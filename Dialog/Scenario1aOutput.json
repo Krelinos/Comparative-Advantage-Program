@@ -1,0 +1,175 @@
+{
+	"dialog": {
+		"start": "1a0",
+		"1a0": {
+			"text": "A farmer grows two types of crops: peppers and tomatoes. They are trying to maximize the crop output of the farmland."
+			,"next": "1a1"
+		}
+		,"1a1": {
+			"text": "There are two plots of land the crops can be planted in: one with light, nutrient-sparse soil..."
+			,"next": "1a1_1"
+			,"visuals": "plant_crops_light"
+		}
+		,"1a1_1": {
+			"text": "...and another with dark, nutrient-rich soil."
+			,"next": "1a2"
+			,"visuals": "plant_crops_dark"
+		}
+		,"1a2": {
+			"text": "If the light soil is planted with ONLY peppers, then it will produce {light_pepper} crates of peppers."
+			,"next": "1a2_1"
+			,"visuals": "light_only_pepper"
+			,"variables": [
+				"light_pepper"
+			]
+		}
+		,"1a2_1": {
+			"text": "And if it is planted with ONLY tomatoes, then it will produce {light_tomato} crates of tomatoes."
+			,"next": "1a3"
+			,"visuals": "light_only_tomato"
+			,"variables": [
+				"light_tomato"
+			]
+		}
+		,"1a3": {
+			"text": "Likewise, the dark soil can produce a max of {dark_pepper} crates of peppers,"
+			,"next": "1a3_1"
+			,"visuals": "dark_only_pepper"
+			,"variables": [
+				"dark_pepper"
+			]
+		}
+		,"1a3_1": {
+			"text": "Or it can produce a max of {dark_tomato} crates of tomatoes."
+			,"next": "1a4"
+			,"visuals": "dark_only_tomato"
+			,"variables": [
+				"dark_tomato"
+			]
+		}
+		,"1a4": {
+			"text": "The dark soil can produce more tomatoes than the light soil, assuming both receive equal irrigation, sunlight, and maintenance. This is known as having the [url][color=#E49F5A]absolute advantage[/color][/url]."
+			,"next": "1a4_1"
+			,"concept": "absolute_advantage"
+		}
+		,"1a4_1": {
+			"next": "1a5"
+			,"question": "1a4"
+		}
+		,"1a5": {
+			"text": "If the farmer were to plant only peppers in the light soil, the opportunity to plant tomatoes would be sacrificed. This is known as the [color=#E49F5A]opportunity cost[/color]."
+			,"next": "1a6"
+		}
+		,"1a6": {
+			"text": "As such, the farmer gives up the opportunity to grow {light_tomato} crates of tomatoes in exchange for {light_pepper} crates of peppers ({light_tomato} / {light_pepper} = {light_pepper_opportunity_cost})."
+			,"next": "1a7"
+			,"variables": [
+				"light_tomato"
+				,"light_pepper"
+				,"light_pepper_opportunity_cost"
+			]
+		}
+		,"1a7": {
+			"text": "Alternatively, the farmer could plant tomatoes, giving up the opportunity to grow {light_pepper} crates of peppers in exchange for {light_tomato} crates of tomatoes ({light_pepper} / {light_tomato} = {light_tomato_opportunity_cost})."
+			,"next": "1a8"
+			,"variables": [
+				"light_pepper"
+				,"light_tomato"
+				,"light_tomato_opportunity_cost"
+			]
+		}
+		,"1a8": {
+			"text": "What would be the [color=#E49F5A]opportunity cost[/color] of the [u]dark[/u] soil be if the farmer grew peppers in it?"
+			,"next": "1a9"
+			,"concept": "opportunity_cost_output"
+			,"question": "1a8"
+		}
+		,"1a9": {
+			"text": "And what would be the opportunity cost of the dark soil be if the farmer grew tomatoes in it?"
+			,"next": "1a10"
+			,"question": "1a9"
+		}
+		,"1a10": {
+			"text": "The table to the top right has been filled with the opportunity costs of both dark and light soil. When comparing two entites, whichever sacrifices less to obtain one unit of a good has the [color=#E49F5A]comparative advantage[/color]."
+			,"next": "1a10_1"
+			,"concept": "comparative_advantage"
+		}
+		,"1a10_1": {
+			"text": ""
+			,"next": "1a11"
+		}
+		,"1a11": {
+			"next": "1a12"
+			,"question": "1a11"
+		}
+		,"1a12": {
+			"text": "You have completed 1.a - Output! Select scenario 1.b - Input at the bottom left to continue."
+			,"completed": "1_a_output"
+		}
+	}
+	
+	,"questions": {
+		"1a4": {
+			"type": "multiple_choice"
+			,"text": "Of these two plots, which has the [url][color=#E49F5A]absolute advantage[/color][/url] in pepper crops? ( You can manually drag the crop sliders by clicking on them with your mouse. )
+
+The ___ has the absolute advantage in both peppers and tomatoes."
+			,"correct": 0
+			,"content": [
+				"nutrient-rich soil"
+				,"nutrient-sparse soil"
+			]
+			,"feedback": [
+				"Correct!"
+				,"Review the definition of absolute advantage by hovering your mouse over the term in the glossary."
+			]
+		}
+		,"1a8": {
+			"type": "multiple_choice"
+			,"text": "The opportunity cost to grow peppers in the dark soil would be ___ tomatoes for {dark_pepper} peppers."
+			,"correct": 2
+			,"content": [
+				"{light_tomato}"
+				,"{light_pepper}"
+				,"{dark_tomato}"
+			]
+			,"feedback": [
+				"You are considering the output of the light soil. Opportunity cost only considers the two goods of a single entity."
+				,"You are considering the output of the light soil. Opportunity cost only considers the two goods of a single entity."
+				,"Correct!"
+			]
+		}
+		,"1a9": {
+			"type": "multiple_choice"
+			,"text": "The opportunity cost to grow tomatoes in the dark soil would be {dark_pepper} peppers for {dark_tomato} tomatoes, or ___ peppers for 1 tomato."
+			,"correct": 0
+			,"content": [
+				"{dark_tomato_opportunity_cost}"
+				,"{dark_pepper_opportunity_cost}"
+			]
+			,"feedback": [
+				"Correct!"
+				,"You have incorrectly applied the equation regarding output. The equation is ( [The sacrificed good] / [The gained good] )"
+			]
+		}
+		,"1a11": {
+			"type": "multiple_choice"
+			,"text": "Which of the following statements is true?"
+			,"correct": 2
+			,"content": [
+				"The dark soil has the absolute and comparative advantage in both crops."
+				,"Because the dark soil has the comparative advantage in peppers, the farmer should plant peppers in the dark soil and tomatoes in the light soil."
+				,"Because the dark soil has the comparative advantage in tomatoes, the farmer should plant tomatoes in the dark soil and peppers in the light soil."
+				,"The farmer should not bother planting crops in the light soil because the dark soil has absolute advantage in both crops."
+				,"The farmer should just mix both soils together so they are equal and therefore wouldn't have to deal with this situation in the first place."
+			]
+			,"feedback": [
+				"Review the definition of comparative advantage and the opportunity costs in the table at the top right."
+				,"Review the definition of comparative advantage and the opportunity costs in the table at the top right."
+				,"Correct!"
+				,"There is still value to be gained from land/countries with a smaller Production Possibility Curve, which will be seen in scenario 2 - Terms of Trade."
+				,"Remember that this scenario is a stand-in for two countries' Production Possibility Curves, and countries sure won't be mixing their economies any time soon. ( The real answer is that the farmer is lazy. )"
+			]
+		}
+	}
+}

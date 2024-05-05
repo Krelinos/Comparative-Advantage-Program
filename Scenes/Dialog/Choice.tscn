@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/UI/MainTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Scripts/Dialog/Choice.cs" type="Script" id=2]
+
+[node name="Choice" type="MarginContainer"]
+margin_right = 289.0
+margin_bottom = 42.0
+script = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 289.0
+margin_bottom = 100.0
+custom_constants/margin_left = 24
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+margin_left = 24.0
+margin_right = 289.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+fit_content_height = true
+
+[node name="CheckBox" type="CheckBox" parent="."]
+margin_right = 289.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
