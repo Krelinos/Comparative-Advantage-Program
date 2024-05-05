@@ -9,14 +9,8 @@ public class SaveService
 {
     public Godot.Collections.Dictionary SaveData { get; private set; }
 
-    public SaveService()
-    {
-
-    }
-
     public Godot.Collections.Dictionary LoadSaveFile()
     {
-        GD.Print("ugh");
         Godot.File saveFile = new Godot.File();
         if ( saveFile.FileExists("user://userprogress.json") )
         {
@@ -24,7 +18,6 @@ public class SaveService
 
             SaveData = Game.ParseJSON( "userprogress.json", "user://" ).Result as Godot.Collections.Dictionary;
             GD.Print(SaveData);
-            GD.Print("owo");
 
             saveFile.Close();
         }
@@ -40,7 +33,7 @@ public class SaveService
             {
                 { "solved", scenInfo }
             };
-            GD.Print("uwu");
+
             saveFile.Open("user://userprogress.json", File.ModeFlags.Write);
             saveFile.StoreString( JSON.Print(SaveData, "\t") );
             saveFile.Close();

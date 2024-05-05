@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Scenarios/UI/Scenario1aOutput.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/Scenarios/1aOutput/Scenario1aOutputUI.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/CropSlider.tscn" type="PackedScene" id=4]
 
-[node name="Scenario1aOutput" type="VBoxContainer"]
+[node name="1aOutput" type="VBoxContainer"]
 margin_right = 493.0
 margin_bottom = 616.0
 script = ExtResource( 2 )

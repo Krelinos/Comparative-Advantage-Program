@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Scenario1aOutput : VBoxContainer
+public class Scenario1aOutputUI : VBoxContainer
 {
     [Signal]
     public delegate void PepperCropChanged(float oldVal, float newVal);
