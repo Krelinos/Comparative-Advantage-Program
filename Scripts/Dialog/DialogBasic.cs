@@ -16,7 +16,7 @@ public class DialogBasic : MarginContainer, IHasDialogLabel
 
 	public void SetLabel( String dialog )
 	{
-		dialog = Game.Variables.Format( dialog );
+		dialog = GameService.Variables.Format( dialog );
 		Label.BbcodeText = dialog;
 	}
 

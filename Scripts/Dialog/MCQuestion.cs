@@ -42,7 +42,7 @@ public class MCQuestion : MarginContainer, IHasDialogLabel
 
     public void Initialize( Godot.Collections.Dictionary questionData )
     {
-        Label.BbcodeText = Game.Variables.Format( questionData["text"] as String );
+        Label.BbcodeText = GameService.Variables.Format( questionData["text"] as String );
         
         QuestionID = questionData["id"] as String;
         CorrectIndex = Convert.ToUInt16( questionData["correct"] );
@@ -62,7 +62,7 @@ public class MCQuestion : MarginContainer, IHasDialogLabel
         }
 
         foreach( String feedback in questionData["feedback"] as Godot.Collections.Array )
-            FeedbackList.Add( Game.Variables.Format( feedback ) );
+            FeedbackList.Add( GameService.Variables.Format( feedback ) );
         
         Solved = (bool)questionData["previouslySolved"];
         if ( Solved )
@@ -71,7 +71,7 @@ public class MCQuestion : MarginContainer, IHasDialogLabel
 
     public void SetLabel( String label )
     {
-        Label.Text = Game.Variables.Format( label );
+        Label.Text = GameService.Variables.Format( label );
     }
 
     public void _OnChoiceSelected( int index )

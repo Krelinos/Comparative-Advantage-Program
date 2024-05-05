@@ -16,7 +16,7 @@ public class SaveService
         {
             saveFile.Open("user://userprogress.json", File.ModeFlags.Read);
 
-            SaveData = Game.ParseJSON( "userprogress.json", "user://" ).Result as Godot.Collections.Dictionary;
+            SaveData = GameService.ParseJSON( "userprogress.json", "user://" ).Result as Godot.Collections.Dictionary;
             GD.Print(SaveData);
 
             saveFile.Close();

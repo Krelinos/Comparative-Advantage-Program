@@ -22,7 +22,7 @@ public class VariablesService
         Variables = new System.Collections.Generic.Dictionary<string, object>();
 
         // Interpret all varibles into an array. Also allows basic arithmetic.
-        Godot.Collections.Dictionary jsonVars = Game.ParseJSON("variables.json", "res://Dialog/").Result as Godot.Collections.Dictionary;
+        Godot.Collections.Dictionary jsonVars = GameService.ParseJSON("variables.json", "res://Dialog/").Result as Godot.Collections.Dictionary;
         foreach ( String key in jsonVars.Keys )
         {
             String s = jsonVars[ key ] as String;
@@ -35,7 +35,7 @@ public class VariablesService
                     // GD.Print( s.Substring( lBracket + 1, rBracket - lBracket - 1 ) );
                     
                     String[] nums = s.Substring( lBracket + 1, rBracket - lBracket - 1 ).Split(",");
-                    Variables[ key ] = Game.RNG.RandiRange( Int32.Parse(nums[0]), Int32.Parse(nums[1]) );
+                    Variables[ key ] = GameService.RNG.RandiRange( Int32.Parse(nums[0]), Int32.Parse(nums[1]) );
                 }
             }
             

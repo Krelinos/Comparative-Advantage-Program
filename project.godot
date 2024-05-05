@@ -15,10 +15,6 @@ run/main_scene="res://Scenes/Game.tscn"
 boot_splash/use_filter=false
 config/icon="res://icon.png"
 
-[autoload]
-
-GameNode="*res://Scripts/GameNode.cs"
-
 [display]
 
 window/size/width=1366

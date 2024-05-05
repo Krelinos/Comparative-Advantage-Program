@@ -17,12 +17,15 @@ public class ScenarioService
     {
         CurrentScenario = scenarioName;
 
-        Godot.Collections.Dictionary scenarioInfo = Game.ParseJSON( $"{scenarioName}.json", "res://Dialog/" ).Result as Godot.Collections.Dictionary;
+        Godot.Collections.Dictionary scenarioInfo = GameService.ParseJSON( $"{scenarioName}.json", "res://Dialog/" ).Result as Godot.Collections.Dictionary;
         Dialog = scenarioInfo[ "dialog" ] as Godot.Collections.Dictionary;
         Questions = scenarioInfo[ "questions" ] as Godot.Collections.Dictionary;
 
         CurrentScenarioVisuals = GD.Load<PackedScene>("res://Scenes/Scenarios/Visuals/Scenario1aOutput.tscn").Instance();
         CurrentScenarioUI = GD.Load<PackedScene>("res://Scenes/Scenarios/UI/Scenario1aOutput.tscn").Instance();
+    
+        GameService.ScenarioVisualsContainer.AddChild( CurrentScenarioVisuals );
+        GameService.ScenarioUIContainer.AddChild( CurrentScenarioUI );
     }
 
     public Godot.Collections.Dictionary GetDialog( String dialogId )

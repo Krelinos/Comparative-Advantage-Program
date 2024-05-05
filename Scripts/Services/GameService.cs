@@ -4,17 +4,16 @@ using System.Dynamic;
 
 namespace ComparativeAdvantage
 {
-public static class Game
+public class GameService : Node
 {
 	public static Godot.RandomNumberGenerator RNG { get; private set; }
 	public static SaveService Save { get; private set; }
 	public static ScenarioService Scenario { get; private set; }
 	public static VariablesService Variables { get; private set; }
+	public static Node ScenarioVisualsContainer { get; private set; }
+	public static Node ScenarioUIContainer { get; private set; }
 
-	private static Node ScenarioVisualsContainer;
-	private static Node ScenarioUIContainer;
-
-    static Game()
+    public GameService()
 	{
 		RNG = new RandomNumberGenerator
 		{
@@ -25,14 +24,19 @@ public static class Game
 		Save = new SaveService();
 		Scenario = new ScenarioService();
 		Variables = new VariablesService();
-
-		// ScenarioVisualsContainer = Get
-
-		Save.LoadSaveFile();
-        Scenario.LoadScenario("Scenario1aOutput");
 	}
 
-    public static JSONParseResult ParseJSON( String fileName, String filePath )
+	public override void _Ready()
+	{
+		ScenarioVisualsContainer = GetNode("ScenarioVisuals");
+		ScenarioUIContainer = GetNode("UserInterface/HBoxContainer/ScenarioUI");
+		
+		Save.LoadSaveFile();
+        Scenario.LoadScenario("Scenario1aOutput");
+		GetNode<Dialog>("UserInterface/HBoxContainer/Dialog").Restart();
+	}
+
+	public static JSONParseResult ParseJSON( String fileName, String filePath )
 	{
 		// fileName = fileName.ToLower();
 		File JsonFile = new File();
@@ -42,13 +46,13 @@ public static class Game
 		Error e = JsonFile.Open($"{filePath}{fileName}", File.ModeFlags.Read);
 		
 		if ( e != Error.Ok )
-			GD.PushError( String.Format("Tried to open scenario file '{0}', but received error '{1}'.", fileName, e.ToString()) );
+			GD.PushError( String.Format("Tried to open file '{0}', but received error '{1}'.", fileName, e.ToString()) );
 		
 		JSONParseResult json = JSON.Parse( JsonFile.GetAsText() );
 		JsonFile.Close();
 		
 		if ( json.Error != Error.Ok )
-			GD.PushError( String.Format("Tried to parse JSON of scenario '{0}', but received error '{1}'.", fileName, json.Error.ToString()) );
+			GD.PushError( String.Format("Tried to parse JSON of file '{0}', but received error '{1}'.", fileName, json.Error.ToString()) );
 	
 		return json;
 	}

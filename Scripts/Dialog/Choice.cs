@@ -38,7 +38,7 @@ public class Choice : MarginContainer, IHasDialogLabel
 
     public void SetLabel( String label )
     {
-        Label.Text = Game.Variables.Format( label );
+        Label.Text = GameService.Variables.Format( label );
     }
 }
 

@@ -26,19 +26,19 @@ public class Dialog : NinePatchRect
         DialogContainer = GetNode<Control>("MarginContainer/ScrollContainer/VBoxContainer");
         ContinueButton = GetNode<Button>("MarginContainer2/Continue");
         ScrollTimer = GetNode<Timer>("ScrollTimer");
-
+        
         NextDialogID = "";
         IsDialogPaused = false;
 
         _DialogBasic = GD.Load<PackedScene>("res://Scenes/Dialog/Basic.tscn");
         _DialogMCQuestion = GD.Load<PackedScene>("res://Scenes/Dialog/MCQuestion.tscn");
 
-        Restart();
+        // Restart();
     }
 
     public void ProceedToNextDialog()
     {
-        Godot.Collections.Dictionary dialog = Game.Scenario.GetDialog( NextDialogID );
+        Godot.Collections.Dictionary dialog = GameService.Scenario.GetDialog( NextDialogID );
         
         // next
         try
@@ -68,10 +68,10 @@ public class Dialog : NinePatchRect
         try
         {
             String questionId = dialog["question"] as String;
-            Godot.Collections.Dictionary question = Game.Scenario.GetQuestion( questionId );
+            Godot.Collections.Dictionary question = GameService.Scenario.GetQuestion( questionId );
             question["id"] = questionId;
 
-            if ( Game.Save.GetSolvedQuestionsOfScenario( Game.Scenario.CurrentScenario ).Contains( questionId ) )
+            if ( GameService.Save.GetSolvedQuestionsOfScenario( GameService.Scenario.CurrentScenario ).Contains( questionId ) )
                 question["previouslySolved"] = true;
             else
             {
@@ -114,7 +114,7 @@ public class Dialog : NinePatchRect
         foreach( Node child in DialogContainer.GetChildren() )
             child.QueueFree();
         
-        NextDialogID = Game.Scenario.GetStartID();
+        NextDialogID = GameService.Scenario.GetStartID();
         IsDialogPaused = false;
     }
 
@@ -131,7 +131,7 @@ public class Dialog : NinePatchRect
 
         if ( solved )
         {
-            Game.Save.UserSolvedQuestionOfScenario( Game.Scenario.CurrentScenario, question.QuestionID );
+            GameService.Save.UserSolvedQuestionOfScenario( GameService.Scenario.CurrentScenario, question.QuestionID );
             Resume();
             question.Disconnect("AnswerSubmitted", this, nameof(AnswerSubmitted));
         }
