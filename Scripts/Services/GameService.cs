@@ -33,6 +33,10 @@ public class GameService : Node
 		
 		Save.LoadSaveFile();
         Scenario.LoadScenario("Scenario1aOutput");
+		
+		var visuals = Scenario.CurrentScenarioVisuals as Scenario1aOutputVisuals;
+		visuals.Initialize();
+
 		GetNode<Dialog>("UserInterface/HBoxContainer/Dialog").Restart();
 	}
 
