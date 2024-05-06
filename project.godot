@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 
 window/size/width=1366
 window/size/height=617
+window/energy_saving/keep_screen_on=false
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 

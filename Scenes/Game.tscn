@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scenes/Scenarios/Visuals/Scenario1aOutput.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Scenarios/UI/Scenario1aOutput.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Dialog/Dialog.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/DefinitionsList.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/Services/GameService.cs" type="Script" id=5]
 
 [node name="Game" type="Node2D"]
@@ -12,9 +10,6 @@ script = ExtResource( 5 )
 
 [node name="ScenarioVisuals" type="Node2D" parent="."]
 position = Vector2( 240, 0 )
-
-[node name="1aOutputVisuals" parent="ScenarioVisuals" instance=ExtResource( 1 )]
-visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -36,18 +31,7 @@ margin_bottom = 616.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Definitions" type="NinePatchRect" parent="UserInterface/HBoxContainer/VBoxContainer"]
-margin_right = 246.0
-margin_bottom = 616.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
-texture = ExtResource( 4 )
-region_rect = Rect2( 465, 65, 14, 14 )
-patch_margin_left = 6
-patch_margin_top = 5
-patch_margin_right = 6
-patch_margin_bottom = 5
+[node name="Definitions" parent="UserInterface/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
 
 [node name="ScenarioUI" type="MarginContainer" parent="UserInterface/HBoxContainer"]
 margin_left = 250.0
@@ -55,9 +39,6 @@ margin_right = 743.0
 margin_bottom = 616.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="1aOutputUI" parent="UserInterface/HBoxContainer/ScenarioUI" instance=ExtResource( 2 )]
-visible = false
 
 [node name="Dialog" parent="UserInterface/HBoxContainer" instance=ExtResource( 3 )]
 margin_left = 747.0
