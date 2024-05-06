@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public class Dialog : NinePatchRect
 {
+    [Signal]
+    public delegate void DialogVisualsEvent( String visualsId );
+
     private ScrollContainer DialogScroll;
     private Control DialogContainer;
     private Button ContinueButton;
@@ -85,6 +88,14 @@ public class Dialog : NinePatchRect
 
             if ( !(bool)question["previouslySolved"] )
                 mcQuestion.Connect("AnswerSubmitted", this, nameof(AnswerSubmitted), null, 0);    
+        }
+        catch( KeyNotFoundException ) { }
+
+        // visuals
+        try
+        {
+            String visualsId = dialog["visuals"] as String;
+            EmitSignal(nameof(DialogVisualsEvent), visualsId);
         }
         catch( KeyNotFoundException ) { }
 

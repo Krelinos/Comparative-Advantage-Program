@@ -1,3 +1,4 @@
+using ComparativeAdvantage;
 using Godot;
 using System;
 
@@ -32,6 +33,36 @@ public class Scenario1aOutputUI : VBoxContainer
         timer.Connect( "timeout", this, nameof(TimerTimeout) );
         // await ToSignal(timer, "timeout");
         // timer.QueueFree();
+    }
+
+    public void Initialize()
+    {
+        GameService.Dialog.Connect("DialogVisualsEvent", this, nameof(_OnDialogVisualsEvent));
+    }
+
+    private void _OnDialogVisualsEvent( String visualsName )
+    {
+        switch ( visualsName )
+        {
+            case "plant_crops_light":
+                LightCropSlider.Initialize( (int)GameService.Variables["light_pepper"], (int)GameService.Variables["light_tomato"] );
+                break;
+            case "plant_crops_dark":
+                DarkCropSlider.Initialize( (int)GameService.Variables["dark_pepper"], (int)GameService.Variables["dark_tomato"] );
+                break;
+            case "light_only_pepper":
+                LightCropSlider.TweenValueTo(1);
+                break;
+            case "light_only_tomato":
+                LightCropSlider.TweenValueTo(0);
+                break;
+            case "dark_only_pepper":
+                DarkCropSlider.TweenValueTo(1);
+                break;
+            case "dark_only_tomato":
+                DarkCropSlider.TweenValueTo(0);
+                break;
+        }
     }
 
     public void _LightSliderChanged(float oldVal, float newVal)

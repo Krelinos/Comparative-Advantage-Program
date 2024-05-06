@@ -12,6 +12,7 @@ public class GameService : Node
 	public static VariablesService Variables { get; private set; }
 	public static Node ScenarioVisualsContainer { get; private set; }
 	public static Node ScenarioUIContainer { get; private set; }
+	public static Dialog Dialog { get; private set; }
 
     public GameService()
 	{
@@ -33,11 +34,15 @@ public class GameService : Node
 		
 		Save.LoadSaveFile();
         Scenario.LoadScenario("Scenario1aOutput");
-		
+
+		Dialog = GetNode<Dialog>("UserInterface/HBoxContainer/Dialog");
+
 		var visuals = Scenario.CurrentScenarioVisuals as Scenario1aOutputVisuals;
 		visuals.Initialize();
+		var ui = Scenario.CurrentScenarioUI as Scenario1aOutputUI;
+		ui.Initialize();
 
-		GetNode<Dialog>("UserInterface/HBoxContainer/Dialog").Restart();
+		Dialog.Restart();
 	}
 
 	public static JSONParseResult ParseJSON( String fileName, String filePath )
