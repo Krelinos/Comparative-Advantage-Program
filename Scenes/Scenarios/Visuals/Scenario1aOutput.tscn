@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Tileset/Ground.tres" type="TileSet" id=1]
+[ext_resource path="res://Scenes/FarmCrops.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/UI/WhiteSquare.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Scenarios/1aOutput/Scenario1aOutputVisuals.cs" type="Script" id=4]
 
@@ -33,57 +34,30 @@ cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 262145, 0, 65537, 262146, 0, 196609, 262147, 0, 196610, 262148, 0, 196610, 262149, 0, 196610, 262150, 0, 65538, 262153, 0, 65537, 262154, 0, 196610, 262155, 0, 196610, 262156, 0, 196609, 262157, 0, 196609, 262158, 0, 65538, 327681, 0, 65539, 327682, 0, 4, 327683, 0, 4, 327684, 0, 4, 327685, 0, 4, 327686, 0, 65536, 327689, 0, 65539, 327690, 0, 4, 327691, 0, 4, 327692, 0, 4, 327693, 0, 4, 327694, 0, 65536, 393217, 0, 65539, 393218, 0, 4, 393219, 0, 4, 393220, 0, 4, 393221, 0, 4, 393222, 0, 65536, 393225, 0, 131075, 393226, 0, 4, 393227, 0, 4, 393228, 0, 4, 393229, 0, 4, 393230, 0, 65536, 458753, 0, 65539, 458754, 0, 4, 458755, 0, 4, 458756, 0, 4, 458757, 0, 4, 458758, 0, 65536, 458761, 0, 65539, 458762, 0, 4, 458763, 0, 4, 458764, 0, 4, 458765, 0, 4, 458766, 0, 131072, 524289, 0, 65539, 524290, 0, 4, 524291, 0, 4, 524292, 0, 4, 524293, 0, 4, 524294, 0, 65536, 524297, 0, 65539, 524298, 0, 4, 524299, 0, 4, 524300, 0, 4, 524301, 0, 4, 524302, 0, 65536, 589825, 0, 65539, 589826, 0, 4, 589827, 0, 4, 589828, 0, 4, 589829, 0, 4, 589830, 0, 65536, 589833, 0, 65539, 589834, 0, 4, 589835, 0, 4, 589836, 0, 4, 589837, 0, 4, 589838, 0, 131072, 655361, 0, 131075, 655362, 0, 4, 655363, 0, 4, 655364, 0, 4, 655365, 0, 4, 655366, 0, 131072, 655369, 0, 131075, 655370, 0, 4, 655371, 0, 4, 655372, 0, 4, 655373, 0, 4, 655374, 0, 131072, 720897, 0, 131073, 720898, 0, 1, 720899, 0, 2, 720900, 0, 2, 720901, 0, 1, 720902, 0, 131074, 720905, 0, 131073, 720906, 0, 2, 720907, 0, 1, 720908, 0, 1, 720909, 0, 2, 720910, 0, 131074 )
 
-[node name="LightCrops" type="Node2D" parent="."]
-
-[node name="Tomato" type="Node2D" parent="LightCrops"]
-position = Vector2( 32.5, 81 )
-
-[node name="Light2D" type="Light2D" parent="LightCrops/Tomato"]
-visible = false
-light_mask = 16
-scale = Vector2( 0.55, 1 )
-texture = ExtResource( 3 )
-texture_scale = 0.4
-color = Color( 1, 1, 1, 0 )
-mode = 3
-range_item_cull_mask = 16
-shadow_item_cull_mask = 0
-
-[node name="Pepper" type="Node2D" parent="LightCrops"]
-position = Vector2( 32.5, 81 )
-
-[node name="Light2D" type="Light2D" parent="LightCrops/Pepper"]
-visible = false
-light_mask = 16
-scale = Vector2( 0.55, 1 )
-texture = ExtResource( 3 )
-texture_scale = 0.4
-color = Color( 1, 1, 1, 0 )
-mode = 3
-range_item_cull_mask = 16
-shadow_item_cull_mask = 0
+[node name="LightCrops" parent="." instance=ExtResource( 2 )]
+position = Vector2( 32, 80 )
 
 [node name="DarkCrops" type="Node2D" parent="."]
 position = Vector2( 128, 0 )
-
-[node name="Tomato" type="Node2D" parent="DarkCrops"]
-position = Vector2( 32.5, 81 )
-
-[node name="Light2D" type="Light2D" parent="DarkCrops/Tomato"]
-visible = false
-light_mask = 16
-scale = Vector2( 0.55, 1 )
-texture = ExtResource( 3 )
-texture_scale = 0.4
-color = Color( 1, 1, 1, 0 )
-mode = 3
-range_item_cull_mask = 16
-shadow_item_cull_mask = 0
 
 [node name="Pepper" type="Node2D" parent="DarkCrops"]
 position = Vector2( 32.5, 81 )
 
 [node name="Light2D" type="Light2D" parent="DarkCrops/Pepper"]
+visible = false
+light_mask = 16
+scale = Vector2( 0.55, 1 )
+texture = ExtResource( 3 )
+texture_scale = 0.4
+color = Color( 1, 1, 1, 0 )
+mode = 3
+range_item_cull_mask = 8
+shadow_item_cull_mask = 0
+
+[node name="Tomato" type="Node2D" parent="DarkCrops"]
+position = Vector2( 32.5, 81 )
+
+[node name="Light2D" type="Light2D" parent="DarkCrops/Tomato"]
 visible = false
 light_mask = 16
 scale = Vector2( 0.55, 1 )
