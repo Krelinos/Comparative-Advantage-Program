@@ -13,6 +13,7 @@ public class GameService : Node
 	public static Node ScenarioVisualsContainer { get; private set; }
 	public static Node ScenarioUIContainer { get; private set; }
 	public static Dialog Dialog { get; private set; }
+	public static DefinitionsList DefinitionsList { get; private set; }
 
     public GameService()
 	{
@@ -36,6 +37,7 @@ public class GameService : Node
         Scenario.LoadScenario("Scenario1aOutput");
 
 		Dialog = GetNode<Dialog>("UserInterface/HBoxContainer/Dialog");
+		DefinitionsList = GetNode<DefinitionsList>("UserInterface/HBoxContainer/VBoxContainer/Definitions");
 
 		var visuals = Scenario.CurrentScenarioVisuals as Scenario1aOutputVisuals;
 		visuals.Initialize();

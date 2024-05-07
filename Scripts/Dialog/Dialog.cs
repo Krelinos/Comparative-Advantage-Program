@@ -99,6 +99,14 @@ public class Dialog : NinePatchRect
         }
         catch( KeyNotFoundException ) { }
 
+        // concept
+        try
+        {
+            String conceptId = dialog["concept"] as String;
+            GameService.DefinitionsList.AppendDefinition( conceptId );
+        }
+        catch( KeyNotFoundException ) { }
+
         ScrollToBottom();
     }
 
