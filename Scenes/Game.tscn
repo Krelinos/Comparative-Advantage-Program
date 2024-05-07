@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=1]
 [ext_resource path="res://Assets/UI/MainTheme.tres" type="Theme" id=2]
 [ext_resource path="res://Scenes/Dialog/Dialog.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/DefinitionsList.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/Services/GameService.cs" type="Script" id=5]
+[ext_resource path="res://Scenes/ScenarioButton.tscn" type="PackedScene" id=6]
 
 [node name="Game" type="Node2D"]
 position = Vector2( -1, 0 )
@@ -21,6 +22,12 @@ current = true
 margin_right = 1364.0
 margin_bottom = 616.0
 
+[node name="Backdrop" type="PanelContainer" parent="UserInterface"]
+margin_right = 246.0
+margin_bottom = 616.0
+rect_min_size = Vector2( 246, 0 )
+size_flags_horizontal = 0
+
 [node name="HBoxContainer" type="HBoxContainer" parent="UserInterface"]
 margin_right = 1364.0
 margin_bottom = 616.0
@@ -34,6 +41,95 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
 [node name="Definitions" parent="UserInterface/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_bottom = 400.0
+size_flags_stretch_ratio = 20.0
+
+[node name="ScenariosMenu" type="NinePatchRect" parent="UserInterface/HBoxContainer/VBoxContainer"]
+margin_top = 404.0
+margin_right = 246.0
+margin_bottom = 581.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 8.88
+texture = ExtResource( 1 )
+region_rect = Rect2( 465, 65, 14, 14 )
+patch_margin_left = 6
+patch_margin_top = 5
+patch_margin_right = 6
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu"]
+margin_right = 246.0
+margin_bottom = 147.0
+custom_constants/margin_right = 6
+custom_constants/margin_top = 1
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer"]
+margin_left = 6.0
+margin_top = 1.0
+margin_right = 240.0
+margin_bottom = 176.0
+custom_constants/separation = 0
+
+[node name="0Preface" parent="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
+margin_bottom = 35.0
+focus_mode = 0
+text = "0 - Preface"
+
+[node name="1aOutput" parent="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
+margin_top = 35.0
+margin_bottom = 70.0
+focus_mode = 0
+text = "1a - Output"
+
+[node name="1bInput" parent="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
+modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
+margin_top = 70.0
+margin_bottom = 105.0
+focus_mode = 0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+disabled = true
+text = "1b - Input"
+
+[node name="2TermsOfTrade" parent="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
+modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
+margin_top = 105.0
+margin_bottom = 140.0
+focus_mode = 0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+disabled = true
+text = "2 - Terms of Trade"
+
+[node name="3PracticeQuestions" parent="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
+modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
+margin_top = 140.0
+margin_bottom = 175.0
+focus_mode = 0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+disabled = true
+text = "3 - Practice Questions"
+
+[node name="SettingsMenu" type="NinePatchRect" parent="UserInterface/HBoxContainer/VBoxContainer"]
+margin_top = 585.0
+margin_right = 246.0
+margin_bottom = 616.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+texture = ExtResource( 1 )
+region_rect = Rect2( 465, 65, 14, 14 )
+patch_margin_left = 6
+patch_margin_top = 5
+patch_margin_right = 6
+patch_margin_bottom = 5
+
+[node name="Label" type="Label" parent="UserInterface/HBoxContainer/VBoxContainer/SettingsMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+text = "Menu"
+align = 1
+valign = 1
 
 [node name="ScenarioUI" type="MarginContainer" parent="UserInterface/HBoxContainer"]
 margin_left = 250.0
@@ -90,3 +186,9 @@ patch_margin_left = 6
 patch_margin_top = 5
 patch_margin_right = 6
 patch_margin_bottom = 5
+
+[connection signal="pressed" from="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer/0Preface" to="." method="OnScenarioButtonPressed" binds= [ "0Preface" ]]
+[connection signal="pressed" from="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer/1aOutput" to="." method="OnScenarioButtonPressed" binds= [ "1aOutput" ]]
+[connection signal="pressed" from="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer/1bInput" to="." method="OnScenarioButtonPressed" binds= [ "1bInput" ]]
+[connection signal="pressed" from="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer/2TermsOfTrade" to="." method="OnScenarioButtonPressed" binds= [ "2TermsOfTrade" ]]
+[connection signal="pressed" from="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer/3PracticeQuestions" to="." method="OnScenarioButtonPressed" binds= [ "2TermsOfTrade" ]]

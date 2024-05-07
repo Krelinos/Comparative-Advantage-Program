@@ -7,6 +7,12 @@ public class Definition : Button
     {
         Modulate = new Color(1,1,1,0);
 
+        Timer timer = new Timer();
+        timer.WaitTime = 0.001f;
+        AddChild(timer);
+        timer.Start();
+        await ToSignal(timer, "timeout");
+
         Tween tween = new Tween();
         tween.InterpolateProperty(this, "rect_position:y", RectPosition.y+30, RectPosition.y, 1f, Tween.TransitionType.Quad, Tween.EaseType.Out );
         AddChild(tween);

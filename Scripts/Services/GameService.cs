@@ -15,6 +15,8 @@ public class GameService : Node
 	public static Dialog Dialog { get; private set; }
 	public static DefinitionsList DefinitionsList { get; private set; }
 
+	private static Node ScenariosList;
+
     public GameService()
 	{
 		RNG = new RandomNumberGenerator
@@ -34,17 +36,20 @@ public class GameService : Node
 		ScenarioUIContainer = GetNode("UserInterface/HBoxContainer/ScenarioUI");
 		
 		Save.LoadSaveFile();
-        Scenario.LoadScenario("Scenario1aOutput");
 
 		Dialog = GetNode<Dialog>("UserInterface/HBoxContainer/Dialog");
 		DefinitionsList = GetNode<DefinitionsList>("UserInterface/HBoxContainer/VBoxContainer/Definitions");
 
-		var visuals = Scenario.CurrentScenarioVisuals as Scenario1aOutputVisuals;
-		visuals.Initialize();
-		var ui = Scenario.CurrentScenarioUI as Scenario1aOutputUI;
-		ui.Initialize();
+        OnScenarioButtonPressed("0Preface");
+		
+        // ScenariosList = GetNode("UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer");
+		// foreach ( Button n in ScenariosList.GetChildren() )
+		// {
+		// 	var args = new Godot.Collections.Array(n.Name);
+		// 	n.Connect("pressed", this, nameof(OnScenarioButtonPressed), args);
+		// }
 
-		Dialog.Restart();
+		
 	}
 
 	public static JSONParseResult ParseJSON( String fileName, String filePath )
@@ -66,6 +71,22 @@ public class GameService : Node
 			GD.PushError( String.Format("Tried to parse JSON of file '{0}', but received error '{1}'.", fileName, json.Error.ToString()) );
 	
 		return json;
+	}
+
+	private void OnScenarioButtonPressed( String scenarioName )
+	{
+		Scenario.Restart();
+		Scenario.LoadScenario("Scenario" + scenarioName);
+
+		var visuals = Scenario.CurrentScenarioVisuals as Scenario1aOutputVisuals;
+		if ( visuals != null )
+			visuals.Initialize();
+		var ui = Scenario.CurrentScenarioUI as Scenario1aOutputUI;
+		if ( ui != null )
+			ui.Initialize();
+
+		Dialog.Restart();
+		Dialog.ProceedToNextDialog();
 	}
     
 }
