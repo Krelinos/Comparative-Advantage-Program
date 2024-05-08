@@ -21,11 +21,22 @@ public class ScenarioService
         Dialog = scenarioInfo[ "dialog" ] as Godot.Collections.Dictionary;
         Questions = scenarioInfo[ "questions" ] as Godot.Collections.Dictionary;
 
-        CurrentScenarioVisuals = GD.Load<PackedScene>("res://Scenes/Scenarios/Visuals/Scenario1aOutput.tscn").Instance();
-        CurrentScenarioUI = GD.Load<PackedScene>("res://Scenes/Scenarios/UI/Scenario1aOutput.tscn").Instance();
+        CurrentScenarioVisuals = GD.Load<PackedScene>($"res://Scenes/Scenarios/Visuals/{scenarioName}.tscn").Instance();
+        CurrentScenarioUI = GD.Load<PackedScene>($"res://Scenes/Scenarios/UI/{scenarioName}.tscn").Instance();
     
         GameService.ScenarioVisualsContainer.AddChild( CurrentScenarioVisuals );
         GameService.ScenarioUIContainer.AddChild( CurrentScenarioUI );
+
+        GD.Print($"Loaded scenario '{scenarioName}'");
+    }
+
+    public void Restart()
+    {
+        Dialog = null;
+        Questions = null;
+        CurrentScenario = null;
+        CurrentScenarioVisuals?.QueueFree();
+        CurrentScenarioUI?.QueueFree();
     }
 
     public Godot.Collections.Dictionary GetDialog( String dialogId )

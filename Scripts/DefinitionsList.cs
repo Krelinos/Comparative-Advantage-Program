@@ -29,11 +29,24 @@ public class DefinitionsList : NinePatchRect
         UnlockedDefinitions = new System.Collections.Generic.List<String>();
     }
 
+    public void Initialize()
+    {
+        foreach( String def in GameService.Save.SaveData["concepts"] as Godot.Collections.Array )
+            AppendDefinition( def );
+    }
+
     public void AppendDefinition( String definitionName )
     {
         if ( !UnlockedDefinitions.Contains(definitionName) )
         {
             UnlockedDefinitions.Add(definitionName);
+
+            var concepts = GameService.Save.SaveData["concepts"] as Godot.Collections.Array;
+            if ( !concepts.Contains( definitionName ) )
+            {
+                concepts.Add( definitionName );
+                GameService.Save.Save();
+            }
 
             Definition definition = _Definition.Instance() as Definition;
             definition.Text = definitionName.Capitalize();
@@ -52,6 +65,13 @@ public class DefinitionsList : NinePatchRect
         var definitionDescription = Definitions[ definitionName ] as String;
         TextLabel.BbcodeText = definitionDescription;
         DialogBox.RectPosition = new Vector2( button.RectSize.x + 15, button.RectPosition.y + 8 );
+    }
+
+    public void Reset()
+    {
+        UnlockedDefinitions = new System.Collections.Generic.List<String>();
+        foreach( Node n in DefinitionList.GetChildren() )
+            n.QueueFree();
     }
 
     private void HideDefinitionDescription()

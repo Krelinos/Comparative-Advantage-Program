@@ -12,29 +12,23 @@ public class SaveService
     public Godot.Collections.Dictionary LoadSaveFile()
     {
         Godot.File saveFile = new Godot.File();
-        if ( saveFile.FileExists("user://userprogress.json") )
+        if ( saveFile.FileExists("user://userdata.json") )
         {
-            saveFile.Open("user://userprogress.json", File.ModeFlags.Read);
+            saveFile.Open("user://userdata.json", File.ModeFlags.Read);
 
-            SaveData = GameService.ParseJSON( "userprogress.json", "user://" ).Result as Godot.Collections.Dictionary;
+            SaveData = GameService.ParseJSON( "userdata.json", "user://" ).Result as Godot.Collections.Dictionary;
             GD.Print(SaveData);
 
             saveFile.Close();
         }
         else
         {
-            var scenInfo = new Godot.Collections.Dictionary
-            {
-                { "Scenario1aOutput", new Godot.Collections.Array() },
-                { "Scenario1bInput", new Godot.Collections.Array() }
-            };
+            SaveData = new Godot.Collections.Dictionary{};
+            ResetScenarioProgress();
+            ResetGlossary();
+            // ResetQuestionCount();
 
-            SaveData = new Godot.Collections.Dictionary
-            {
-                { "solved", scenInfo }
-            };
-
-            saveFile.Open("user://userprogress.json", File.ModeFlags.Write);
+            saveFile.Open("user://userdata.json", File.ModeFlags.Write);
             saveFile.StoreString( JSON.Print(SaveData, "\t") );
             saveFile.Close();
         }
@@ -45,12 +39,27 @@ public class SaveService
     public void Save()
     {
         Godot.File saveFile = new Godot.File();
-        saveFile.Open("user://userprogress.json", File.ModeFlags.Write);
+        saveFile.Open("user://userdata.json", File.ModeFlags.Write);
 
         String saveJSON = JSON.Print( SaveData, "\t" );
         saveFile.StoreString( saveJSON );
         saveFile.Close();
     }
+
+    public void ResetScenarioProgress()
+    {
+        SaveData["solved"] = new Godot.Collections.Dictionary
+        {
+            { "Scenario1aOutput", new Godot.Collections.Array() },
+            { "Scenario1bInput", new Godot.Collections.Array() }
+        };
+    }
+
+    public void ResetGlossary()
+    {
+        SaveData["concepts"] = new Godot.Collections.Array();
+    }
+
 
     public void UserSolvedQuestionOfScenario( String scenarioName, String questionId )
     {

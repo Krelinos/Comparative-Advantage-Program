@@ -134,7 +134,7 @@ public class Dialog : NinePatchRect
             child.QueueFree();
         
         NextDialogID = GameService.Scenario.GetStartID();
-        IsDialogPaused = false;
+        Resume();
     }
 
     private async void ScrollToBottom()
