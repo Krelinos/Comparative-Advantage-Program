@@ -40,6 +40,8 @@ public class GameService : Node
 		Dialog = GetNode<Dialog>("UserInterface/HBoxContainer/Dialog");
 		DefinitionsList = GetNode<DefinitionsList>("UserInterface/HBoxContainer/VBoxContainer/Definitions");
 
+		DefinitionsList.Initialize();
+
         OnScenarioButtonPressed("0Preface");
 		
         // ScenariosList = GetNode("UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer");

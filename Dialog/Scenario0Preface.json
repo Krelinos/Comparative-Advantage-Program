@@ -2,9 +2,9 @@
 	"dialog": {
 		"start": "0",
 		"0": {
-			"text": "Hi, V here! Welcome to my Comparative Advantage application, designed to assist in teaching Ms. Tillotson's highschool senior class.
+			"text": "Hi, Vivienne here! Welcome to my Comparative Advantage application, designed to assist in teaching Ms. Tillotson's highschool senior class.
 
-A few things before moving on (press space or enter/return to continue):"
+A few things before moving on (press space to continue):"
 			,"next": "1"
 		}
 		,"1": {
@@ -12,7 +12,7 @@ A few things before moving on (press space or enter/return to continue):"
 			,"next": "2"
 		}
 		,"2": {
-			"text": "On the left of this window is a glossary that stores these concepts. Hovering over the word will show the definition. It will be automatically appended to as more concepts are exposed to you."
+			"text": "On the top left of this application is a glossary that stores important concepts. Hovering over the word will show the definition. It will be automatically appended to as more concepts are exposed to you."
 			,"next": "3"
 		}
 		,"3": {
@@ -20,11 +20,11 @@ A few things before moving on (press space or enter/return to continue):"
 			,"next": "4"
 		}
 		,"4": {
-			"text": "If your progress is missing, then your browser cookies got irrecoverably wiped at some point. This is out of this application's control."
+			"text": "If your progress is missing, then your browser cookies got irrecoverably wiped at some point or were never saved in the first place (incognito mode prevents cookie saving.) This is out of this application's control."
 			,"next": "5"
 		}
 		,"5": {
-			"text": "Finally, you can get started by clicking on '1.a - Output' or any scenario/lesson at the bottom left.
+			"text": "Finally, you can get started by clicking on '1a - Output' or any scenario/lesson at the bottom left.
 
 Enjoy! <3"
 		}

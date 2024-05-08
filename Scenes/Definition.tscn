@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Font/m5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Definition.cs" type="Script" id=3]
+[ext_resource path="res://Assets/UI/MainTheme.tres" type="Theme" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
@@ -12,6 +13,7 @@ font_data = ExtResource( 1 )
 margin_right = 234.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 35 )
+theme = ExtResource( 4 )
 custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )

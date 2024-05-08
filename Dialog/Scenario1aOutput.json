@@ -32,7 +32,7 @@
 			]
 		}
 		,"1a3": {
-			"text": "Likewise, the dark soil can produce a max of {dark_pepper} crates of peppers,"
+			"text": "Likewise, the dark soil can produce a max of {dark_pepper} crates of peppers..."
 			,"next": "1a3_1"
 			,"visuals": "dark_only_pepper"
 			,"variables": [
@@ -40,7 +40,7 @@
 			]
 		}
 		,"1a3_1": {
-			"text": "Or it can produce a max of {dark_tomato} crates of tomatoes."
+			"text": "...or it can produce a max of {dark_tomato} crates of tomatoes."
 			,"next": "1a4"
 			,"visuals": "dark_only_tomato"
 			,"variables": [
@@ -48,7 +48,7 @@
 			]
 		}
 		,"1a4": {
-			"text": "The dark soil can produce more tomatoes than the light soil, assuming both receive equal irrigation, sunlight, and maintenance. This is known as having the [url][color=#E49F5A]absolute advantage[/color][/url]."
+			"text": "The dark soil can produce more tomatoes than the light soil, assuming both receive equal irrigation, sunlight, and maintenance. This is known as having the [color=#E49F5A]absolute advantage[/color]. Try experimenting with the crop sliders by clicking anywhere on the sliders with your mouse."
 			,"next": "1a4_1"
 			,"concept": "absolute_advantage"
 		}
@@ -90,8 +90,8 @@
 			,"question": "1a9"
 		}
 		,"1a10": {
-			"text": "The table to the top right has been filled with the opportunity costs of both dark and light soil. When comparing two entites, whichever sacrifices less to obtain one unit of a good has the [color=#E49F5A]comparative advantage[/color]."
-			,"next": "1a10_1"
+			"text": "The area to the bottom middle has been filled with the opportunity costs of both light and dark soil. When comparing two entites, whichever sacrifices less to obtain one unit of a good has the [color=#E49F5A]comparative advantage[/color]."
+			,"next": "1a11"
 			,"concept": "comparative_advantage"
 		}
 		,"1a10_1": {
@@ -103,7 +103,7 @@
 			,"question": "1a11"
 		}
 		,"1a12": {
-			"text": "You have completed 1.a - Output! Select scenario 1.b - Input at the bottom left to continue."
+			"text": "You have completed 1a - Output! Select scenario 1b - Input at the bottom left to continue."
 			,"completed": "1_a_output"
 		}
 	}
@@ -111,7 +111,7 @@
 	,"questions": {
 		"1a4": {
 			"type": "multiple_choice"
-			,"text": "Of these two plots, which has the [url][color=#E49F5A]absolute advantage[/color][/url] in pepper crops? ( You can manually drag the crop sliders by clicking on them with your mouse. )
+			,"text": "Of these two plots, which has the [color=#E49F5A]absolute advantage[/color] in pepper crops?
 
 The ___ has the absolute advantage in both peppers and tomatoes."
 			,"correct": 0
@@ -164,8 +164,8 @@ The ___ has the absolute advantage in both peppers and tomatoes."
 				,"The farmer should just mix both soils together so they are equal and therefore wouldn't have to deal with this situation in the first place."
 			]
 			,"feedback": [
-				"Review the definition of comparative advantage and the opportunity costs in the table at the top right."
-				,"Review the definition of comparative advantage and the opportunity costs in the table at the top right."
+				"Review the definition of comparative advantage and the opportunity costs in the glossary at the top right."
+				,"Review the definition of comparative advantage and the opportunity costs in the glossary at the top right."
 				,"Correct!"
 				,"There is still value to be gained from land/countries with a smaller Production Possibility Curve, which will be seen in scenario 2 - Terms of Trade."
 				,"Remember that this scenario is a stand-in for two countries' Production Possibility Curves, and countries sure won't be mixing their economies any time soon. ( The real answer is that the farmer is lazy. )"
