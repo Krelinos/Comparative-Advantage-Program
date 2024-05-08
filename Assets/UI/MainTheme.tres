@@ -4,6 +4,11 @@
 [ext_resource path="res://Assets/UI/SrToasty/UI books & more.png" type="Texture" id=2]
 [ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=3]
 
+[sub_resource type="DynamicFont" id=1]
+size = 24
+use_filter = true
+font_data = ExtResource( 1 )
+
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
 region = Rect2( 401, 209, 14, 14 )
@@ -37,13 +42,14 @@ margin_right = 5.0
 margin_top = 5.0
 margin_bottom = 5.0
 
-[sub_resource type="DynamicFont" id=1]
-size = 24
-use_filter = true
-font_data = ExtResource( 1 )
-
 [resource]
 default_font = SubResource( 1 )
+Button/colors/font_color = Color( 0, 0, 0, 1 )
+Button/colors/font_color_disabled = Color( 0.219608, 0.219608, 0.219608, 0.2 )
+Button/colors/font_color_focus = Color( 0, 0, 0, 1 )
+Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
+Button/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+Button/fonts/font = SubResource( 1 )
 CheckBox/icons/checked = SubResource( 2 )
 CheckBox/icons/radio_checked = SubResource( 2 )
 CheckBox/icons/radio_unchecked = SubResource( 3 )

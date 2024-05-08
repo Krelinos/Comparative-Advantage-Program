@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=1]
 [ext_resource path="res://Assets/UI/MainTheme.tres" type="Theme" id=2]
@@ -6,6 +6,26 @@
 [ext_resource path="res://Scenes/DefinitionsList.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/Services/GameService.cs" type="Script" id=5]
 [ext_resource path="res://Scenes/ScenarioButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/MenuDialog.cs" type="Script" id=7]
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 1 )
+region_rect = Rect2( 337, 129, 14, 14 )
+margin_left = 7.0
+margin_right = 7.0
+margin_top = 6.0
+margin_bottom = 7.0
+
+[sub_resource type="StyleBoxFlat" id=1]
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 1 )
+region_rect = Rect2( 337, 129, 14, 14 )
+margin_left = 7.0
+margin_right = 7.0
+margin_top = 6.0
+margin_bottom = 7.0
+modulate_color = Color( 0.537255, 0.537255, 0.537255, 1 )
 
 [node name="Game" type="Node2D"]
 position = Vector2( -1, 0 )
@@ -41,15 +61,15 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
 [node name="Definitions" parent="UserInterface/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
-margin_bottom = 400.0
+margin_bottom = 385.0
 size_flags_stretch_ratio = 20.0
 
 [node name="ScenariosMenu" type="NinePatchRect" parent="UserInterface/HBoxContainer/VBoxContainer"]
-margin_top = 404.0
+margin_top = 389.0
 margin_right = 246.0
-margin_bottom = 581.0
+margin_bottom = 616.0
 size_flags_vertical = 3
-size_flags_stretch_ratio = 8.88
+size_flags_stretch_ratio = 11.75
 texture = ExtResource( 1 )
 region_rect = Rect2( 465, 65, 14, 14 )
 patch_margin_left = 6
@@ -69,18 +89,30 @@ custom_constants/margin_bottom = 6
 margin_left = 6.0
 margin_top = 1.0
 margin_right = 240.0
-margin_bottom = 176.0
+margin_bottom = 222.0
 custom_constants/separation = 0
 
 [node name="0Preface" parent="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
 margin_bottom = 35.0
 focus_mode = 0
+theme = ExtResource( 2 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
 text = "0 - Preface"
 
 [node name="1aOutput" parent="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
 margin_top = 35.0
 margin_bottom = 70.0
 focus_mode = 0
+theme = ExtResource( 2 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
 text = "1a - Output"
 
 [node name="1bInput" parent="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
@@ -88,7 +120,13 @@ modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
 margin_top = 70.0
 margin_bottom = 105.0
 focus_mode = 0
+theme = ExtResource( 2 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
 disabled = true
 text = "1b - Input"
 
@@ -97,7 +135,13 @@ modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
 margin_top = 105.0
 margin_bottom = 140.0
 focus_mode = 0
+theme = ExtResource( 2 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
 disabled = true
 text = "2 - Terms of Trade"
 
@@ -106,11 +150,36 @@ modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
 margin_top = 140.0
 margin_bottom = 175.0
 focus_mode = 0
+theme = ExtResource( 2 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
 disabled = true
 text = "3 - Practice Questions"
 
+[node name="PanelContainer" type="PanelContainer" parent="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 175.0
+margin_right = 234.0
+margin_bottom = 189.0
+theme = ExtResource( 2 )
+
+[node name="Menu" type="Button" parent="UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer"]
+margin_top = 189.0
+margin_right = 234.0
+margin_bottom = 221.0
+theme = ExtResource( 2 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+text = "Menu"
+
 [node name="SettingsMenu" type="NinePatchRect" parent="UserInterface/HBoxContainer/VBoxContainer"]
+visible = false
 margin_top = 585.0
 margin_right = 246.0
 margin_bottom = 616.0
@@ -123,13 +192,13 @@ patch_margin_top = 5
 patch_margin_right = 6
 patch_margin_bottom = 5
 
-[node name="Label" type="Label" parent="UserInterface/HBoxContainer/VBoxContainer/SettingsMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/HBoxContainer/VBoxContainer/SettingsMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 2 )
-text = "Menu"
-align = 1
-valign = 1
+custom_constants/margin_right = 6
+custom_constants/margin_top = 6
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
 
 [node name="ScenarioUI" type="MarginContainer" parent="UserInterface/HBoxContainer"]
 margin_left = 250.0
@@ -142,6 +211,166 @@ size_flags_vertical = 3
 margin_left = 747.0
 margin_right = 1364.0
 margin_bottom = 616.0
+
+[node name="MenuDialog" type="PanelContainer" parent="UserInterface"]
+self_modulate = Color( 0, 0, 0, 0.352941 )
+margin_right = 1364.0
+margin_bottom = 616.0
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 7 )
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MenuDialog"]
+margin_left = 497.0
+margin_top = 116.0
+margin_right = 867.0
+margin_bottom = 500.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UserInterface/MenuDialog/MarginContainer"]
+margin_right = 370.0
+margin_bottom = 384.0
+texture = ExtResource( 1 )
+region_rect = Rect2( 465, 65, 14, 14 )
+patch_margin_left = 6
+patch_margin_top = 5
+patch_margin_right = 6
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MenuDialog/MarginContainer"]
+margin_right = 370.0
+margin_bottom = 384.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 360.0
+margin_bottom = 374.0
+custom_constants/separation = 20
+
+[node name="RandomizingSeed" type="VBoxContainer" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer"]
+margin_right = 350.0
+margin_bottom = 118.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer/RandomizingSeed"]
+margin_right = 350.0
+margin_bottom = 29.0
+custom_constants/separation = 12
+
+[node name="Label" type="Label" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer/RandomizingSeed/HBoxContainer"]
+margin_top = 5.0
+margin_right = 138.0
+margin_bottom = 24.0
+theme = ExtResource( 2 )
+text = "Randomizing Seed"
+
+[node name="LineEdit" type="LineEdit" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer/RandomizingSeed/HBoxContainer"]
+margin_left = 150.0
+margin_right = 350.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 200, 0 )
+theme = ExtResource( 2 )
+text = "vivienne"
+align = 1
+placeholder_text = "seed"
+
+[node name="Label" type="Label" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer/RandomizingSeed"]
+margin_top = 33.0
+margin_right = 350.0
+margin_bottom = 118.0
+theme = ExtResource( 2 )
+text = "A keyword/phrase that this application uses to randomize questions and variables in the Practice Questions scenario. Leave blank to use your system's internal time."
+autowrap = true
+
+[node name="ResetScenarioQuestions" type="VBoxContainer" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer"]
+margin_top = 138.0
+margin_right = 350.0
+margin_bottom = 215.0
+
+[node name="Button" type="Button" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer/ResetScenarioQuestions"]
+margin_right = 210.0
+margin_bottom = 32.0
+size_flags_horizontal = 0
+theme = ExtResource( 2 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+text = "Reset Scenario Progress"
+
+[node name="Label" type="Label" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer/ResetScenarioQuestions"]
+margin_top = 36.0
+margin_right = 350.0
+margin_bottom = 77.0
+theme = ExtResource( 2 )
+text = "All solved scenario questions will require solving again to progress past them."
+autowrap = true
+
+[node name="ResetQuestionCounter" type="VBoxContainer" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer"]
+margin_top = 235.0
+margin_right = 350.0
+margin_bottom = 312.0
+
+[node name="Button" type="Button" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer/ResetQuestionCounter"]
+margin_right = 202.0
+margin_bottom = 32.0
+size_flags_horizontal = 0
+theme = ExtResource( 2 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 2 )
+disabled = true
+text = "Reset Question Counter"
+
+[node name="Label" type="Label" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer/ResetQuestionCounter"]
+margin_top = 36.0
+margin_right = 350.0
+margin_bottom = 77.0
+theme = ExtResource( 2 )
+text = "Practice Questions counters will be reset to zero."
+autowrap = true
+
+[node name="Exit" type="HBoxContainer" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer"]
+margin_top = 332.0
+margin_right = 350.0
+margin_bottom = 364.0
+
+[node name="ApplyClose" type="Button" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer/Exit"]
+margin_right = 123.0
+margin_bottom = 32.0
+theme = ExtResource( 2 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+text = "Apply & Close"
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer/Exit"]
+margin_left = 127.0
+margin_right = 291.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+
+[node name="Close" type="Button" parent="UserInterface/MenuDialog/MarginContainer/MarginContainer/VBoxContainer/Exit"]
+margin_left = 295.0
+margin_right = 350.0
+margin_bottom = 32.0
+theme = ExtResource( 2 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+text = "Close"
 
 [node name="DefinitionDialogBox" type="MarginContainer" parent="."]
 visible = false
