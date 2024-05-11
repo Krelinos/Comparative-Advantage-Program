@@ -33,12 +33,12 @@ public class GameService : Node
 	public override void _Ready()
 	{
 		ScenarioVisualsContainer = GetNode("ScenarioVisuals");
-		ScenarioUIContainer = GetNode("UserInterface/HBoxContainer/ScenarioUI");
+		ScenarioUIContainer = GetNode("UserInterface/MarginContainer/HBoxContainer/ScenarioUI");
 		
 		Save.LoadSaveFile();
 
-		Dialog = GetNode<Dialog>("UserInterface/HBoxContainer/Dialog");
-		DefinitionsList = GetNode<DefinitionsList>("UserInterface/HBoxContainer/VBoxContainer/Definitions");
+		Dialog = GetNode<Dialog>("UserInterface/MarginContainer/HBoxContainer/Dialog");
+		DefinitionsList = GetNode<DefinitionsList>("UserInterface/MarginContainer/HBoxContainer/VBoxContainer/Definitions");
 
 		DefinitionsList.Initialize();
 

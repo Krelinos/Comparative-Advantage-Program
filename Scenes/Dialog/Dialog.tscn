@@ -54,7 +54,7 @@ scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
 margin_right = 603.0
-margin_bottom = 235.0
+margin_bottom = 215.0
 size_flags_horizontal = 3
 custom_constants/separation = 4
 
@@ -65,7 +65,7 @@ margin_bottom = 85.0
 [node name="Basic" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 89.0
 margin_right = 603.0
-margin_bottom = 235.0
+margin_bottom = 215.0
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 anchor_top = 1.0

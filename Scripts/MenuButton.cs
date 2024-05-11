@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class ScenarioButton : Button
+public class MenuButton : Button
 {
     public override void _Ready()
     {

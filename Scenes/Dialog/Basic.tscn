@@ -12,7 +12,7 @@ script = ExtResource( 3 )
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 margin_right = 299.0
-margin_bottom = 306.0
+margin_bottom = 286.0
 texture = ExtResource( 1 )
 region_rect = Rect2( 130, 274, 12, 12 )
 patch_margin_left = 2
@@ -22,7 +22,7 @@ patch_margin_bottom = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 299.0
-margin_bottom = 306.0
+margin_bottom = 286.0
 custom_constants/margin_right = 2
 custom_constants/margin_top = 2
 custom_constants/margin_left = 6
@@ -32,7 +32,7 @@ custom_constants/margin_bottom = 4
 margin_left = 6.0
 margin_top = 2.0
 margin_right = 297.0
-margin_bottom = 302.0
+margin_bottom = 282.0
 theme = ExtResource( 2 )
 bbcode_enabled = true
 bbcode_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."

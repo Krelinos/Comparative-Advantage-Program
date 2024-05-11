@@ -2,13 +2,13 @@
 
 [ext_resource path="res://Assets/Font/m5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=2]
-[ext_resource path="res://Scripts/ScenarioButton.cs" type="Script" id=3]
+[ext_resource path="res://Scripts/MenuButton.cs" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 1 )
 
-[node name="Scenario" type="Button"]
+[node name="MenuButton" type="Button"]
 modulate = Color( 0.941176, 0.941176, 0.941176, 1 )
 margin_right = 234.0
 margin_bottom = 24.0
