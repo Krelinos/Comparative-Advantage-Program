@@ -54,15 +54,14 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
 [node name="Definitions" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
-margin_bottom = 386.0
-size_flags_stretch_ratio = 20.0
+margin_bottom = 367.0
+size_flags_stretch_ratio = 1.5
 
 [node name="ScenariosMenu" type="NinePatchRect" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer"]
-margin_top = 390.0
+margin_top = 371.0
 margin_right = 246.0
 margin_bottom = 617.0
 size_flags_vertical = 3
-size_flags_stretch_ratio = 11.75
 texture = ExtResource( 1 )
 region_rect = Rect2( 465, 65, 14, 14 )
 patch_margin_left = 6
@@ -71,18 +70,18 @@ patch_margin_right = 6
 patch_margin_bottom = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu"]
-margin_right = 246.0
-margin_bottom = 147.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 custom_constants/margin_right = 6
-custom_constants/margin_top = 1
+custom_constants/margin_top = 6
 custom_constants/margin_left = 6
 custom_constants/margin_bottom = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer"]
 margin_left = 6.0
-margin_top = 1.0
+margin_top = 6.0
 margin_right = 240.0
-margin_bottom = 225.0
+margin_bottom = 240.0
 custom_constants/separation = 0
 
 [node name="0Preface" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
@@ -129,12 +128,13 @@ text = "3 - Practice Questions"
 modulate = Color( 1, 1, 1, 0 )
 margin_top = 175.0
 margin_right = 234.0
-margin_bottom = 189.0
+margin_bottom = 199.0
+size_flags_vertical = 3
 theme = ExtResource( 2 )
 
 [node name="Menu" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
-margin_top = 189.0
-margin_bottom = 224.0
+margin_top = 199.0
+margin_bottom = 234.0
 text = "Menu"
 
 [node name="ScenarioUI" type="MarginContainer" parent="UserInterface/MarginContainer/HBoxContainer"]
@@ -148,161 +148,6 @@ size_flags_vertical = 3
 margin_left = 748.0
 margin_right = 1366.0
 margin_bottom = 617.0
-
-[node name="MenuWindow" type="PanelContainer" parent="UserInterface/MarginContainer"]
-visible = false
-self_modulate = Color( 0, 0, 0, 0.352941 )
-margin_right = 1366.0
-margin_bottom = 617.0
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 7 )
-
-[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MarginContainer/MenuWindow"]
-margin_left = 498.0
-margin_top = 53.0
-margin_right = 867.0
-margin_bottom = 563.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="NinePatchRect" type="NinePatchRect" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer"]
-margin_right = 369.0
-margin_bottom = 510.0
-texture = ExtResource( 1 )
-region_rect = Rect2( 465, 65, 14, 14 )
-patch_margin_left = 6
-patch_margin_top = 5
-patch_margin_right = 6
-patch_margin_bottom = 5
-
-[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer"]
-margin_right = 369.0
-margin_bottom = 510.0
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 359.0
-margin_bottom = 505.0
-custom_constants/separation = 20
-
-[node name="RandomizingSeed" type="VBoxContainer" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer"]
-margin_right = 349.0
-margin_bottom = 118.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/RandomizingSeed"]
-margin_right = 349.0
-margin_bottom = 29.0
-custom_constants/separation = 12
-
-[node name="Label" type="Label" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/RandomizingSeed/HBoxContainer"]
-margin_top = 5.0
-margin_right = 137.0
-margin_bottom = 24.0
-theme = ExtResource( 2 )
-text = "Randomizing Seed"
-
-[node name="LineEdit" type="LineEdit" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/RandomizingSeed/HBoxContainer"]
-margin_left = 149.0
-margin_right = 349.0
-margin_bottom = 29.0
-rect_min_size = Vector2( 200, 0 )
-theme = ExtResource( 2 )
-text = "Not editable yet!"
-align = 1
-editable = false
-placeholder_text = "seed"
-
-[node name="Label" type="Label" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/RandomizingSeed"]
-margin_top = 33.0
-margin_right = 349.0
-margin_bottom = 118.0
-theme = ExtResource( 2 )
-text = "A keyword/phrase that this application uses to randomize variables and questions in the Practice Questions scenario. Leave blank to use your system's internal time."
-autowrap = true
-
-[node name="ResetScenarioQuestions" type="VBoxContainer" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer"]
-margin_top = 138.0
-margin_right = 349.0
-margin_bottom = 240.0
-
-[node name="MenuButton" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/ResetScenarioQuestions" instance=ExtResource( 6 )]
-margin_right = 204.0
-margin_bottom = 35.0
-size_flags_horizontal = 0
-text = "Reset Scenario Progress"
-
-[node name="Label" type="Label" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/ResetScenarioQuestions"]
-margin_top = 39.0
-margin_right = 349.0
-margin_bottom = 102.0
-theme = ExtResource( 2 )
-text = "Previously solved scenario questions will require solving again to progress past them."
-autowrap = true
-
-[node name="ResetGlossary" type="VBoxContainer" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer"]
-margin_top = 260.0
-margin_right = 349.0
-margin_bottom = 340.0
-
-[node name="MenuButton" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/ResetGlossary" instance=ExtResource( 6 )]
-margin_right = 129.0
-margin_bottom = 35.0
-size_flags_horizontal = 0
-text = "Reset Glossary"
-
-[node name="Label" type="Label" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/ResetGlossary"]
-margin_top = 39.0
-margin_right = 349.0
-margin_bottom = 80.0
-theme = ExtResource( 2 )
-text = "Previously learned glossary concepts must be rediscovered in the scenarios."
-autowrap = true
-
-[node name="ResetAnswersCounter" type="VBoxContainer" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer"]
-margin_top = 360.0
-margin_right = 349.0
-margin_bottom = 440.0
-
-[node name="MenuButton" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/ResetAnswersCounter" instance=ExtResource( 6 )]
-margin_right = 186.0
-margin_bottom = 35.0
-size_flags_horizontal = 0
-text = "Reset Answer Counter"
-
-[node name="Label" type="Label" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/ResetAnswersCounter"]
-margin_top = 39.0
-margin_right = 349.0
-margin_bottom = 80.0
-theme = ExtResource( 2 )
-text = "Correct & incorrect counters for Practice Questions will be reset to zero."
-autowrap = true
-
-[node name="Exit" type="HBoxContainer" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer"]
-margin_top = 460.0
-margin_right = 349.0
-margin_bottom = 495.0
-
-[node name="ApplyClose" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/Exit" instance=ExtResource( 6 )]
-margin_right = 118.5
-margin_bottom = 35.0
-text = "Apply & Close"
-
-[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/Exit"]
-margin_left = 122.0
-margin_right = 293.0
-margin_bottom = 35.0
-size_flags_horizontal = 3
-
-[node name="Close" parent="UserInterface/MarginContainer/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/Exit" instance=ExtResource( 6 )]
-margin_left = 297.0
-margin_right = 349.5
-margin_bottom = 35.0
-text = "Close"
 
 [node name="DefinitionDialogBox" type="MarginContainer" parent="UserInterface"]
 visible = false
@@ -348,6 +193,161 @@ patch_margin_left = 6
 patch_margin_top = 5
 patch_margin_right = 6
 patch_margin_bottom = 5
+
+[node name="MenuWindow" type="PanelContainer" parent="UserInterface"]
+visible = false
+self_modulate = Color( 0, 0, 0, 0.352941 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 7 )
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MenuWindow"]
+margin_left = 498.0
+margin_top = 53.0
+margin_right = 867.0
+margin_bottom = 563.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UserInterface/MenuWindow/MarginContainer"]
+margin_right = 370.0
+margin_bottom = 510.0
+texture = ExtResource( 1 )
+region_rect = Rect2( 465, 65, 14, 14 )
+patch_margin_left = 6
+patch_margin_top = 5
+patch_margin_right = 6
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MenuWindow/MarginContainer"]
+margin_right = 370.0
+margin_bottom = 510.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 360.0
+margin_bottom = 505.0
+custom_constants/separation = 20
+
+[node name="RandomizingSeed" type="VBoxContainer" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer"]
+margin_right = 349.0
+margin_bottom = 118.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/RandomizingSeed"]
+margin_right = 349.0
+margin_bottom = 29.0
+custom_constants/separation = 12
+
+[node name="Label" type="Label" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/RandomizingSeed/HBoxContainer"]
+margin_top = 5.0
+margin_right = 137.0
+margin_bottom = 24.0
+theme = ExtResource( 2 )
+text = "Randomizing Seed"
+
+[node name="LineEdit" type="LineEdit" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/RandomizingSeed/HBoxContainer"]
+margin_left = 149.0
+margin_right = 349.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 200, 0 )
+theme = ExtResource( 2 )
+text = "Not editable yet!"
+align = 1
+editable = false
+placeholder_text = "seed"
+
+[node name="Label" type="Label" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/RandomizingSeed"]
+margin_top = 33.0
+margin_right = 349.0
+margin_bottom = 118.0
+theme = ExtResource( 2 )
+text = "A keyword/phrase that this application uses to randomize variables and questions in the Practice Questions scenario. Leave blank to use your system's internal time."
+autowrap = true
+
+[node name="ResetScenarioQuestions" type="VBoxContainer" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer"]
+margin_top = 138.0
+margin_right = 349.0
+margin_bottom = 240.0
+
+[node name="MenuButton" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/ResetScenarioQuestions" instance=ExtResource( 6 )]
+margin_right = 204.0
+margin_bottom = 35.0
+size_flags_horizontal = 0
+text = "Reset Scenario Progress"
+
+[node name="Label" type="Label" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/ResetScenarioQuestions"]
+margin_top = 39.0
+margin_right = 349.0
+margin_bottom = 102.0
+theme = ExtResource( 2 )
+text = "Previously solved scenario questions will require solving again to progress past them."
+autowrap = true
+
+[node name="ResetGlossary" type="VBoxContainer" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer"]
+margin_top = 260.0
+margin_right = 349.0
+margin_bottom = 340.0
+
+[node name="MenuButton" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/ResetGlossary" instance=ExtResource( 6 )]
+margin_right = 129.0
+margin_bottom = 35.0
+size_flags_horizontal = 0
+text = "Reset Glossary"
+
+[node name="Label" type="Label" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/ResetGlossary"]
+margin_top = 39.0
+margin_right = 349.0
+margin_bottom = 80.0
+theme = ExtResource( 2 )
+text = "Previously learned glossary concepts must be rediscovered in the scenarios."
+autowrap = true
+
+[node name="ResetAnswersCounter" type="VBoxContainer" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer"]
+margin_top = 360.0
+margin_right = 349.0
+margin_bottom = 440.0
+
+[node name="MenuButton" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/ResetAnswersCounter" instance=ExtResource( 6 )]
+margin_right = 186.0
+margin_bottom = 35.0
+size_flags_horizontal = 0
+text = "Reset Answer Counter"
+
+[node name="Label" type="Label" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/ResetAnswersCounter"]
+margin_top = 39.0
+margin_right = 349.0
+margin_bottom = 80.0
+theme = ExtResource( 2 )
+text = "Correct & incorrect counters for Practice Questions will be reset to zero."
+autowrap = true
+
+[node name="Exit" type="HBoxContainer" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer"]
+margin_top = 460.0
+margin_right = 349.0
+margin_bottom = 495.0
+
+[node name="ApplyClose" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/Exit" instance=ExtResource( 6 )]
+margin_right = 118.5
+margin_bottom = 35.0
+text = "Apply & Close"
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/Exit"]
+margin_left = 122.0
+margin_right = 293.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+
+[node name="Close" parent="UserInterface/MenuWindow/MarginContainer/MarginContainer/VBoxContainer/Exit" instance=ExtResource( 6 )]
+margin_left = 297.0
+margin_right = 349.5
+margin_bottom = 35.0
+text = "Close"
 
 [connection signal="pressed" from="UserInterface/MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer/0Preface" to="." method="OnScenarioButtonPressed" binds= [ "0Preface" ]]
 [connection signal="pressed" from="UserInterface/MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer/1aOutput" to="." method="OnScenarioButtonPressed" binds= [ "1aOutput" ]]

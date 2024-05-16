@@ -20,7 +20,7 @@ public class MenuWindow : PanelContainer
 
     public override void _Ready()
     {
-        Menu = GetNode<Button>("../HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer/Menu");
+        Menu = GetNode<Button>("../MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer/Menu");
         Node options = GetNode("MarginContainer/MarginContainer/VBoxContainer");
 
         Seed = options.GetNode<LineEdit>("RandomizingSeed/HBoxContainer/LineEdit");

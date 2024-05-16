@@ -59,38 +59,47 @@
 		,"1a5": {
 			"text": "If the farmer were to plant only peppers in the light soil, the opportunity to plant tomatoes would be sacrificed. This is known as the [color=#E49F5A]opportunity cost[/color]."
 			,"next": "1a6"
+			,"concept": "opportunity_cost_output"
 		}
 		,"1a6": {
-			"text": "As such, the farmer gives up the opportunity to grow {light_tomato} crates of tomatoes in exchange for {light_pepper} crates of peppers ({light_tomato} / {light_pepper} = {light_pepper_opportunity_cost})."
-			,"next": "1a7"
-			,"variables": [
-				"light_tomato"
-				,"light_pepper"
-				,"light_pepper_opportunity_cost"
-			]
+			"text": "As such, the farmer gives up the opportunity to grow {light_tomato} crates of tomatoes in exchange for {light_pepper} crates of peppers."
+			,"next": "1a6_1"
+		}
+		,"1a6_1": {
+			"text": "Alternatively, the farmer could plant tomatoes, giving up the opportunity to grow {light_pepper} crates of peppers in exchange for {light_tomato} crates of tomatoes."
+			,"next": "1a6_2"
+		}
+		,"1a6_2": {
+			"next": "1a7"
+			,"question": "1a6_2"
 		}
 		,"1a7": {
-			"text": "Alternatively, the farmer could plant tomatoes, giving up the opportunity to grow {light_pepper} crates of peppers in exchange for {light_tomato} crates of tomatoes ({light_pepper} / {light_tomato} = {light_tomato_opportunity_cost})."
+			"text": "When comparing two entites, whichever has the lower opportunity cost to produce an item has the [color=#E49F5A]comparative advantage[/color] for that item."
+			,"next": "1a7_1"
+			,"concept": "comparative_advantage"
+		}
+		,"1a7_1": {
+			"text": "To compare the opportunity costs of the farmlands, the costs must be normalized. The way to do this regarding output is by dividing the Sacrificed Item by the Gained Item."
 			,"next": "1a8"
-			,"variables": [
-				"light_pepper"
-				,"light_tomato"
-				,"light_tomato_opportunity_cost"
-			]
 		}
 		,"1a8": {
-			"next": "1a9"
-			,"concept": "opportunity_cost_output"
-			,"question": "1a8"
+			"text": "For the light soil, the opportunity cost to recieve one pepper is {light_tomato} / {light_pepper} = {light_pepper_opportunity_cost}"
+			,"next": "1a8_1"
+			,"visuals": "table_show_lpepper"
+		}
+		,"1a8_1": {
+			"text": "And the opportunity cost to receive one tomato is {light_pepper} / {light_tomato} = {light_tomato_opportunity_cost}"
+			,"next": "1a9"
+			,"visuals": "table_show_ltomato"
 		}
 		,"1a9": {
 			"next": "1a10"
 			,"question": "1a9"
 		}
 		,"1a10": {
-			"text": "The area to the bottom middle has been filled with the opportunity costs of both light and dark soil. When comparing two entites, whichever sacrifices less to obtain one unit of a good has the [color=#E49F5A]comparative advantage[/color]."
-			,"next": "1a11"
-			,"concept": "comparative_advantage"
+			"next": "1a11"
+			,"question": "1a10"
+			,"visuals": "table_show_dpepper"
 		}
 		,"1a10_1": {
 			"text": ""
@@ -99,6 +108,7 @@
 		,"1a11": {
 			"next": "1a12"
 			,"question": "1a11"
+			,"visuals": "table_show_dtomato"
 		}
 		,"1a12": {
 			"text": "You have completed 1a - Output! Select scenario 1b - Input at the bottom left to continue."
@@ -124,7 +134,7 @@ The ___ has the absolute advantage in both peppers and tomatoes."
 				,"Review the definition of absolute advantage by hovering your mouse over the term in the glossary."
 			]
 		}
-		,"1a8": {
+		,"1a6_2": {
 			"type": "multiple_choice"
 			,"text": "What would be the [color=#E49F5A]opportunity cost[/color] of the [u]dark[/u] soil be if the farmer grew peppers in it?
 
@@ -143,9 +153,24 @@ The opportunity cost to grow peppers in the dark soil would be ___ tomatoes for 
 		}
 		,"1a9": {
 			"type": "multiple_choice"
-			,"text": "And what would be the opportunity cost of the dark soil be if the farmer grew tomatoes in it?
+			,"text": "What would be the dark soil's opportunity cost to grow one pepper?
 
-The opportunity cost to grow tomatoes in the dark soil would be {dark_pepper} peppers for {dark_tomato} tomatoes, or ___ peppers for 1 tomato."
+The opportunity cost to grow one pepper in the dark soil would be ___ tomatoes."
+			,"correct": 1
+			,"content": [
+				"{dark_tomato_opportunity_cost}"
+				,"{dark_pepper_opportunity_cost}"
+			]
+			,"feedback": [
+				"You have incorrectly applied the equation regarding output. The equation is [Sacrificed Good] / [Gained Good]"
+				,"Correct!"
+			]
+		}
+		,"1a10": {
+			"type": "multiple_choice"
+			,"text": "And what would be the dark soil's opportunity cost to grow one tomato?
+
+The opportunity cost to grow one tomato in the dark soil would be ___ peppers."
 			,"correct": 0
 			,"content": [
 				"{dark_tomato_opportunity_cost}"
@@ -153,7 +178,7 @@ The opportunity cost to grow tomatoes in the dark soil would be {dark_pepper} pe
 			]
 			,"feedback": [
 				"Correct!"
-				,"You have incorrectly applied the equation regarding output. The equation is ( [The sacrificed good] / [The gained good] )"
+				,"You have incorrectly applied the equation regarding output. The equation is [Sacrificed Good] / [Gained Good]"
 			]
 		}
 		,"1a11": {

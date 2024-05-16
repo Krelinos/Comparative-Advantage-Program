@@ -15,8 +15,6 @@ public class GameService : Node
 	public static Dialog Dialog { get; private set; }
 	public static DefinitionsList DefinitionsList { get; private set; }
 
-	private static Node ScenariosList;
-
     public GameService()
 	{
 		RNG = new RandomNumberGenerator
@@ -43,15 +41,6 @@ public class GameService : Node
 		DefinitionsList.Initialize();
 
         OnScenarioButtonPressed("0Preface");
-		
-        // ScenariosList = GetNode("UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer");
-		// foreach ( Button n in ScenariosList.GetChildren() )
-		// {
-		// 	var args = new Godot.Collections.Array(n.Name);
-		// 	n.Connect("pressed", this, nameof(OnScenarioButtonPressed), args);
-		// }
-
-		
 	}
 
 	public static JSONParseResult ParseJSON( String fileName, String filePath )
@@ -83,6 +72,7 @@ public class GameService : Node
 		var visuals = Scenario.CurrentScenarioVisuals as Scenario1aOutputVisuals;
 		if ( visuals != null )
 			visuals.Initialize();
+		
 		var ui = Scenario.CurrentScenarioUI as Scenario1aOutputUI;
 		if ( ui != null )
 			ui.Initialize();
