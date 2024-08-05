@@ -1,11 +1,10 @@
 [gd_resource type="Theme" load_steps=10 format=2]
 
-[ext_resource path="res://Assets/Font/m5x7.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Font/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/UI/SrToasty/UI books & more.png" type="Texture" id=2]
 [ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 24
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )

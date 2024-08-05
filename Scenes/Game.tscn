@@ -37,30 +37,31 @@ anchor_bottom = 1.0
 
 [node name="Backdrop" type="PanelContainer" parent="UserInterface/MarginContainer"]
 margin_right = 246.0
-margin_bottom = 617.0
+margin_bottom = 640.0
 rect_min_size = Vector2( 246, 0 )
 size_flags_horizontal = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/MarginContainer"]
-margin_right = 1366.0
-margin_bottom = 617.0
+margin_right = 360.0
+margin_bottom = 640.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MarginContainer/HBoxContainer"]
-margin_right = 246.0
-margin_bottom = 617.0
+margin_right = 64.0
+margin_bottom = 640.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
 [node name="Definitions" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
-margin_bottom = 367.0
+margin_right = 64.0
+margin_bottom = 381.0
 size_flags_stretch_ratio = 1.5
 
 [node name="ScenariosMenu" type="NinePatchRect" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer"]
-margin_top = 371.0
-margin_right = 246.0
-margin_bottom = 617.0
+margin_top = 385.0
+margin_right = 64.0
+margin_bottom = 640.0
 size_flags_vertical = 3
 texture = ExtResource( 1 )
 region_rect = Rect2( 465, 65, 14, 14 )
@@ -80,11 +81,12 @@ custom_constants/margin_bottom = 6
 [node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer"]
 margin_left = 6.0
 margin_top = 6.0
-margin_right = 240.0
-margin_bottom = 240.0
+margin_right = 202.0
+margin_bottom = 249.0
 custom_constants/separation = 0
 
 [node name="0Preface" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
+margin_right = 196.0
 margin_bottom = 35.0
 focus_mode = 0
 custom_styles/normal = SubResource( 2 )
@@ -92,6 +94,7 @@ text = "0 - Preface"
 
 [node name="1aOutput" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
 margin_top = 35.0
+margin_right = 196.0
 margin_bottom = 70.0
 focus_mode = 0
 custom_styles/normal = SubResource( 2 )
@@ -100,6 +103,7 @@ text = "1a - Output"
 [node name="1bInput" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
 modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
 margin_top = 70.0
+margin_right = 196.0
 margin_bottom = 105.0
 focus_mode = 0
 custom_styles/normal = SubResource( 2 )
@@ -109,6 +113,7 @@ text = "1b - Input"
 [node name="2TermsOfTrade" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
 modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
 margin_top = 105.0
+margin_right = 196.0
 margin_bottom = 140.0
 focus_mode = 0
 custom_styles/normal = SubResource( 2 )
@@ -118,6 +123,7 @@ text = "2 - Terms of Trade"
 [node name="3PracticeQuestions" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
 modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
 margin_top = 140.0
+margin_right = 196.0
 margin_bottom = 175.0
 focus_mode = 0
 custom_styles/normal = SubResource( 2 )
@@ -127,27 +133,28 @@ text = "3 - Practice Questions"
 [node name="PanelContainer" type="PanelContainer" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
 margin_top = 175.0
-margin_right = 234.0
-margin_bottom = 199.0
+margin_right = 196.0
+margin_bottom = 208.0
 size_flags_vertical = 3
 theme = ExtResource( 2 )
 
 [node name="Menu" parent="UserInterface/MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
-margin_top = 199.0
-margin_bottom = 234.0
+margin_top = 208.0
+margin_right = 196.0
+margin_bottom = 243.0
 text = "Menu"
 
 [node name="ScenarioUI" type="MarginContainer" parent="UserInterface/MarginContainer/HBoxContainer"]
-margin_left = 250.0
-margin_right = 744.0
-margin_bottom = 617.0
+margin_left = 68.0
+margin_right = 196.0
+margin_bottom = 640.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Dialog" parent="UserInterface/MarginContainer/HBoxContainer" instance=ExtResource( 3 )]
-margin_left = 748.0
-margin_right = 1366.0
-margin_bottom = 617.0
+margin_left = 200.0
+margin_right = 360.0
+margin_bottom = 640.0
 
 [node name="DefinitionDialogBox" type="MarginContainer" parent="UserInterface"]
 visible = false
