@@ -54,8 +54,8 @@ public class MCQuestion : MarginContainer, IHasDialogLabel
             Choice choice = _Choice.Instance() as Choice;
             Answers.AddChild( choice );
 
-            choice.SetGroup( ButtonGroup );
-            choice.SetLabel( answer );
+            choice.ButtonGroup = ButtonGroup;
+            choice.LabelText = answer;
 
             Godot.Collections.Array args = new Godot.Collections.Array { i };
             choice.CheckBox.Connect("pressed", this, nameof(_OnChoiceSelected), args );

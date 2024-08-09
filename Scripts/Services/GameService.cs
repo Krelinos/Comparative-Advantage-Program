@@ -6,6 +6,11 @@ namespace ComparativeAdvantage
 {
 public class GameService : Node
 {
+	[Export] protected NodePath ScenarioVisualsPath;
+	[Export] protected NodePath ScenarioUIPath;
+	[Export] protected NodePath DialogPath;
+	[Export] protected NodePath DefinitionsPath;
+
 	public static Godot.RandomNumberGenerator RNG { get; private set; }
 	public static SaveService Save { get; private set; }
 	public static ScenarioService Scenario { get; private set; }
@@ -19,7 +24,7 @@ public class GameService : Node
 	{
 		RNG = new RandomNumberGenerator
 		{
-			Seed = (ulong)$"vivienne, until you call again".GetHashCode(),
+			Seed = (ulong)$"until you call again, vivienne".GetHashCode(),
 			State = 0
 		};
 
@@ -30,13 +35,13 @@ public class GameService : Node
 
 	public override void _Ready()
 	{
-		ScenarioVisualsContainer = GetNode("ScenarioVisuals");
-		ScenarioUIContainer = GetNode("UserInterface/MarginContainer/HBoxContainer/ScenarioUI");
+		ScenarioVisualsContainer = GetNode( ScenarioVisualsPath );
+		ScenarioUIContainer = GetNode( ScenarioUIPath );
 		
 		Save.LoadSaveFile();
 
-		Dialog = GetNode<Dialog>("UserInterface/MarginContainer/HBoxContainer/Dialog");
-		DefinitionsList = GetNode<DefinitionsList>("UserInterface/MarginContainer/HBoxContainer/VBoxContainer/Definitions");
+		Dialog = GetNode<Dialog>( DialogPath );
+		DefinitionsList = GetNode<DefinitionsList>( DefinitionsPath );
 
 		DefinitionsList.Initialize();
 

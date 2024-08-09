@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
+namespace ComparativeAdvantage
+{
+
 /// <summary>
 /// A ScrollContainer that responds to touchscreen InputEvents. Swiping quickly
 /// will continue scrolling the scrollbar as is typical of mobile applications.
@@ -16,6 +19,8 @@ public class TouchSwipeScrollContainer : ScrollContainer
 
 	public override void _Ready()
 	{
+		base._Ready();
+
 		// Since this is touchscreen, scrolling via scrollbar is not required.
 		GetVScrollbar().MouseFilter = MouseFilterEnum.Ignore;
 	}
@@ -46,7 +51,7 @@ public class TouchSwipeScrollContainer : ScrollContainer
 				Velocity = 0;
 			}
 			else
-				Velocity = TimeSinceLastDragEvent > 0.1f ? 0 : LastDragSpeed.y*0.35f;
+				Velocity = TimeSinceLastDragEvent > 0.1f ? 0 : LastDragSpeed.y*0.25f;
 		}
 
 		if ( @event is InputEventScreenDrag drag )
@@ -58,3 +63,5 @@ public class TouchSwipeScrollContainer : ScrollContainer
 		}
 	}
 }
+
+}	// namespace ComparativeAdvantage

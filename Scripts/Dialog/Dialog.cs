@@ -8,20 +8,20 @@ public class Dialog : NinePatchRect
     [Signal]
     public delegate void DialogVisualsEvent( String visualsId );
 
-    private ScrollContainer DialogScroll;
-    private Control DialogContainer;
-    private Button ContinueButton;
-    private Timer ScrollTimer;
+    protected ScrollContainer DialogScroll;
+    protected Control DialogContainer;
+    protected Button ContinueButton;
+    protected Timer ScrollTimer;
 
-    private String NextDialogID;
-    private bool IsDialogPaused;
+    protected String NextDialogID;
+    protected bool IsDialogPaused;
 
-    private const String CONTINUE_CONTINUE = "Click here or press space to continue.";
-    private const String CONTINUE_PAUSE    = "Solve the above question to continue.";
-    private const String CONTINUE_END      = "- End of scenario -";
+    protected const String CONTINUE_CONTINUE = "Click here or press space to continue.";
+    protected const String CONTINUE_PAUSE    = "Solve the above question to continue.";
+    protected const String CONTINUE_END      = "- End of scenario -";
 
-    private PackedScene _DialogBasic;
-    private PackedScene _DialogMCQuestion;
+    protected PackedScene _DialogBasic;
+    protected PackedScene _DialogMCQuestion;
 
     public override void _Ready()
     {
