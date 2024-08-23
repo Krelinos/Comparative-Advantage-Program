@@ -53,10 +53,10 @@ public class SideMenu : CanvasLayer
         OnscreenWindow = GetNode<Container>( __OnscreenWindow );
 
         MenuButton.Connect( "pressed", this, nameof(ToggleMenu) );
-        GetNode<SideMenu>( OtherSideMenu ).
+        GetNode<SideMenu>( OtherSideMenu ).Connect( "OffscreenWindowVisibilityChanged", this, nameof(OnOtherMenuOffscreenWindowVisibilityChanged) );
     }
 
-    protected void ToggleMenu()
+    protected async void ToggleMenu()
     {
         IsMenuOpen = !IsMenuOpen;
         EmitSignal( nameof(OffscreenWindowVisibilityChanged), IsMenuOpen );
@@ -74,6 +74,7 @@ public class SideMenu : CanvasLayer
             tween2.Start();
 
             Backdrop.MouseFilter = Control.MouseFilterEnum.Stop;
+            Layer++;
         }
         else
         {
@@ -88,12 +89,15 @@ public class SideMenu : CanvasLayer
             tween2.Start();
 
             Backdrop.MouseFilter = Control.MouseFilterEnum.Ignore;
+            await ToSignal( tween, "tween_completed" );
+            Layer--;
         }
     }
 
     protected void OnOtherMenuOffscreenWindowVisibilityChanged( bool IsVisible )
     {
-
+        Visible = !IsVisible;
+        // OnscreenWindow.MouseFilter = IsVisible ? Control.MouseFilterEnum.Ignore : Control.MouseFilterEnum.Stop;
     }
 }
 

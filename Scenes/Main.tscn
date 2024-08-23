@@ -169,22 +169,27 @@ script = ExtResource( 11 )
 __MenuButton = NodePath("MarginContainer/HBoxContainer/Onscreen/MarginContainer/MenuButton")
 __Backdrop = NodePath("PanelContainer")
 __OffscreenWindow = NodePath("MarginContainer/HBoxContainer/Offscreen")
+__OnscreenWindow = NodePath("MarginContainer/HBoxContainer/Onscreen")
+OtherSideMenu = NodePath("../RightSideMenu")
 
 [node name="PanelContainer" type="PanelContainer" parent="LeftSideMenu"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 360.0
+mouse_filter = 2
 custom_styles/panel = SubResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="LeftSideMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 custom_constants/margin_right = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LeftSideMenu/MarginContainer"]
 margin_right = 358.0
 margin_bottom = 640.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Offscreen" type="MarginContainer" parent="LeftSideMenu/MarginContainer/HBoxContainer"]
@@ -535,6 +540,8 @@ script = ExtResource( 11 )
 __MenuButton = NodePath("MarginContainer/HBoxContainer/Onscreen/MarginContainer/MenuButton")
 __Backdrop = NodePath("PanelContainer")
 __OffscreenWindow = NodePath("MarginContainer/HBoxContainer/Offscreen")
+__OnscreenWindow = NodePath("MarginContainer/HBoxContainer/Onscreen")
+OtherSideMenu = NodePath("../LeftSideMenu")
 IsRightOriented = true
 
 [node name="PanelContainer" type="PanelContainer" parent="RightSideMenu"]
@@ -548,13 +555,14 @@ custom_styles/panel = SubResource( 3 )
 [node name="MarginContainer" type="MarginContainer" parent="RightSideMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 1
+mouse_filter = 2
 custom_constants/margin_left = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="RightSideMenu/MarginContainer"]
 margin_left = 2.0
 margin_right = 360.0
 margin_bottom = 640.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Onscreen" type="MarginContainer" parent="RightSideMenu/MarginContainer/HBoxContainer"]
