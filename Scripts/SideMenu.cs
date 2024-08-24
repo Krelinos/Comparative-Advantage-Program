@@ -20,7 +20,7 @@ public class SideMenu : CanvasLayer
         protected set { _MenuButton = value; }
     }
     
-    public Control Backdrop
+    public Button Backdrop
     {
         get { return _Backdrop; }
         protected set { _Backdrop = value; }
@@ -39,7 +39,7 @@ public class SideMenu : CanvasLayer
     }
 
     private Button _MenuButton;
-    private Control _Backdrop;
+    private Button _Backdrop;
     private Container _OffscreenWindow;
     private Container _OnscreenWindow;
 
@@ -48,11 +48,12 @@ public class SideMenu : CanvasLayer
     public override void _Ready()
     {
         MenuButton = GetNode<Button>( __MenuButton );
-        Backdrop = GetNode<Control>( __Backdrop );
+        Backdrop = GetNode<Button>( __Backdrop );
         OffscreenWindow = GetNode<Container>( __OffscreenWindow );
         OnscreenWindow = GetNode<Container>( __OnscreenWindow );
 
         MenuButton.Connect( "pressed", this, nameof(ToggleMenu) );
+        Backdrop.Connect( "pressed", this, nameof(OnBackdropPressed) );
         GetNode<SideMenu>( OtherSideMenu ).Connect( "OffscreenWindowVisibilityChanged", this, nameof(OnOtherMenuOffscreenWindowVisibilityChanged) );
     }
 
@@ -98,6 +99,12 @@ public class SideMenu : CanvasLayer
     {
         Visible = !IsVisible;
         // OnscreenWindow.MouseFilter = IsVisible ? Control.MouseFilterEnum.Ignore : Control.MouseFilterEnum.Stop;
+    }
+
+    protected void OnBackdropPressed()
+    {
+        if ( IsMenuOpen )
+            ToggleMenu();
     }
 }
 
