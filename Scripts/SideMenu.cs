@@ -45,6 +45,8 @@ public class SideMenu : CanvasLayer
 
     protected bool IsMenuOpen;
 
+    protected const float OPEN_AND_CLOSE_DURATION = 0.25f;
+
     public override void _Ready()
     {
         MenuButton = GetNode<Button>( __MenuButton );
@@ -65,39 +67,49 @@ public class SideMenu : CanvasLayer
         if ( IsMenuOpen )
         {
             Tween tween = new Tween();
-            tween.InterpolateProperty(this, "offset:x", OffscreenWindow.RectSize.x * (IsRightOriented ? 1 : -1), 0, 1f, Tween.TransitionType.Quad, Tween.EaseType.Out );
+            tween.InterpolateProperty(this, "offset:x",
+                Backdrop.RectSize.x/2 * (IsRightOriented ? 1 : -1),
+                Backdrop.RectSize.x/2 * (IsRightOriented ? 1 : -1) + OffscreenWindow.RectSize.x * (IsRightOriented ? -1 : 1),
+                OPEN_AND_CLOSE_DURATION,
+                Tween.TransitionType.Quad,
+                Tween.EaseType.Out );
             AddChild(tween);
             tween.Start();
 
             Tween tween2 = new Tween();
-            tween2.InterpolateProperty(Backdrop, "modulate", new Color(1,1,1,0f), new Color(1,1,1,0.5f), 1f, Tween.TransitionType.Quad, Tween.EaseType.Out );
+            tween2.InterpolateProperty(Backdrop, "modulate", new Color(1,1,1,0f), new Color(1,1,1,0.5f),
+                OPEN_AND_CLOSE_DURATION,
+                Tween.TransitionType.Quad,
+                Tween.EaseType.Out );
             AddChild(tween2);
             tween2.Start();
 
             Backdrop.MouseFilter = Control.MouseFilterEnum.Stop;
-            Layer++;
         }
         else
         {
             Tween tween = new Tween();
-            tween.InterpolateProperty(this, "offset:x", 0, OffscreenWindow.RectSize.x * (IsRightOriented ? 1 : -1), 1f, Tween.TransitionType.Quad, Tween.EaseType.Out );
+            tween.InterpolateProperty(this, "offset:x",
+                Backdrop.RectSize.x/2 * (IsRightOriented ? 1 : -1) + OffscreenWindow.RectSize.x * (IsRightOriented ? -1 : 1),
+                Backdrop.RectSize.x/2 * (IsRightOriented ? 1 : -1),
+                OPEN_AND_CLOSE_DURATION,
+                Tween.TransitionType.Quad,
+                Tween.EaseType.Out );
             AddChild(tween);
             tween.Start();
 
             Tween tween2 = new Tween();
-            tween2.InterpolateProperty(Backdrop, "modulate", new Color(1,1,1,0.5f), new Color(1,1,1,0f), 1f, Tween.TransitionType.Quad, Tween.EaseType.Out );
+            tween2.InterpolateProperty(Backdrop, "modulate", new Color(1,1,1,0.5f), new Color(1,1,1,0f), OPEN_AND_CLOSE_DURATION, Tween.TransitionType.Quad, Tween.EaseType.Out );
             AddChild(tween2);
             tween2.Start();
 
             Backdrop.MouseFilter = Control.MouseFilterEnum.Ignore;
-            await ToSignal( tween, "tween_completed" );
-            Layer--;
         }
     }
 
     protected void OnOtherMenuOffscreenWindowVisibilityChanged( bool IsVisible )
     {
-        Visible = !IsVisible;
+        // Visible = !IsVisible;
         // OnscreenWindow.MouseFilter = IsVisible ? Control.MouseFilterEnum.Ignore : Control.MouseFilterEnum.Stop;
     }
 
