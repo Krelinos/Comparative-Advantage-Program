@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace ComparativeAdvantage {
+namespace ComparativeAdvantage { namespace mobile {
 
 public class SideMenu : CanvasLayer
 {
@@ -11,6 +11,7 @@ public class SideMenu : CanvasLayer
     [Export] protected NodePath __Backdrop;
     [Export] protected NodePath __OffscreenWindow;
     [Export] protected NodePath __OnscreenWindow;
+    [Export] protected NodePath __BackButton;
     [Export] protected NodePath OtherSideMenu;
     [Export] protected readonly bool IsRightOriented;
 
@@ -38,10 +39,17 @@ public class SideMenu : CanvasLayer
         protected set { _OnscreenWindow = value; }
     }
 
+    public Button BackButton
+    {
+        get { return _BackButton; }
+        protected set { _BackButton = value; }
+    }
+
     private Button _MenuButton;
     private Button _Backdrop;
     private Container _OffscreenWindow;
     private Container _OnscreenWindow;
+    private Button _BackButton;
 
     protected bool IsMenuOpen;
 
@@ -53,13 +61,16 @@ public class SideMenu : CanvasLayer
         Backdrop = GetNode<Button>( __Backdrop );
         OffscreenWindow = GetNode<Container>( __OffscreenWindow );
         OnscreenWindow = GetNode<Container>( __OnscreenWindow );
+        BackButton = GetNode<Button>( __BackButton );
 
         MenuButton.Connect( "pressed", this, nameof(ToggleMenu) );
-        Backdrop.Connect( "pressed", this, nameof(OnBackdropPressed) );
+        Backdrop.Connect( "pressed", this, nameof(OnBackdropOrBackButtonPressed) );
+        BackButton.Connect( "pressed", this, nameof(OnBackdropOrBackButtonPressed) );
+
         GetNode<SideMenu>( OtherSideMenu ).Connect( "OffscreenWindowVisibilityChanged", this, nameof(OnOtherMenuOffscreenWindowVisibilityChanged) );
     }
 
-    protected async void ToggleMenu()
+    protected void ToggleMenu()
     {
         IsMenuOpen = !IsMenuOpen;
         EmitSignal( nameof(OffscreenWindowVisibilityChanged), IsMenuOpen );
@@ -113,11 +124,11 @@ public class SideMenu : CanvasLayer
         // OnscreenWindow.MouseFilter = IsVisible ? Control.MouseFilterEnum.Ignore : Control.MouseFilterEnum.Stop;
     }
 
-    protected void OnBackdropPressed()
+    protected void OnBackdropOrBackButtonPressed()
     {
         if ( IsMenuOpen )
             ToggleMenu();
     }
 }
 
-}
+} }

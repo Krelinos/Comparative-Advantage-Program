@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=1]
+[ext_resource path="res://Assets/UI/MainTheme.tres" type="Theme" id=2]
+[ext_resource path="res://Scripts/MobileExclusive/Definition.cs" type="Script" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[node name="Definition" type="PanelContainer"]
+margin_right = 164.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 36, 48 )
+rect_pivot_offset = Vector2( -187, -124 )
+custom_styles/panel = SubResource( 7 )
+script = ExtResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 164.0
+margin_bottom = 48.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 6
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 6
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
+margin_left = 4.0
+margin_top = 6.0
+margin_right = 160.0
+margin_bottom = 42.0
+texture = ExtResource( 1 )
+region_rect = Rect2( 337, 129, 14, 14 )
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 7
+patch_margin_bottom = 7
+
+[node name="Term" type="Label" parent="MarginContainer"]
+margin_left = 4.0
+margin_top = 14.0
+margin_right = 160.0
+margin_bottom = 33.0
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Term"
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 4.0
+margin_top = 6.0
+margin_right = 160.0
+margin_bottom = 42.0
+custom_constants/separation = 8
+
+[node name="Description" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+margin_right = 156.0
+theme = ExtResource( 2 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "The tradeoff in which an entity sacrifices the potential to produce a good in order to produce a more desirable good.
+
+For example, an entity can produce 4 units of Item A or 10 units of Item B. If the entity focused entirely on Item B, the opportunity cost would be the 4 units of Item A that the entity could have made instead.
+
+( As an aside, the entity could put any ratio into A or B, 75% to A and 25% to B for example, but then the opportunity cost would be 1 unit of A and 7.5 units of B. )"
+text = "The tradeoff in which an entity sacrifices the potential to produce a good in order to produce a more desirable good.
+
+For example, an entity can produce 4 units of Item A or 10 units of Item B. If the entity focused entirely on Item B, the opportunity cost would be the 4 units of Item A that the entity could have made instead.
+
+( As an aside, the entity could put any ratio into A or B, 75% to A and 25% to B for example, but then the opportunity cost would be 1 unit of A and 7.5 units of B. )"
+
+[node name="Button" type="Button" parent="."]
+margin_right = 164.0
+margin_bottom = 48.0
+flat = true
