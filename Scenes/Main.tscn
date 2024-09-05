@@ -226,7 +226,7 @@ script = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/NinePatchRect/ScrollContainer"]
 margin_right = 360.0
-margin_bottom = 543.0
+margin_bottom = 523.0
 mouse_filter = 1
 size_flags_horizontal = 3
 custom_constants/margin_right = 8
@@ -238,7 +238,7 @@ custom_constants/margin_bottom = 8
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 352.0
-margin_bottom = 535.0
+margin_bottom = 515.0
 
 [node name="MCQuestion" parent="VBoxContainer/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_right = 332.0
@@ -906,7 +906,7 @@ margin_right = 281.0
 margin_bottom = 35.0
 size_flags_horizontal = 7
 custom_fonts/font = SubResource( 6 )
-text = "Opportunity Cost (Output)"
+text = "Lorem ispum dolor"
 align = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer"]
@@ -939,7 +939,7 @@ size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
 margin_right = 281.0
-margin_bottom = 360.0
+margin_bottom = 340.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -949,19 +949,19 @@ custom_constants/margin_bottom = 10
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 271.0
-margin_bottom = 350.0
+margin_bottom = 330.0
 theme = ExtResource( 7 )
 bbcode_enabled = true
-bbcode_text = "The tradeoff in which an entity sacrifices the potential to produce a good in order to produce a more desirable good.
+bbcode_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
-For example, an entity can produce 4 units of Item A or 10 units of Item B. If the entity focused entirely on Item B, the opportunity cost would be the 4 units of Item A that the entity could have made instead.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 
-( As an aside, the entity could put any ratio into A or B, 75% to A and 25% to B for example, but then the opportunity cost would be 1 unit of A and 7.5 units of B. )"
-text = "The tradeoff in which an entity sacrifices the potential to produce a good in order to produce a more desirable good.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
-For example, an entity can produce 4 units of Item A or 10 units of Item B. If the entity focused entirely on Item B, the opportunity cost would be the 4 units of Item A that the entity could have made instead.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 
-( As an aside, the entity could put any ratio into A or B, 75% to A and 25% to B for example, but then the opportunity cost would be 1 unit of A and 7.5 units of B. )"
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 fit_content_height = true
 
 [node name="ScenarioVisuals" type="CanvasLayer" parent="."]

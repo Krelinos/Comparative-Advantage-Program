@@ -5,7 +5,7 @@ namespace ComparativeAdvantage { namespace mobile {
 
 /// <summary>
 /// Displays the user's learned terms in a list. Pulls term
-/// information from Main.Glossary.
+/// descriptions from Main.Glossary.
 /// </summary>
 public class Terms : NinePatchRect
 {
@@ -18,10 +18,15 @@ public class Terms : NinePatchRect
         protected set { _TermEntries = value; }
     }
 
-    protected TermDetails TermDetails;
+    public TermDetails TermDetails
+    {
+        get { return _TermDetails; }
+        protected set { _TermDetails = value; }
+    }
     protected PackedScene _TermEntry;
 
     private Control _TermEntries;
+    private TermDetails _TermDetails;
 
     public override void _Ready()
     {
@@ -34,6 +39,10 @@ public class Terms : NinePatchRect
         AddTerm( "opportunity_cost_(output)");
     }
 
+    /// <summary>
+    /// Appends a term to the Terms's list. Ignores duplicate terms.
+    /// </summary>
+    /// <param name="termIndex">The key value of the term in the Glossary.</param>
     public void AddTerm( String termIndex )
     {
         // Do not add duplicate terms.
@@ -46,7 +55,6 @@ public class Terms : NinePatchRect
         termEntry.Name = termIndex;
         termEntry.TermLabel.Text = termIndex.Capitalize();
 
-        // termEntry.Connect( "ButtonPressed", TermDetails, nameof(TermDetails.Bruh) );
         termEntry.Connect( "ButtonPressed", TermDetails, nameof(TermDetails.DisplayDetailsForTerm),
             new Godot.Collections.Array { termIndex }, 0 );
     }
