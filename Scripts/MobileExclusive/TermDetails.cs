@@ -57,7 +57,6 @@ public class TermDetails : NinePatchRect
 
     public void DisplayDetailsForTerm( String term )
     {
-        GD.Print("yeet");
         TermName.Text = term.Capitalize();
         TermDescription.BbcodeText = Main.Glossary.TermDescriptions[ term ] as String;
         OpenMenu();

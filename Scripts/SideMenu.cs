@@ -5,12 +5,11 @@ namespace ComparativeAdvantage { namespace mobile {
 
 public class SideMenu : CanvasLayer
 {
-    [Signal] protected delegate void OffscreenWindowVisibilityChanged( bool IsVisible );
-
     [Export] protected NodePath __MenuButton;
     [Export] protected NodePath __Backdrop;
     [Export] protected NodePath __OffscreenWindow;
     [Export] protected NodePath __OnscreenWindow;
+    [Export] protected NodePath __Menu;
     [Export] protected NodePath __BackButton;
     [Export] protected NodePath OtherSideMenu;
     [Export] protected readonly bool IsRightOriented;
@@ -39,6 +38,12 @@ public class SideMenu : CanvasLayer
         protected set { _OnscreenWindow = value; }
     }
 
+    public Container Menu
+    {
+        get { return _Menu; }
+        protected set { _Menu = value; }
+    }
+
     public Button BackButton
     {
         get { return _BackButton; }
@@ -49,6 +54,7 @@ public class SideMenu : CanvasLayer
     private Button _Backdrop;
     private Container _OffscreenWindow;
     private Container _OnscreenWindow;
+    private Container _Menu;
     private Button _BackButton;
 
     protected bool IsMenuOpen;
@@ -61,26 +67,25 @@ public class SideMenu : CanvasLayer
         Backdrop = GetNode<Button>( __Backdrop );
         OffscreenWindow = GetNode<Container>( __OffscreenWindow );
         OnscreenWindow = GetNode<Container>( __OnscreenWindow );
+        Menu = GetNode<Container>( __Menu );
         BackButton = GetNode<Button>( __BackButton );
 
         MenuButton.Connect( "pressed", this, nameof(ToggleMenu) );
         Backdrop.Connect( "pressed", this, nameof(OnBackdropOrBackButtonPressed) );
         BackButton.Connect( "pressed", this, nameof(OnBackdropOrBackButtonPressed) );
-
-        GetNode<SideMenu>( OtherSideMenu ).Connect( "OffscreenWindowVisibilityChanged", this, nameof(OnOtherMenuOffscreenWindowVisibilityChanged) );
     }
 
     protected void ToggleMenu()
     {
         IsMenuOpen = !IsMenuOpen;
-        EmitSignal( nameof(OffscreenWindowVisibilityChanged), IsMenuOpen );
+        var initial =  OffscreenWindow.RectSize.x * (IsRightOriented ? 1 : -1);
 
         if ( IsMenuOpen )
         {
             Tween tween = new Tween();
             tween.InterpolateProperty(this, "offset:x",
-                Backdrop.RectSize.x/2 * (IsRightOriented ? 1 : -1),
-                Backdrop.RectSize.x/2 * (IsRightOriented ? 1 : -1) + OffscreenWindow.RectSize.x * (IsRightOriented ? -1 : 1),
+                initial,
+                initial + Menu.RectSize.x * (IsRightOriented ? -1 : 1),
                 OPEN_AND_CLOSE_DURATION,
                 Tween.TransitionType.Quad,
                 Tween.EaseType.Out );
@@ -101,8 +106,8 @@ public class SideMenu : CanvasLayer
         {
             Tween tween = new Tween();
             tween.InterpolateProperty(this, "offset:x",
-                Backdrop.RectSize.x/2 * (IsRightOriented ? 1 : -1) + OffscreenWindow.RectSize.x * (IsRightOriented ? -1 : 1),
-                Backdrop.RectSize.x/2 * (IsRightOriented ? 1 : -1),
+                initial + Menu.RectSize.x * (IsRightOriented ? -1 : 1),
+                initial,
                 OPEN_AND_CLOSE_DURATION,
                 Tween.TransitionType.Quad,
                 Tween.EaseType.Out );
@@ -116,12 +121,6 @@ public class SideMenu : CanvasLayer
 
             Backdrop.MouseFilter = Control.MouseFilterEnum.Ignore;
         }
-    }
-
-    protected void OnOtherMenuOffscreenWindowVisibilityChanged( bool IsVisible )
-    {
-        // Visible = !IsVisible;
-        // OnscreenWindow.MouseFilter = IsVisible ? Control.MouseFilterEnum.Ignore : Control.MouseFilterEnum.Stop;
     }
 
     protected void OnBackdropOrBackButtonPressed()

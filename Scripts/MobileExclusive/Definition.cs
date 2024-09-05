@@ -33,8 +33,8 @@ public class Definition : PanelContainer
     protected void OnButtonPressed()
     {
         EmitSignal( nameof(ButtonPressed) );
-        GD.Print("mrow!");
     }
 }
 
-}}
+} // namespace mobile
+} // namespace ComparativeAdvantage
