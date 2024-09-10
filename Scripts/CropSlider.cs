@@ -7,9 +7,9 @@ public class CropSlider : MarginContainer
     [Signal]
     public delegate void SliderValueChanged( float oldVal, float newVal );
 
-    private RichTextLabel PepperLabel;
-    private RichTextLabel TomatoLabel;
-    public Slider Slider { get; private set; }
+    private Label PepperLabel;
+    private Label TomatoLabel;
+    public Slider Slider { get; protected set; }
 
     private float CurrentSliderValue;
     private int PepperMax;
@@ -17,13 +17,13 @@ public class CropSlider : MarginContainer
 
     public override void _Ready()
     {
-        PepperLabel = GetNode<RichTextLabel>("VBoxContainer/HBoxContainer2/PepperLabel");
-        TomatoLabel = GetNode<RichTextLabel>("VBoxContainer/HBoxContainer2/TomatoLabel");
+        PepperLabel = GetNode<Label>("VBoxContainer/HBoxContainer2/PepperLabel");
+        TomatoLabel = GetNode<Label>("VBoxContainer/HBoxContainer2/TomatoLabel");
         Slider = GetNode<Slider>("VBoxContainer/HBoxContainer/HSlider");
         PepperMax = 1;
         TomatoMax = 1;
 
-        Modulate = new Color(1,1,1,0);
+        // Modulate = new Color(1,1,1,0);
     }
 
     public async void Initialize( int firstCrop, int secondCrop )
@@ -68,11 +68,11 @@ public class CropSlider : MarginContainer
     {
         var pepper = CurrentSliderValue * PepperMax;
         pepper = (float)Math.Round( pepper, 2 );
-        PepperLabel.BbcodeText = $"[center]Peppers[/center]\n[center]{pepper}[/center]";
+        PepperLabel.Text = pepper.ToString();
         
         var tomato = (1 - CurrentSliderValue) * TomatoMax;
         tomato = (float)Math.Round( tomato, 2 );
-        TomatoLabel.BbcodeText = $"[center]Tomatoes[/center]\n[center]{tomato}[/center]";
+        TomatoLabel.Text = tomato.ToString();
     }
 
     private void _OnSliderUpdate( float value )

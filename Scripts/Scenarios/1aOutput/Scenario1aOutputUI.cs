@@ -9,6 +9,8 @@ public class Scenario1aOutputUI : VBoxContainer
     [Signal]
     public delegate void DarkCropChanged(float oldVal, float newVal);
 
+    [Export] public NodePath _CropSliderContainer;
+
     private Control CropSliderContainer;
     private CropSlider LightCropSlider;
     private CropSlider DarkCropSlider;
@@ -17,7 +19,7 @@ public class Scenario1aOutputUI : VBoxContainer
 
     public override void _Ready()
     {
-        CropSliderContainer = GetNode<Control>("HBoxContainer");
+        CropSliderContainer = GetNode<Control>( _CropSliderContainer );
         LightCropSlider = CropSliderContainer.GetNode<CropSlider>("CropSlider");
         DarkCropSlider = CropSliderContainer.GetNode<CropSlider>("CropSlider2");
 
@@ -77,7 +79,7 @@ public class Scenario1aOutputUI : VBoxContainer
 
     public void TimerTimeout()
     {
-        CropSliderContainer.RectSize = CropSliderContainerOriginalSize/2;
-        CropSliderContainer.RectScale = new Vector2(2, 2);
+    //     CropSliderContainer.RectSize = CropSliderContainerOriginalSize/2;
+    //     CropSliderContainer.RectScale = new Vector2(2, 2);
     }
 }

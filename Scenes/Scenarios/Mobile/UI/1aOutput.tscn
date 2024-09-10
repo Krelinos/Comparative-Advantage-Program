@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/OpportunityCostTable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/CropSlider.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Scenarios/1aOutput/Scenario1aOutputUI.cs" type="Script" id=3]
 [ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=4]
 
 [node name="1aOutput - UI" type="VBoxContainer"]
@@ -13,6 +14,8 @@ margin_left = -65.0
 margin_top = -108.0
 margin_right = 65.0
 margin_bottom = 108.0
+script = ExtResource( 3 )
+_CropSliderContainer = NodePath("MarginContainer/HBoxContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 130.0
@@ -35,28 +38,27 @@ alignment = 1
 
 [node name="CropSlider" parent="MarginContainer/HBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
+margin_top = 15.0
 margin_right = 118.0
-margin_bottom = 92.0
+margin_bottom = 71.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-script = null
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
-margin_top = 102.0
+margin_top = 97.0
 margin_right = 118.0
-margin_bottom = 102.0
+margin_bottom = 106.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 
 [node name="CropSlider2" parent="MarginContainer/HBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
-margin_top = 112.0
+margin_top = 132.0
 margin_right = 118.0
-margin_bottom = 204.0
+margin_bottom = 188.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-script = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 visible = false

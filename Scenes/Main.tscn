@@ -278,6 +278,7 @@ margin_right = 180.0
 margin_bottom = 137.0
 
 [node name="1aOutput - Visuals" parent="Scenario/VBoxContainer/ScenarioVisuals/CenterContainer/Center" instance=ExtResource( 13 )]
+_UI = NodePath("../../../1aOutput - UI")
 
 [node name="1aOutput - UI" parent="Scenario/VBoxContainer/ScenarioVisuals" instance=ExtResource( 17 )]
 anchor_left = 0.0
