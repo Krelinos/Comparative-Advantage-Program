@@ -23,8 +23,8 @@ public class Terms : NinePatchRect
         get { return _TermDetails; }
         protected set { _TermDetails = value; }
     }
+    
     protected PackedScene _TermEntry;
-
     private Control _TermEntries;
     private TermDetails _TermDetails;
 

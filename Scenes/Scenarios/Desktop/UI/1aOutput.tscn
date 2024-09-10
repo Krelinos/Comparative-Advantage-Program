@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/OpportunityCostTable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/CropSlider.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Scenarios/1aOutput/Scenario1aOutputUI.cs" type="Script" id=3]
+[ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=4]
+
+[node name="1aOutput - UI" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 360.0
+margin_bottom = 430.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.1
+custom_constants/separation = 10
+alignment = 1
+
+[node name="CropSlider" parent="HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+margin_right = 161.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 171.0
+margin_right = 188.0
+margin_bottom = 430.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="CropSlider2" parent="HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+margin_left = 198.0
+margin_right = 360.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+margin_top = 434.0
+margin_right = 360.0
+margin_bottom = 640.0
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+region_rect = Rect2( 465, 65, 14, 14 )
+patch_margin_left = 6
+patch_margin_top = 5
+patch_margin_right = 6
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 6
+custom_constants/margin_top = 6
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 354.0
+margin_bottom = 200.0
+
+[node name="OpportunityCostTable" parent="NinePatchRect/MarginContainer/HBoxContainer" instance=ExtResource( 1 )]
+margin_right = 208.0
+margin_bottom = 194.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="NinePatchRect/MarginContainer/HBoxContainer"]
+margin_left = 212.0
+margin_right = 348.0
+margin_bottom = 194.0
+size_flags_horizontal = 3

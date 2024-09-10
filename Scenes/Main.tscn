@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Dialog/Basic.tscn" type="PackedScene" id=2]
@@ -12,9 +12,11 @@
 [ext_resource path="res://Scenes/MenuButton.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scripts/SideMenu.cs" type="Script" id=11]
 [ext_resource path="res://Scripts/MobileExclusive/Terms.cs" type="Script" id=12]
+[ext_resource path="res://Scenes/Scenarios/Mobile/Visuals/1aOutput.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Font/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=14]
 [ext_resource path="res://Assets/Font/Roboto/Roboto-Bold.ttf" type="DynamicFontData" id=15]
 [ext_resource path="res://Scripts/MobileExclusive/TermDetails.cs" type="Script" id=16]
+[ext_resource path="res://Scenes/Scenarios/Mobile/UI/1aOutput.tscn" type="PackedScene" id=17]
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 1 )
@@ -39,19 +41,107 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 9 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Scenario" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="MarginContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Scenario"]
+visible = false
+margin_right = 360.0
+margin_bottom = 640.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+texture = ExtResource( 1 )
+region_rect = Rect2( 417, 17, 46, 45 )
+patch_margin_left = 7
+patch_margin_top = 6
+patch_margin_right = 7
+patch_margin_bottom = 6
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Scenario/NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+follow_focus = true
+scroll_horizontal_enabled = false
+script = ExtResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Scenario/NinePatchRect/ScrollContainer"]
+margin_right = 360.0
+margin_bottom = 543.0
+mouse_filter = 1
+size_flags_horizontal = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 352.0
+margin_bottom = 535.0
+
+[node name="MCQuestion" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_right = 344.0
+margin_bottom = 277.0
+
+[node name="NinePatchRect" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion" index="0"]
+margin_right = 344.0
+margin_bottom = 277.0
+
+[node name="MarginContainer" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion" index="1"]
+margin_right = 344.0
+margin_bottom = 277.0
+
+[node name="VBoxContainer" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer" index="0"]
+margin_right = 338.0
+margin_bottom = 273.0
+
+[node name="RichTextLabel" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer" index="0"]
+margin_right = 332.0
+margin_bottom = 60.0
+
+[node name="MarginContainer" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer" index="1"]
+margin_top = 64.0
+margin_right = 332.0
+margin_bottom = 240.0
+
+[node name="Answers" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer/MarginContainer" index="0"]
+margin_right = 332.0
+margin_bottom = 172.0
+
+[node name="Choice2" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer/MarginContainer/Answers" index="0" instance=ExtResource( 4 )]
+margin_right = 332.0
+margin_bottom = 80.0
+
+[node name="Choice" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer/MarginContainer/Answers" index="1" instance=ExtResource( 4 )]
+margin_top = 88.0
+margin_right = 332.0
+margin_bottom = 168.0
+
+[node name="Submit" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer" index="2"]
+margin_top = 244.0
+margin_bottom = 269.0
+
+[node name="Basic2" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 281.0
+margin_right = 344.0
+margin_bottom = 487.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scenario"]
+margin_right = 360.0
+margin_bottom = 640.0
+custom_constants/separation = 0
+
+[node name="SideMenuButtons" type="HBoxContainer" parent="Scenario/VBoxContainer"]
 margin_right = 360.0
 margin_bottom = 43.0
 size_flags_horizontal = 9
-size_flags_vertical = 3
+size_flags_vertical = 0
 size_flags_stretch_ratio = 0.35
 alignment = 1
 
-[node name="LeftSideMenuButton" type="MarginContainer" parent="VBoxContainer/MarginContainer"]
+[node name="LeftSideMenuButton" type="MarginContainer" parent="Scenario/VBoxContainer/SideMenuButtons"]
 margin_right = 68.0
 margin_bottom = 43.0
 size_flags_horizontal = 2
@@ -61,7 +151,7 @@ custom_constants/margin_top = 6
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/MarginContainer/LeftSideMenuButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton"]
 show_behind_parent = true
 margin_top = 6.0
 margin_right = 68.0
@@ -73,7 +163,7 @@ patch_margin_top = 5
 patch_margin_right = 7
 patch_margin_bottom = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/LeftSideMenuButton"]
+[node name="MarginContainer" type="MarginContainer" parent="Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton"]
 margin_top = 6.0
 margin_right = 68.0
 margin_bottom = 43.0
@@ -82,7 +172,7 @@ custom_constants/margin_top = 6
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 6
 
-[node name="MenuButton" type="Button" parent="VBoxContainer/MarginContainer/LeftSideMenuButton/MarginContainer"]
+[node name="MenuButton" type="Button" parent="Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton/MarginContainer"]
 modulate = Color( 0.941176, 0.941176, 0.941176, 1 )
 margin_left = 8.0
 margin_top = 6.0
@@ -98,7 +188,7 @@ custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 text = "Menu"
 flat = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/MarginContainer/LeftSideMenuButton/MarginContainer/MenuButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton/MarginContainer/MenuButton"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -109,7 +199,7 @@ patch_margin_top = 6
 patch_margin_right = 7
 patch_margin_bottom = 7
 
-[node name="RightSideMenuButton" type="MarginContainer" parent="VBoxContainer/MarginContainer"]
+[node name="RightSideMenuButton" type="MarginContainer" parent="Scenario/VBoxContainer/SideMenuButtons"]
 margin_left = 269.0
 margin_right = 360.0
 margin_bottom = 43.0
@@ -121,7 +211,7 @@ custom_constants/margin_top = 6
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/MarginContainer/RightSideMenuButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton"]
 show_behind_parent = true
 margin_top = 6.0
 margin_right = 91.0
@@ -133,7 +223,7 @@ patch_margin_top = 5
 patch_margin_right = 7
 patch_margin_bottom = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/RightSideMenuButton"]
+[node name="MarginContainer" type="MarginContainer" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton"]
 margin_top = 6.0
 margin_right = 91.0
 margin_bottom = 43.0
@@ -142,7 +232,7 @@ custom_constants/margin_top = 6
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 6
 
-[node name="MenuButton" type="Button" parent="VBoxContainer/MarginContainer/RightSideMenuButton/MarginContainer"]
+[node name="MenuButton" type="Button" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton/MarginContainer"]
 modulate = Color( 0.941176, 0.941176, 0.941176, 1 )
 margin_left = 8.0
 margin_top = 6.0
@@ -158,7 +248,7 @@ custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 text = "Glossary"
 flat = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/MarginContainer/RightSideMenuButton/MarginContainer/MenuButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton/MarginContainer/MenuButton"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -169,132 +259,72 @@ patch_margin_top = 6
 patch_margin_right = 7
 patch_margin_bottom = 7
 
-[node name="ScenarioUI" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 47.0
+[node name="ScenarioVisuals" type="MarginContainer" parent="Scenario/VBoxContainer"]
+show_behind_parent = true
+margin_top = 43.0
 margin_right = 360.0
 margin_bottom = 318.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="Dialog" parent="VBoxContainer" instance=ExtResource( 8 )]
-margin_top = 322.0
+[node name="CenterContainer" type="CenterContainer" parent="Scenario/VBoxContainer/ScenarioVisuals"]
+margin_right = 360.0
+margin_bottom = 275.0
+
+[node name="Center" type="Control" parent="Scenario/VBoxContainer/ScenarioVisuals/CenterContainer"]
+margin_left = 180.0
+margin_top = 137.0
+margin_right = 180.0
+margin_bottom = 137.0
+
+[node name="1aOutput - Visuals" parent="Scenario/VBoxContainer/ScenarioVisuals/CenterContainer/Center" instance=ExtResource( 13 )]
+
+[node name="1aOutput - UI" parent="Scenario/VBoxContainer/ScenarioVisuals" instance=ExtResource( 17 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 360.0
+margin_bottom = 275.0
+
+[node name="DialogBox" parent="Scenario/VBoxContainer" instance=ExtResource( 8 )]
+margin_top = 318.0
 margin_right = 360.0
 margin_bottom = 640.0
 size_flags_stretch_ratio = 3.5
 
-[node name="ScrollContainer" parent="VBoxContainer/Dialog/MarginContainer" index="0"]
+[node name="ScrollContainer" parent="Scenario/VBoxContainer/DialogBox/MarginContainer" index="0"]
 margin_right = 354.0
-margin_bottom = 286.0
+margin_bottom = 290.0
 script = ExtResource( 3 )
 
-[node name="VBoxContainer" parent="VBoxContainer/Dialog/MarginContainer/ScrollContainer" index="0"]
+[node name="VBoxContainer" parent="Scenario/VBoxContainer/DialogBox/MarginContainer/ScrollContainer" index="0"]
 margin_right = 342.0
 margin_bottom = 319.0
 
-[node name="MCQuestion" parent="VBoxContainer/Dialog/MarginContainer/ScrollContainer/VBoxContainer" index="0"]
+[node name="MCQuestion" parent="Scenario/VBoxContainer/DialogBox/MarginContainer/ScrollContainer/VBoxContainer" index="0"]
 margin_right = 342.0
 margin_bottom = 109.0
 
-[node name="Basic" parent="VBoxContainer/Dialog/MarginContainer/ScrollContainer/VBoxContainer" index="1"]
+[node name="Basic" parent="Scenario/VBoxContainer/DialogBox/MarginContainer/ScrollContainer/VBoxContainer" index="1"]
 margin_top = 113.0
 margin_right = 342.0
 margin_bottom = 319.0
 
-[node name="Continue" parent="VBoxContainer/Dialog/MarginContainer2" index="0"]
+[node name="Continue" parent="Scenario/VBoxContainer/DialogBox/MarginContainer2" index="0"]
 margin_right = 355.0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer"]
-visible = false
-margin_top = 428.0
-margin_right = 360.0
-margin_bottom = 640.0
-size_flags_vertical = 3
-size_flags_stretch_ratio = 4.0
-texture = ExtResource( 1 )
-region_rect = Rect2( 417, 17, 46, 45 )
-patch_margin_left = 7
-patch_margin_top = 6
-patch_margin_right = 7
-patch_margin_bottom = 6
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/NinePatchRect"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-follow_focus = true
-scroll_horizontal_enabled = false
-script = ExtResource( 3 )
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/NinePatchRect/ScrollContainer"]
-margin_right = 360.0
-margin_bottom = 523.0
-mouse_filter = 1
-size_flags_horizontal = 3
-custom_constants/margin_right = 8
-custom_constants/margin_top = 8
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/NinePatchRect/ScrollContainer/MarginContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 352.0
-margin_bottom = 515.0
-
-[node name="MCQuestion" parent="VBoxContainer/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_right = 332.0
-margin_bottom = 277.0
-
-[node name="NinePatchRect" parent="VBoxContainer/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion" index="0"]
-margin_right = 332.0
-margin_bottom = 277.0
-
-[node name="MarginContainer" parent="VBoxContainer/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion" index="1"]
-margin_right = 332.0
-margin_bottom = 277.0
-
-[node name="VBoxContainer" parent="VBoxContainer/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer" index="0"]
-margin_right = 326.0
-margin_bottom = 273.0
-
-[node name="RichTextLabel" parent="VBoxContainer/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer" index="0"]
-margin_right = 320.0
-margin_bottom = 60.0
-
-[node name="MarginContainer" parent="VBoxContainer/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer" index="1"]
-margin_top = 64.0
-margin_right = 320.0
-margin_bottom = 240.0
-
-[node name="Answers" parent="VBoxContainer/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer/MarginContainer" index="0"]
-margin_right = 320.0
-margin_bottom = 172.0
-
-[node name="Choice2" parent="VBoxContainer/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer/MarginContainer/Answers" index="0" instance=ExtResource( 4 )]
-margin_right = 320.0
-margin_bottom = 80.0
-
-[node name="Choice" parent="VBoxContainer/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer/MarginContainer/Answers" index="1" instance=ExtResource( 4 )]
-margin_top = 88.0
-margin_right = 320.0
-margin_bottom = 168.0
-
-[node name="Submit" parent="VBoxContainer/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer" index="2"]
-margin_top = 244.0
-margin_bottom = 269.0
-
-[node name="Basic2" parent="VBoxContainer/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 281.0
-margin_right = 332.0
-margin_bottom = 507.0
-
 [node name="LeftSideMenu" type="CanvasLayer" parent="."]
+visible = false
 offset = Vector2( -360, 0 )
 transform = Transform2D( 1, 0, 0, 1, -360, 0 )
 script = ExtResource( 11 )
-__MenuButton = NodePath("../VBoxContainer/MarginContainer/LeftSideMenuButton/MarginContainer/MenuButton")
+__MenuButton = NodePath("../Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton/MarginContainer/MenuButton")
 __Backdrop = NodePath("Backdrop")
 __OffscreenWindow = NodePath("Offscreen")
-__OnscreenWindow = NodePath("../VBoxContainer/MarginContainer/LeftSideMenuButton")
+__OnscreenWindow = NodePath("../Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton")
 __Menu = NodePath("Offscreen/Menu")
 __BackButton = NodePath("Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/VBoxContainer/0Preface")
 OtherSideMenu = NodePath("../RightSideMenu")
@@ -607,13 +637,14 @@ margin_bottom = 30.0
 text = "Close"
 
 [node name="RightSideMenu" type="CanvasLayer" parent="."]
+visible = false
 offset = Vector2( 360, 0 )
 transform = Transform2D( 1, 0, 0, 1, 360, 0 )
 script = ExtResource( 11 )
-__MenuButton = NodePath("../VBoxContainer/MarginContainer/RightSideMenuButton/MarginContainer/MenuButton")
+__MenuButton = NodePath("../Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton/MarginContainer/MenuButton")
 __Backdrop = NodePath("Backdrop")
 __OffscreenWindow = NodePath("Offscreen")
-__OnscreenWindow = NodePath("../VBoxContainer/MarginContainer/RightSideMenuButton")
+__OnscreenWindow = NodePath("../Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton")
 __Menu = NodePath("Offscreen/Menu")
 __BackButton = NodePath("Offscreen/Menu/VBoxContainer/Glossary/MarginContainer/VBoxContainer/HBoxContainer/Back")
 OtherSideMenu = NodePath("../LeftSideMenu")
@@ -964,7 +995,5 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 fit_content_height = true
 
-[node name="ScenarioVisuals" type="CanvasLayer" parent="."]
-
-[editable path="VBoxContainer/Dialog"]
-[editable path="VBoxContainer/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion"]
+[editable path="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion"]
+[editable path="Scenario/VBoxContainer/DialogBox"]
