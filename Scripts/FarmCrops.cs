@@ -32,18 +32,12 @@ public class FarmCrops : Node2D
         PlantingZone = GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D;
 
         // PepperOccluder should start on the right then sweep left.
-        PepperOccluderStart = new Vector2( PlantingZone.Extents.x, 0 )*1;
-        PepperOccluderEnd = new Vector2( -PlantingZone.Extents.x, 0 )*1;
-        // PepperOccluderEnd = new Vector2();
-        // PepperOccluderStart = new Vector2();
-        // PepperOccluderEnd = new Vector2( -PlantingZone.Extents.x, 0 )*1;
+        PepperOccluderStart = new Vector2( PlantingZone.Extents.x, 0 );
+        PepperOccluderEnd = new Vector2( -PlantingZone.Extents.x, 0 );
 
         // Opposite for the Tomato.
-        TomatoOccluderStart = new Vector2( -PlantingZone.Extents.x, 0 )*1;
-        TomatoOccluderEnd = new Vector2( PlantingZone.Extents.x, 0 )*1;
-        // TomatoOccluderEnd = new Vector2();
-        // TomatoOccluderStart = new Vector2();
-        // TomatoOccluderEnd = new Vector2( PlantingZone.Extents.x, 0 )*2;
+        TomatoOccluderStart = new Vector2( -PlantingZone.Extents.x, 0 );
+        TomatoOccluderEnd = new Vector2( PlantingZone.Extents.x, 0 );
 
         _Crop = GD.Load<PackedScene>("res://Scenes/Crop.tscn");
     }

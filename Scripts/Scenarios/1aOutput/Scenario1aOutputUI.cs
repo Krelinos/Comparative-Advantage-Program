@@ -35,11 +35,14 @@ public class Scenario1aOutputUI : VBoxContainer
         timer.Connect( "timeout", this, nameof(TimerTimeout) );
         // await ToSignal(timer, "timeout");
         // timer.QueueFree();
+        Initialize();
     }
 
     public void Initialize()
     {
-        GameService.Dialog.Connect("DialogVisualsEvent", this, nameof(_OnDialogVisualsEvent));
+        // GameService.Dialog.Connect("DialogVisualsEvent", this, nameof(_OnDialogVisualsEvent));
+        LightCropSlider.TweenValueTo(0.5f, true);
+        DarkCropSlider.TweenValueTo(0.5f, true);
     }
 
     private void _OnDialogVisualsEvent( String visualsName )

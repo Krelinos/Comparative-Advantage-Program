@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Drawing.Configuration;
 
 namespace ComparativeAdvantage { namespace mobile {
 
@@ -73,6 +74,25 @@ public class SideMenu : CanvasLayer
         MenuButton.Connect( "pressed", this, nameof(ToggleMenu) );
         Backdrop.Connect( "pressed", this, nameof(OnBackdropOrBackButtonPressed) );
         BackButton.Connect( "pressed", this, nameof(OnBackdropOrBackButtonPressed) );
+
+        GetTree().Connect( "screen_resized", this, nameof(OnScreenResized) );
+    }
+
+    public void OnScreenResized()
+    {
+        /*
+            TODO: When maximizing the window when a side menu is open, the side
+            menu does not properly adjust its size. Since side menus are only
+            supposed to be used on mobile devices, this may be a nonissue.
+            Testing is required.
+        */
+        if ( IsMenuOpen )
+            if ( IsRightOriented )
+                Offset = new Vector2( GetViewport().Size.x-Menu.RectSize.x, 0 );
+            else
+                Offset = new Vector2( Menu.RectSize.x-GetViewport().Size.x, 0 );
+        else
+            Offset = GetViewport().Size * new Vector2( IsRightOriented?1:-1, 0 );
     }
 
     protected void ToggleMenu()
@@ -130,4 +150,5 @@ public class SideMenu : CanvasLayer
     }
 }
 
-} }
+} // namespace mobile
+} // namespace ComparativeAdvantage

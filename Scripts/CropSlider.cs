@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Globalization;
 
+namespace ComparativeAdvantage {
+
 public class CropSlider : MarginContainer
 {
     [Signal]
@@ -50,7 +52,7 @@ public class CropSlider : MarginContainer
         tween2.QueueFree();
     }
 
-    public async void TweenValueTo( int newVal, bool instant = false )
+    public async void TweenValueTo( float newVal, bool instant = false )
 	{
 		// 26 Dec 2023 - Tween.TransitionType has the 'Trans' part removed.
 		// So instead of Tween.TransitionType.TransLinear, it would be
@@ -85,3 +87,5 @@ public class CropSlider : MarginContainer
         }
     }
 }
+
+} // namespace ComparativeAdvantage
