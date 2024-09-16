@@ -67,7 +67,7 @@ script = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Scenario/NinePatchRect/ScrollContainer"]
 margin_right = 360.0
-margin_bottom = 503.0
+margin_bottom = 543.0
 mouse_filter = 1
 size_flags_horizontal = 3
 custom_constants/margin_right = 8
@@ -79,7 +79,7 @@ custom_constants/margin_bottom = 8
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 352.0
-margin_bottom = 495.0
+margin_bottom = 535.0
 
 [node name="MCQuestion" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_right = 344.0
@@ -692,7 +692,7 @@ patch_margin_right = 6
 patch_margin_bottom = 5
 script = ExtResource( 12 )
 __TermsList = NodePath("MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer")
-__TermDetails = NodePath("../../../Control/TermDetails")
+__TermDetails = NodePath("../../../../TermDetails")
 
 [node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary"]
 anchor_right = 1.0
@@ -840,22 +840,25 @@ patch_margin_top = 5
 patch_margin_right = 6
 patch_margin_bottom = 5
 
-[node name="Control" type="Control" parent="RightSideMenu/Offscreen"]
+[node name="Padding" type="MarginContainer" parent="RightSideMenu/Offscreen"]
 margin_left = 293.0
-margin_right = 293.0
+margin_right = 360.0
 margin_bottom = 640.0
+size_flags_horizontal = 3
 
-[node name="TermDetails" type="NinePatchRect" parent="RightSideMenu/Offscreen/Control"]
-anchor_right = 1.0
+[node name="TermDetails" type="NinePatchRect" parent="RightSideMenu"]
+anchor_right = 0.814
 anchor_bottom = 1.0
-margin_right = 293.0
+margin_left = 293.0
+margin_right = 292.96
 size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 4.45
 texture = ExtResource( 1 )
-region_rect = Rect2( 416, 17, 48, 21 )
-patch_margin_left = 6
+region_rect = Rect2( 416, 17, 47, 46 )
+patch_margin_left = 7
 patch_margin_top = 5
-patch_margin_right = 6
+patch_margin_right = 7
 patch_margin_bottom = 5
 script = ExtResource( 16 )
 __BackButton = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Back")
@@ -863,7 +866,7 @@ __Backdrop = NodePath("Backdrop")
 __TermName = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Label")
 __TermDescription = NodePath("MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/RichTextLabel")
 
-[node name="Backdrop" type="Button" parent="RightSideMenu/Offscreen/Control/TermDetails"]
+[node name="Backdrop" type="Button" parent="RightSideMenu/TermDetails"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -871,7 +874,7 @@ margin_left = -293.0
 margin_right = -293.0
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/Offscreen/Control/TermDetails"]
+[node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/TermDetails"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 6
@@ -879,17 +882,17 @@ custom_constants/margin_top = 2
 custom_constants/margin_left = 6
 custom_constants/margin_bottom = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="RightSideMenu/Offscreen/Control/TermDetails/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="RightSideMenu/TermDetails/MarginContainer"]
 margin_left = 6.0
 margin_top = 2.0
 margin_right = 287.0
 margin_bottom = 634.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="RightSideMenu/Offscreen/Control/TermDetails/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer"]
 margin_right = 281.0
 margin_bottom = 48.0
 
-[node name="Back" type="Button" parent="RightSideMenu/Offscreen/Control/TermDetails/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Back" type="Button" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 64.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 64, 48 )
@@ -898,7 +901,7 @@ theme = ExtResource( 7 )
 flat = true
 align = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="RightSideMenu/Offscreen/Control/TermDetails/MarginContainer/VBoxContainer/HBoxContainer/Back"]
+[node name="NinePatchRect" type="NinePatchRect" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/HBoxContainer/Back"]
 show_behind_parent = true
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -912,7 +915,7 @@ patch_margin_top = 7
 patch_margin_right = 7
 patch_margin_bottom = 7
 
-[node name="Label" type="Label" parent="RightSideMenu/Offscreen/Control/TermDetails/MarginContainer/VBoxContainer/HBoxContainer/Back/NinePatchRect"]
+[node name="Label" type="Label" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/HBoxContainer/Back/NinePatchRect"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -927,7 +930,7 @@ text = "Back"
 align = 1
 valign = 1
 
-[node name="Label" type="Label" parent="RightSideMenu/Offscreen/Control/TermDetails/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 68.0
 margin_top = 13.0
 margin_right = 281.0
@@ -937,13 +940,13 @@ custom_fonts/font = SubResource( 6 )
 text = "Lorem ispum dolor"
 align = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/Offscreen/Control/TermDetails/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer"]
 margin_top = 52.0
 margin_right = 281.0
 margin_bottom = 632.0
 size_flags_vertical = 3
 
-[node name="NinePatchRect" type="NinePatchRect" parent="RightSideMenu/Offscreen/Control/TermDetails/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/MarginContainer"]
 margin_right = 281.0
 margin_bottom = 580.0
 texture = ExtResource( 1 )
@@ -953,19 +956,19 @@ patch_margin_top = 2
 patch_margin_right = 1
 patch_margin_bottom = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="RightSideMenu/Offscreen/Control/TermDetails/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/MarginContainer"]
 margin_right = 281.0
 margin_bottom = 580.0
 rect_pivot_offset = Vector2( -354, -73 )
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="RightSideMenu/Offscreen/Control/TermDetails/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer"]
 margin_right = 281.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/Offscreen/Control/TermDetails/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
 margin_right = 281.0
 margin_bottom = 340.0
 custom_constants/margin_right = 10
@@ -973,7 +976,7 @@ custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
-[node name="RichTextLabel" type="RichTextLabel" parent="RightSideMenu/Offscreen/Control/TermDetails/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 271.0
@@ -991,16 +994,6 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 fit_content_height = true
-
-[node name="Padding" type="MarginContainer" parent="RightSideMenu/Offscreen"]
-margin_left = 293.0
-margin_right = 360.0
-margin_bottom = 640.0
-size_flags_horizontal = 3
-
-[node name="Control" type="Control" parent="RightSideMenu"]
-margin_right = 40.0
-margin_bottom = 40.0
 
 [editable path="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion"]
 [editable path="Scenario/VBoxContainer/DialogBox"]

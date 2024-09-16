@@ -32,12 +32,12 @@ public class FarmCrops : Node2D
         PlantingZone = GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D;
 
         // PepperOccluder should start on the right then sweep left.
-        PepperOccluderStart = new Vector2( PlantingZone.Extents.x, 0 );
-        PepperOccluderEnd = new Vector2( -PlantingZone.Extents.x, 0 );
+        PepperOccluderStart = new Vector2( PlantingZone.Extents.x+12, 0 );
+        PepperOccluderEnd = new Vector2( -PlantingZone.Extents.x-12, 0 );
 
         // Opposite for the Tomato.
-        TomatoOccluderStart = new Vector2( -PlantingZone.Extents.x, 0 );
-        TomatoOccluderEnd = new Vector2( PlantingZone.Extents.x, 0 );
+        TomatoOccluderStart = new Vector2( -PlantingZone.Extents.x-12, 0 );
+        TomatoOccluderEnd = new Vector2( PlantingZone.Extents.x+12, 0 );
 
         _Crop = GD.Load<PackedScene>("res://Scenes/Crop.tscn");
     }
@@ -55,16 +55,15 @@ public class FarmCrops : Node2D
         PepperOccluder.Offset = PepperOccluderStart;
 
         var pepperOccluderTexture = PepperOccluder.Texture as GradientTexture2D;
-        pepperOccluderTexture.Width = (int)PlantingZone.Extents.x*2;
-        pepperOccluderTexture.Height = (int)PlantingZone.Extents.y*2 + 32;  // Because the crop sprites
-                                                                            // extend beyond the PlantingZone.
+        pepperOccluderTexture.Width = (int)PlantingZone.Extents.x*2 + 24;
+        pepperOccluderTexture.Height = (int)PlantingZone.Extents.y*2 + 32;
         
         // Repeat for tomato Light2D.
         TomatoOccluder.RangeItemCullMask = TomatoMask;
         TomatoOccluder.Offset = TomatoOccluderStart;
 
         var tomatoOccluderTexture = TomatoOccluder.Texture as GradientTexture2D;
-        tomatoOccluderTexture.Width = (int)PlantingZone.Extents.x*2;
+        tomatoOccluderTexture.Width = (int)PlantingZone.Extents.x*2 + 24;
         tomatoOccluderTexture.Height = (int)PlantingZone.Extents.y*2 + 32;
         PlantCrops();
     }
@@ -86,7 +85,7 @@ public class FarmCrops : Node2D
 
         while ( yPlantingPos < PlantingZone.Extents.y )
         {
-            xPlantingPos = (int)-PlantingZone.Extents.x + XDensity;
+            xPlantingPos = (int)-PlantingZone.Extents.x + XDensity/3;
             while ( xPlantingPos < PlantingZone.Extents.x )
             {
                 var pepper = _Crop.Instance() as AnimatedSprite;
@@ -110,6 +109,7 @@ public class FarmCrops : Node2D
 
                 xPlantingPos += XDensity;
                 await ToSignal( timer, "timeout" );
+                GD.Print("Planted at " + xPlantingPos + " , " + yPlantingPos);
             }
             alternator = !alternator;
             yPlantingPos += YDensity;

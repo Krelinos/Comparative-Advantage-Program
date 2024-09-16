@@ -53,6 +53,14 @@ public class TermDetails : NinePatchRect
 
         BackButton.Connect( "pressed", this, nameof(CloseMenu) );
         Backdrop.Connect( "pressed", this, nameof(CloseMenu) );
+
+        GetTree().Connect( "screen_resized", this, nameof(OnScreenResized) );
+    }
+
+    public void OnScreenResized()
+    {
+        if ( !IsOpen )
+            RectPosition = new Vector2( RectSize.x, 0 );
     }
 
     public void DisplayDetailsForTerm( String term )
@@ -64,6 +72,8 @@ public class TermDetails : NinePatchRect
 
     protected void OpenMenu()
     {
+        IsOpen = true;
+
         Tween tween = new Tween();
             tween.InterpolateProperty(this, "rect_position:x",
                 RectSize.x,
@@ -79,6 +89,8 @@ public class TermDetails : NinePatchRect
 
     protected void CloseMenu()
     {
+        IsOpen = false;
+
         Tween tween = new Tween();
             tween.InterpolateProperty(this, "rect_position:x",
                 0,

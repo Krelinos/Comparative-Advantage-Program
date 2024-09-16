@@ -30,7 +30,7 @@ public class Scenario1aOutputVisuals : Node
     
         LightCrops.Initialize( 20, 20, 2, 4 );
         LightCrops.UpdateCrops(0.5f);
-        DarkCrops.Initialize( 15, 15, 8, 16 );
+        DarkCrops.Initialize( 15, 20, 8, 16 );
         DarkCrops.UpdateCrops(0.5f);
     }
 
