@@ -25,7 +25,7 @@ public class CropSlider : MarginContainer
         PepperMax = 1;
         TomatoMax = 1;
 
-        // Modulate = new Color(1,1,1,0);
+        Modulate = new Color(1,1,1,0);
     }
 
     public async void Initialize( int firstCrop, int secondCrop )

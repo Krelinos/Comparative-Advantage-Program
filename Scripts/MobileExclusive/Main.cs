@@ -1,11 +1,23 @@
 using Godot;
 using System;
+using System.Data.SqlTypes;
+using System.Dynamic;
 
 namespace ComparativeAdvantage
 {
 
 public class Main : Control
 {
+    [Export] private NodePath _ScenarioSelectionButtons;
+    [Export] private NodePath _ScenarioVisualsParent;
+    [Export] private NodePath _ScenarioUIParent;
+
+    public static Scenarios Scenarios
+    {
+        get { return _Scenarios; }
+        private set { _Scenarios = value; }
+    }
+
     public static Glossary Glossary
     {
         get { return _Glossary; }
@@ -18,15 +30,29 @@ public class Main : Control
         private set { _SaveInfo = value; }
     }
 
+    public bool IsClientOnDesktop = false;
+
+    private static Scenarios _Scenarios;
     private static Glossary _Glossary;
     private static SaveInfo _SaveInfo;
+
+    private Node ScenarioVisualsParent;
+    private Node ScenarioUIParent;
+    private Node ScenarioVisuals;
+    private Node ScenarioUI;
 
     public override void _EnterTree()
     {
         base._Ready();
 
+        Scenarios = new Scenarios( GetNode( _ScenarioSelectionButtons) );
         Glossary = new Glossary();
         SaveInfo = new SaveInfo();
+
+        ScenarioVisualsParent = GetNode( _ScenarioVisualsParent );
+        ScenarioUIParent = GetNode( _ScenarioUIParent );
+
+        Scenarios.Connect( nameof(Scenarios.ScenarioLoaded), this, nameof(OnScenarioLoaded) );
     }
 
     public static JSONParseResult ParseJSON( String fileName, String filePath )
@@ -49,6 +75,70 @@ public class Main : Control
 	
 		return json;
 	}
+
+    private void OnScenarioLoaded( String scenarioName )
+    {
+        ScenarioVisuals?.QueueFree();
+        ScenarioUI?.QueueFree();
+
+        var _ScenarioVisuals = GD.Load(
+            "res://Scenes/Scenarios/"
+            + ( IsClientOnDesktop ? "Desktop" : "Mobile")
+            + "/Visuals" + scenarioName + ".tscn"
+        ) as PackedScene;
+        ScenarioVisuals = _ScenarioVisuals.Instance();
+
+        var _ScenarioUI = GD.Load(
+            "res://Scenes/Scenarios/"
+            + ( IsClientOnDesktop ? "Desktop" : "Mobile")
+            + "/UI" + scenarioName + ".tscn"
+        ) as PackedScene;
+        ScenarioUI = _ScenarioUI.Instance();
+
+        ScenarioVisualsParent.AddChild( ScenarioVisuals );
+        ScenarioUIParent.AddChild( ScenarioUI );
+    }
+}
+
+
+/// <summary>
+/// Handles scenario selection and the dialog, term discovery, and questions
+/// as a user progresses through a scenario.
+/// </summary>
+public class Scenarios : Godot.Object
+{
+    [Signal] public delegate void ScenarioLoaded( String scenarioName );
+
+    public Godot.Collections.Array Dialog { get; private set; }
+    public Godot.Collections.Dictionary Questions { get; private set; }
+
+    private int NextDialogIndex;
+
+    public Scenarios( Node scenarioButtonsList )
+    {
+        foreach( Node n in scenarioButtonsList.GetChildren() )
+        {
+            if ( n is BaseButton b )
+            {
+                b.Connect( "pressed", this, nameof(LoadScenario) );
+            }
+        }
+    }
+
+    private void LoadScenario( String scenarioFileName )
+    {
+        var scenarioData = Main.ParseJSON( scenarioFileName, "res://Dialog/" ).Result as Godot.Collections.Dictionary;
+    
+        Dialog = scenarioData["dialog"] as Godot.Collections.Array;
+        Questions = scenarioData["questions"] as Godot.Collections.Dictionary;
+
+        EmitSignal( nameof(ScenarioLoaded), scenarioFileName );
+    }
+
+    public Godot.Collections.Dictionary PopDialog()
+    {
+        return Dialog[ NextDialogIndex++ ] as Godot.Collections.Dictionary;
+    }
 }
 
 public class Glossary

@@ -40,6 +40,9 @@ font_data = ExtResource( 15 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 9 )
+_ScenarioSelectionButtons = NodePath("LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer")
+_ScenarioVisualsParent = NodePath("Scenario/VBoxContainer/ScenarioVisuals/CenterContainer/Center")
+_ScenarioUIParent = NodePath("Scenario/VBoxContainer/ScenarioVisuals/MarginContainer")
 
 [node name="Scenario" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -67,7 +70,7 @@ script = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Scenario/NinePatchRect/ScrollContainer"]
 margin_right = 360.0
-margin_bottom = 543.0
+margin_bottom = 503.0
 mouse_filter = 1
 size_flags_horizontal = 3
 custom_constants/margin_right = 8
@@ -79,7 +82,7 @@ custom_constants/margin_bottom = 8
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 352.0
-margin_bottom = 535.0
+margin_bottom = 495.0
 
 [node name="MCQuestion" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_right = 344.0
@@ -278,9 +281,13 @@ margin_right = 180.0
 margin_bottom = 137.0
 
 [node name="1aOutput - Visuals" parent="Scenario/VBoxContainer/ScenarioVisuals/CenterContainer/Center" instance=ExtResource( 13 )]
-_UI = NodePath("../../../1aOutput - UI")
+_UI = NodePath("../../../MarginContainer/1aOutput - UI")
 
-[node name="1aOutput - UI" parent="Scenario/VBoxContainer/ScenarioVisuals" instance=ExtResource( 17 )]
+[node name="MarginContainer" type="MarginContainer" parent="Scenario/VBoxContainer/ScenarioVisuals"]
+margin_right = 360.0
+margin_bottom = 275.0
+
+[node name="1aOutput - UI" parent="Scenario/VBoxContainer/ScenarioVisuals/MarginContainer" instance=ExtResource( 17 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -296,25 +303,33 @@ margin_right = 360.0
 margin_bottom = 640.0
 size_flags_stretch_ratio = 3.5
 
-[node name="ScrollContainer" parent="Scenario/VBoxContainer/DialogBox/MarginContainer" index="0"]
-margin_right = 354.0
-margin_bottom = 290.0
-script = ExtResource( 3 )
+[node name="MarginContainer" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer" index="0"]
+margin_right = 360.0
+margin_bottom = 278.0
 
-[node name="VBoxContainer" parent="Scenario/VBoxContainer/DialogBox/MarginContainer/ScrollContainer" index="0"]
+[node name="ScrollContainer" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer/MarginContainer" index="0"]
+margin_right = 354.0
+margin_bottom = 278.0
+
+[node name="VBoxContainer" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer/MarginContainer/ScrollContainer" index="0"]
 margin_right = 342.0
 margin_bottom = 319.0
 
-[node name="MCQuestion" parent="Scenario/VBoxContainer/DialogBox/MarginContainer/ScrollContainer/VBoxContainer" index="0"]
+[node name="MCQuestion" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer" index="0"]
 margin_right = 342.0
 margin_bottom = 109.0
 
-[node name="Basic" parent="Scenario/VBoxContainer/DialogBox/MarginContainer/ScrollContainer/VBoxContainer" index="1"]
+[node name="Basic" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer" index="1"]
 margin_top = 113.0
 margin_right = 342.0
 margin_bottom = 319.0
 
-[node name="Continue" parent="Scenario/VBoxContainer/DialogBox/MarginContainer2" index="0"]
+[node name="MarginContainer2" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer" index="1"]
+margin_top = 282.0
+margin_right = 360.0
+margin_bottom = 322.0
+
+[node name="Continue" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer/MarginContainer2" index="0"]
 margin_right = 355.0
 
 [node name="LeftSideMenu" type="CanvasLayer" parent="."]
@@ -326,7 +341,7 @@ __Backdrop = NodePath("Backdrop")
 __OffscreenWindow = NodePath("Offscreen")
 __OnscreenWindow = NodePath("../Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton")
 __Menu = NodePath("Offscreen/Menu")
-__BackButton = NodePath("Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/VBoxContainer/0Preface")
+__BackButton = NodePath("Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer/0Preface")
 OtherSideMenu = NodePath("../RightSideMenu")
 
 [node name="Backdrop" type="Button" parent="LeftSideMenu"]
@@ -416,27 +431,34 @@ custom_constants/margin_top = 20
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer"]
 margin_left = 10.0
 margin_top = 20.0
 margin_right = 265.0
 margin_bottom = 581.0
+script = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/ScrollContainer"]
+margin_right = 255.0
+margin_bottom = 561.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/separation = 16
 
-[node name="0Preface" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/VBoxContainer" instance=ExtResource( 10 )]
+[node name="0Preface" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
 margin_right = 255.0
 margin_bottom = 42.0
 custom_styles/normal = SubResource( 2 )
 text = "0 - Preface"
 
-[node name="1aOutput" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/VBoxContainer" instance=ExtResource( 10 )]
+[node name="1aOutput" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
 margin_top = 58.0
 margin_right = 255.0
 margin_bottom = 100.0
 custom_styles/normal = SubResource( 2 )
 text = "1a - Output"
 
-[node name="1bInput" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/VBoxContainer" instance=ExtResource( 10 )]
+[node name="1bInput" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
 modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
 margin_top = 116.0
 margin_right = 255.0
@@ -446,7 +468,7 @@ custom_styles/normal = SubResource( 2 )
 disabled = true
 text = "1b - Input"
 
-[node name="2TermsOfTrade" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/VBoxContainer" instance=ExtResource( 10 )]
+[node name="2TermsOfTrade" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
 modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
 margin_top = 174.0
 margin_right = 255.0
@@ -456,7 +478,7 @@ custom_styles/normal = SubResource( 2 )
 disabled = true
 text = "2 - Terms of Trade"
 
-[node name="3PracticeQuestions" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/VBoxContainer" instance=ExtResource( 10 )]
+[node name="3PracticeQuestions" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
 modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
 margin_top = 232.0
 margin_right = 255.0
@@ -855,10 +877,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.45
 texture = ExtResource( 1 )
-region_rect = Rect2( 416, 17, 47, 46 )
-patch_margin_left = 7
+region_rect = Rect2( 417, 17, 46, 46 )
+patch_margin_left = 6
 patch_margin_top = 5
-patch_margin_right = 7
+patch_margin_right = 6
 patch_margin_bottom = 5
 script = ExtResource( 16 )
 __BackButton = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Back")
@@ -868,10 +890,11 @@ __TermDescription = NodePath("MarginContainer/VBoxContainer/MarginContainer/Scro
 
 [node name="Backdrop" type="Button" parent="RightSideMenu/TermDetails"]
 modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
+show_behind_parent = true
+anchor_left = -1.0
+anchor_right = 0.024
 anchor_bottom = 1.0
-margin_left = -293.0
-margin_right = -293.0
+margin_right = -0.0320001
 mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/TermDetails"]

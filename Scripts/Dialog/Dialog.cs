@@ -17,6 +17,7 @@ public class Dialog : NinePatchRect
     protected bool IsDialogPaused;
 
     protected const String CONTINUE_CONTINUE = "Click here or press space to continue.";
+    protected const String CONTINUE_CONTINUE_MOBILE = "Tap here to continue.";
     protected const String CONTINUE_PAUSE    = "Solve the above question to continue.";
     protected const String CONTINUE_END      = "- End of scenario -";
 
@@ -25,9 +26,9 @@ public class Dialog : NinePatchRect
 
     public override void _Ready()
     {
-        DialogScroll = GetNode<ScrollContainer>("MarginContainer/ScrollContainer");
-        DialogContainer = GetNode<Control>("MarginContainer/ScrollContainer/VBoxContainer");
-        ContinueButton = GetNode<Button>("MarginContainer2/Continue");
+        DialogScroll = GetNode<ScrollContainer>("VBoxContainer/MarginContainer/ScrollContainer");
+        DialogContainer = GetNode<Control>("VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer");
+        ContinueButton = GetNode<Button>("VBoxContainer/MarginContainer2/Continue");
         ScrollTimer = GetNode<Timer>("ScrollTimer");
         
         NextDialogID = "";
@@ -36,23 +37,30 @@ public class Dialog : NinePatchRect
         _DialogBasic = GD.Load<PackedScene>("res://Scenes/Dialog/Basic.tscn");
         _DialogMCQuestion = GD.Load<PackedScene>("res://Scenes/Dialog/MCQuestion.tscn");
 
-        // Restart();
+        Restart();
     }
 
     public void ProceedToNextDialog()
     {
-        Godot.Collections.Dictionary dialog = GameService.Scenario.GetDialog( NextDialogID );
+        Godot.Collections.Dictionary dialog = Main.Scenarios.PopDialog();
         
-        // next
-        try
+        // flags
+        // try
+        // {
+        //     NextDialogID = dialog["flags"] as String;
+        // }
+        // catch( KeyNotFoundException ) { }
+
+        if ( dialog.Contains("flags") && dialog["flags"] is String flags )
         {
-            NextDialogID = dialog["next"] as String;
-            GD.Print( NextDialogID );
-        }
-        catch( KeyNotFoundException )
-        {
-            NextDialogID = "END";
-            Pause();
+            var flagsList = flags.Split(' ');
+            foreach ( String flag in flagsList )
+                switch( flag )
+                {
+                    case "end":
+                        Pause();
+                        break;
+                }
         }
 
         // text
@@ -133,7 +141,6 @@ public class Dialog : NinePatchRect
         foreach( Node child in DialogContainer.GetChildren() )
             child.QueueFree();
         
-        NextDialogID = GameService.Scenario.GetStartID();
         Resume();
     }
 

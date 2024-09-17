@@ -65,7 +65,6 @@ public class FarmCrops : Node2D
         var tomatoOccluderTexture = TomatoOccluder.Texture as GradientTexture2D;
         tomatoOccluderTexture.Width = (int)PlantingZone.Extents.x*2 + 24;
         tomatoOccluderTexture.Height = (int)PlantingZone.Extents.y*2 + 32;
-        PlantCrops();
     }
 
     /// <summary>

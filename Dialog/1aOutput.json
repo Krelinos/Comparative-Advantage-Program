@@ -113,6 +113,7 @@
 		,"1a12": {
 			"text": "You have completed 1a - Output! Select scenario 1b - Input at the bottom left to continue."
 			,"completed": "1_a_output"
+			,"flags": "end"
 		}
 	}
 	
