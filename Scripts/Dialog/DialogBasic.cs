@@ -4,8 +4,18 @@ using System;
 namespace ComparativeAdvantage
 {
 
-public class DialogBasic : MarginContainer, IHasDialogLabel
+public class DialogBasic : MarginContainer
 {
+	public String Text
+	{
+		get { return Label.BbcodeText; }
+		set {
+			GD.Print( value );
+			var dialog = Main.Variables.Format( value );
+			Label.BbcodeText = dialog;
+		}
+	}
+
 	protected RichTextLabel Label;
 
 	// Called when the node enters the scene tree for the first time.
@@ -13,18 +23,6 @@ public class DialogBasic : MarginContainer, IHasDialogLabel
 	{
 		Label = GetNode<RichTextLabel>("MarginContainer/RichTextLabel");
     }
-
-	public void SetLabel( String dialog )
-	{
-		dialog = GameService.Variables.Format( dialog );
-		Label.BbcodeText = dialog;
-	}
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }
 
-}
+} // namespace ComparativeAdvantage

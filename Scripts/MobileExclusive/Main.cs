@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Dynamic;
 
@@ -30,7 +31,9 @@ public class Main : Control
         private set { _SaveInfo = value; }
     }
 
-    public bool IsClientOnDesktop = false;
+    public static Variables Variables { get; private set; }
+
+    public static bool IsClientOnDesktop = false;
 
     private static Scenarios _Scenarios;
     private static Glossary _Glossary;
@@ -43,11 +46,12 @@ public class Main : Control
 
     public override void _EnterTree()
     {
-        base._Ready();
+        base._EnterTree();
 
         Scenarios = new Scenarios( GetNode( _ScenarioSelectionButtons) );
         Glossary = new Glossary();
         SaveInfo = new SaveInfo();
+        Variables = new Variables();
 
         ScenarioVisualsParent = GetNode( _ScenarioVisualsParent );
         ScenarioUIParent = GetNode( _ScenarioUIParent );
@@ -100,6 +104,7 @@ public class Main : Control
     }
 }
 
+//======================================= SCENARIOS
 
 /// <summary>
 /// Handles scenario selection and the dialog, term discovery, and questions
@@ -123,11 +128,13 @@ public class Scenarios : Godot.Object
                 b.Connect( "pressed", this, nameof(LoadScenario) );
             }
         }
+
+        LoadScenario( "0Preface" );
     }
 
     private void LoadScenario( String scenarioFileName )
     {
-        var scenarioData = Main.ParseJSON( scenarioFileName, "res://Dialog/" ).Result as Godot.Collections.Dictionary;
+        var scenarioData = Main.ParseJSON( scenarioFileName+".json", "res://Dialog/" ).Result as Godot.Collections.Dictionary;
     
         Dialog = scenarioData["dialog"] as Godot.Collections.Array;
         Questions = scenarioData["questions"] as Godot.Collections.Dictionary;
@@ -141,6 +148,11 @@ public class Scenarios : Godot.Object
     }
 }
 
+//======================================= GLOSSARY
+
+/// <summary>
+/// 
+/// </summary>
 public class Glossary
 {
     public Godot.Collections.Dictionary TermDescriptions { get; protected set; }
@@ -151,6 +163,8 @@ public class Glossary
             as Godot.Collections.Dictionary;
     }
 }
+
+//======================================= SAVEINFO
 
 /// <summary>
 /// Reads and writes user save data to a file.
@@ -206,6 +220,101 @@ public class SaveInfo
     {
         Data["terms"] = new Godot.Collections.Array();
     }
+}
+
+//======================================= VARIABLES
+
+/// <summary>
+/// 
+/// </summary>
+public class Variables
+{
+    public object this[ String key ]    // Whenever "Main.Variables[ key ]" is called, this is executed.
+    {
+        get { return VariablesDictionary[ key ]; }
+        private set { VariablesDictionary[ key ] = value; }
+    }
+
+    private static readonly Dictionary<String, object> VariablesDictionary = new Dictionary<String, object>();
+
+    public Variables()
+    {
+        var jsonVars = Main.ParseJSON("variables.json", "res://Dialog/").Result as Godot.Collections.Dictionary;
+
+        foreach ( String key in jsonVars.Keys )
+        {
+            // Some (if not most) variables can just be a constant value.
+            if (jsonVars[key] is String constant)
+            {
+                VariablesDictionary.Add( key, Double.Parse(constant) );
+                GD.Print("Added " + key + " : " + constant);
+            }
+
+            // Variables can also appear as a Godot Dictionary. Used for variables that depend on previous constants or variables.
+            if (jsonVars[key] is Godot.Collections.Dictionary d)
+            {
+                // The "variables" array contains the Variable keys that will be inserted into the formula.
+                Godot.Collections.Array dData = d["variables"] as Godot.Collections.Array;
+
+                // List nums holds the values that the Variable keys point to.
+                List<object> nums = new List<object>();
+                foreach ( String dVar in dData )
+                    nums.Add( this[dVar] );
+
+                // Insert the values into the formula's placeholders.
+                // The order of the keys is important!
+                String expression = String.Format( d["formula"] as String, nums.ToArray() );
+
+                // Solve and put into the VariablesDictionary.
+                var dt = new System.Data.DataTable();
+                double answer = (double)dt.Compute(expression, "");
+                this[key] = Math.Round(answer, 3); // AP test require rounding to the 3rd decimal, unless specified.
+                
+                GD.Print("Added " + key + " : " + answer);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Similar to String.Format(), this replaces contents within curly brackets with data.
+	/// Ex: The string "Test {variable_name} example" becomes "Test 1 example"
+	/// 	if a variable with the ID/key of "variable_name" in the variables dictionary exists.
+	/// Variable keys/values that have curly brackets will break this, so hopefully variables
+    ///     only have alphanumeric characters.
+    /// </summary>
+    /// <param name="str">A string with one or more variable indicators.</param>
+    /// <returns>The given string with variable indicators replaced with the number they represent.</returns>
+	public String Format( String str )
+	{
+		Int32 lBracket = str.IndexOf('{');
+		Int32 rBracket = str.IndexOf('}');
+		String varKey;
+		
+		while ( lBracket != -1 && rBracket != -1 )
+		{
+			varKey = str.Substring( lBracket + 1, rBracket - lBracket - 1 );
+			str = str.Remove( lBracket, rBracket - lBracket + 1 );
+
+            switch ( this[ varKey ] )
+            {
+                case double d:
+                    str = str.Insert( lBracket, Math.Round( (double)this[ varKey ], 3 ).ToString() );
+                    break;
+                case int i:
+                case String s:
+                    // GD.Print(varKey);
+                    str = str.Insert( lBracket, this[ varKey ].ToString() );
+                    break;
+                default:
+                    str = str.Insert( lBracket, "NULLVARTYPE" );
+                    break;
+            }
+			
+			lBracket = str.IndexOf('{');
+			rBracket = str.IndexOf('}');
+		}
+		return str;
+	}
 }
 
 }   // namespace ComparativeAdvantage

@@ -5,28 +5,28 @@
 	,"dark_tomato": "20"
 	,"light_pepper_opportunity_cost": {
 		"formula": "{0} / {1}"
-		,"data": [
+		,"variables": [
 			"light_tomato"
 			,"light_pepper"
 		]
 	}
 	,"light_tomato_opportunity_cost": {
 		"formula": "{1} / {0}"
-		,"data": [
+		,"variables": [
 			"light_tomato"
 			,"light_pepper"
 		]
 	}
 	,"dark_pepper_opportunity_cost": {
 		"formula": "{0} / {1}"
-		,"data": [
+		,"variables": [
 			"dark_tomato"
 			,"dark_pepper"
 		]
 	}
 	,"dark_tomato_opportunity_cost": {
 		"formula": "{1} / {0}"
-		,"data": [
+		,"variables": [
 			"dark_tomato"
 			,"dark_pepper"
 		]

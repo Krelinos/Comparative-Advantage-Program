@@ -58,7 +58,7 @@ public class Dialog : NinePatchRect
                 switch( flag )
                 {
                     case "end":
-                        Pause();
+                        Pause( true );
                         break;
                 }
         }
@@ -71,7 +71,7 @@ public class Dialog : NinePatchRect
             
             DialogContainer.AddChild( dialogBasic );
             // await ToSignal( dialogBasic, "ready" );
-            dialogBasic.SetLabel( label );
+            dialogBasic.Text = label;
         }
         catch( KeyNotFoundException ) { }
 
@@ -118,12 +118,12 @@ public class Dialog : NinePatchRect
         ScrollToBottom();
     }
 
-    public void Pause()
+    public void Pause( bool isEndOfScenario = false )
     {
         IsDialogPaused = true;
         ContinueButton.Disabled = true;
 
-        if ( NextDialogID == "END" )
+        if ( isEndOfScenario )
             ContinueButton.Text = CONTINUE_END;
         else
             ContinueButton.Text = CONTINUE_PAUSE;
@@ -133,7 +133,10 @@ public class Dialog : NinePatchRect
     {
         IsDialogPaused = false;
         ContinueButton.Disabled = false;
-        ContinueButton.Text = CONTINUE_CONTINUE;
+        if ( Main.IsClientOnDesktop )
+            ContinueButton.Text = CONTINUE_CONTINUE;
+        else
+            ContinueButton.Text = CONTINUE_CONTINUE_MOBILE;
     }
 
     public void Restart()
