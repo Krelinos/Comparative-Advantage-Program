@@ -41,8 +41,8 @@ public class Main : Control
 
     private Node ScenarioVisualsParent;
     private Node ScenarioUIParent;
-    private Node ScenarioVisuals;
-    private Node ScenarioUI;
+    public static Node ScenarioVisuals;
+    public static Node ScenarioUI;
 
     public override void _EnterTree()
     {
@@ -57,6 +57,12 @@ public class Main : Control
         ScenarioUIParent = GetNode( _ScenarioUIParent );
 
         Scenarios.Connect( nameof(Scenarios.ScenarioLoaded), this, nameof(OnScenarioLoaded) );
+    }
+
+    public override void _Ready()
+    {
+        base._Ready();
+        Scenarios.LoadScenario( "0Preface" );
     }
 
     public static JSONParseResult ParseJSON( String fileName, String filePath )
@@ -88,14 +94,14 @@ public class Main : Control
         var _ScenarioVisuals = GD.Load(
             "res://Scenes/Scenarios/"
             + ( IsClientOnDesktop ? "Desktop" : "Mobile")
-            + "/Visuals" + scenarioName + ".tscn"
+            + "/Visuals/" + scenarioName + ".tscn"
         ) as PackedScene;
         ScenarioVisuals = _ScenarioVisuals.Instance();
 
         var _ScenarioUI = GD.Load(
             "res://Scenes/Scenarios/"
             + ( IsClientOnDesktop ? "Desktop" : "Mobile")
-            + "/UI" + scenarioName + ".tscn"
+            + "/UI/" + scenarioName + ".tscn"
         ) as PackedScene;
         ScenarioUI = _ScenarioUI.Instance();
 
@@ -121,23 +127,24 @@ public class Scenarios : Godot.Object
 
     public Scenarios( Node scenarioButtonsList )
     {
+        // 19 Sept 2024 - Godot signals and the method they are connected
+        // to MUST have the same number of parameters, otherwise Godot
+        // will complain about "Method not found" without stating this
+        // reasoning.
         foreach( Node n in scenarioButtonsList.GetChildren() )
-        {
-            if ( n is BaseButton b )
-            {
-                b.Connect( "pressed", this, nameof(LoadScenario) );
-            }
-        }
-
-        LoadScenario( "0Preface" );
+            if ( n is MenuButton b )
+                b.Connect(nameof(MenuButton.ScenarioButtonPressed), this, nameof(LoadScenario) );
     }
 
-    private void LoadScenario( String scenarioFileName )
+    public void LoadScenario( String scenarioFileName )
     {
+        GD.Print( scenarioFileName );
         var scenarioData = Main.ParseJSON( scenarioFileName+".json", "res://Dialog/" ).Result as Godot.Collections.Dictionary;
     
         Dialog = scenarioData["dialog"] as Godot.Collections.Array;
         Questions = scenarioData["questions"] as Godot.Collections.Dictionary;
+
+        NextDialogIndex = 0;
 
         EmitSignal( nameof(ScenarioLoaded), scenarioFileName );
     }

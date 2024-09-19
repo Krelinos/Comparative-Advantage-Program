@@ -3,12 +3,15 @@ using System;
 
 public class MenuButton : Button
 {
+    [Signal] public delegate void ScenarioButtonPressed( String scenName );
+
     public override void _Ready()
     {
         Connect("button_down", this, nameof(OnButtonDown));
         Connect("button_up", this, nameof(OnButtonUp));
         Connect("mouse_entered", this, nameof(OnMouseEntered));
         Connect("mouse_exited", this, nameof(OnMouseExited));
+        Connect( "pressed", this, nameof(OnMenuButtonPressed) );
     }
 
     private void OnButtonDown()
@@ -30,5 +33,9 @@ public class MenuButton : Button
     {
         if ( !Disabled )
             Modulate = new Color(0.9f, 0.9f, 0.9f);
+    }
+    private void OnMenuButtonPressed()
+    {
+        EmitSignal( nameof(ScenarioButtonPressed), Name );
     }
 }

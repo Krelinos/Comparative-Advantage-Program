@@ -6,8 +6,6 @@ namespace ComparativeAdvantage {
 
 public class Scenario1aOutputVisuals : Node
 {
-    [Export] public NodePath _UI;
-
     private FarmCrops LightCrops;
     private FarmCrops DarkCrops;
     private Scenario1aOutputUI UI;
@@ -16,7 +14,7 @@ public class Scenario1aOutputVisuals : Node
     {
         LightCrops = GetNode<FarmCrops>("LightCrops");
         DarkCrops = GetNode<FarmCrops>("DarkCrops");
-        UI = GetNode<Scenario1aOutputUI>( _UI );
+        UI = Main.ScenarioUI as Scenario1aOutputUI;
 
         Initialize();
     }

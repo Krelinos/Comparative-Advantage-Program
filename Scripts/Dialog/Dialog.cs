@@ -37,6 +37,8 @@ public class Dialog : NinePatchRect
         _DialogBasic = GD.Load<PackedScene>("res://Scenes/Dialog/Basic.tscn");
         _DialogMCQuestion = GD.Load<PackedScene>("res://Scenes/Dialog/MCQuestion.tscn");
 
+        Main.Scenarios.Connect( nameof(Scenarios.ScenarioLoaded), this, nameof(OnScenarioLoaded) );
+
         Restart();
     }
 
@@ -164,6 +166,12 @@ public class Dialog : NinePatchRect
             Resume();
             question.Disconnect("AnswerSubmitted", this, nameof(AnswerSubmitted));
         }
+    }
+
+    private void OnScenarioLoaded( String scenarioName )
+    {
+        Restart();
+        ProceedToNextDialog();
     }
 
     public void _OnContinuePressed()

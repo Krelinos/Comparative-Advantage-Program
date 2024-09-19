@@ -1,121 +1,98 @@
 {
-	"dialog": {
-		"start": "1a0",
-		"1a0": {
+	"dialog": [
+		{
 			"text": "A farmer grows two types of crops: peppers and tomatoes. They are trying to maximize the crop output of the farmland."
-			,"next": "1a1"
 		}
-		,"1a1": {
+		,{
 			"text": "There are two plots of land the crops can be planted in: one with light, nutrient-sparse soil..."
-			,"next": "1a1_1"
 			,"visuals": "plant_crops_light"
 		}
-		,"1a1_1": {
+		,{
 			"text": "...and another with dark, nutrient-rich soil."
-			,"next": "1a2"
 			,"visuals": "plant_crops_dark"
 		}
-		,"1a2": {
+		,{
 			"text": "If the light soil is planted with ONLY peppers, then it will produce {light_pepper} crates of peppers."
-			,"next": "1a2_1"
 			,"visuals": "light_only_pepper"
 			,"variables": [
 				"light_pepper"
 			]
 		}
-		,"1a2_1": {
+		,{
 			"text": "And if it is planted with ONLY tomatoes, then it will produce {light_tomato} crates of tomatoes."
-			,"next": "1a3"
 			,"visuals": "light_only_tomato"
 			,"variables": [
 				"light_tomato"
 			]
 		}
-		,"1a3": {
+		,{
 			"text": "Likewise, the dark soil can produce a max of {dark_pepper} crates of peppers..."
-			,"next": "1a3_1"
 			,"visuals": "dark_only_pepper"
 			,"variables": [
 				"dark_pepper"
 			]
 		}
-		,"1a3_1": {
+		,{
 			"text": "...or it can produce a max of {dark_tomato} crates of tomatoes."
-			,"next": "1a4"
 			,"visuals": "dark_only_tomato"
 			,"variables": [
 				"dark_tomato"
 			]
 		}
-		,"1a4": {
-			"text": "The dark soil can produce more tomatoes than the light soil, assuming both receive equal irrigation, sunlight, and maintenance. This is known as having the [color=#E49F5A]absolute advantage[/color]. Try experimenting with the crop sliders by clicking anywhere on the sliders with your mouse."
-			,"next": "1a4_1"
+		,{
+			"text": "The dark soil can produce more tomatoes than the light soil, assuming both receive equal irrigation, sunlight, and maintenance. This is known as having the [color=#E49F5A]absolute advantage[/color].
+
+Try experimenting with the crop sliders by tapping or clicking anywhere on the sliders."
 			,"concept": "absolute_advantage"
 		}
-		,"1a4_1": {
-			"next": "1a5"
-			,"question": "1a4"
+		,{
+			"question": "1a4"
 		}
-		,"1a5": {
+		,{
 			"text": "If the farmer were to plant only peppers in the light soil, the opportunity to plant tomatoes would be sacrificed. This is known as the [color=#E49F5A]opportunity cost[/color]."
-			,"next": "1a6"
 			,"concept": "opportunity_cost_output"
 		}
-		,"1a6": {
+		,{
 			"text": "As such, the farmer gives up the opportunity to grow {light_tomato} crates of tomatoes in exchange for {light_pepper} crates of peppers."
-			,"next": "1a6_1"
 		}
-		,"1a6_1": {
+		,{
 			"text": "Alternatively, the farmer could plant tomatoes, giving up the opportunity to grow {light_pepper} crates of peppers in exchange for {light_tomato} crates of tomatoes."
-			,"next": "1a6_2"
 		}
-		,"1a6_2": {
-			"next": "1a7"
-			,"question": "1a6_2"
+		,{
+			"question": "1a6_2"
 		}
-		,"1a7": {
+		,{
 			"text": "When comparing two entites, whichever has the lower opportunity cost to produce an item has the [color=#E49F5A]comparative advantage[/color] for that item."
-			,"next": "1a7_1"
 			,"concept": "comparative_advantage"
 		}
-		,"1a7_1": {
+		,{
 			"text": "To compare the opportunity costs of the farmlands, the costs must be normalized. The way to do this regarding output is by dividing the Sacrificed Item by the Gained Item."
-			,"next": "1a8"
 		}
-		,"1a8": {
+		,{
 			"text": "For the light soil, the opportunity cost to recieve one pepper is {light_tomato} / {light_pepper} = {light_pepper_opportunity_cost}"
-			,"next": "1a8_1"
 			,"visuals": "table_show_lpepper"
 		}
-		,"1a8_1": {
+		,{
 			"text": "And the opportunity cost to receive one tomato is {light_pepper} / {light_tomato} = {light_tomato_opportunity_cost}"
-			,"next": "1a9"
 			,"visuals": "table_show_ltomato"
 		}
-		,"1a9": {
-			"next": "1a10"
-			,"question": "1a9"
+		,{
+			"question": "1a9"
 		}
-		,"1a10": {
-			"next": "1a11"
-			,"question": "1a10"
+		,{
+			"question": "1a10"
 			,"visuals": "table_show_dpepper"
 		}
-		,"1a10_1": {
-			"text": ""
-			,"next": "1a11"
-		}
-		,"1a11": {
-			"next": "1a12"
-			,"question": "1a11"
+		,{
+			"question": "1a11"
 			,"visuals": "table_show_dtomato"
 		}
-		,"1a12": {
+		,{
 			"text": "You have completed 1a - Output! Select scenario 1b - Input at the bottom left to continue."
 			,"completed": "1_a_output"
 			,"flags": "end"
 		}
-	}
+	]
 	
 	,"questions": {
 		"1a4": {

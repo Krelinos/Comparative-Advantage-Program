@@ -12,6 +12,11 @@ region = Rect2( 401, 209, 14, 14 )
 atlas = ExtResource( 2 )
 region = Rect2( 401, 225, 14, 14 )
 
+[sub_resource type="DynamicFont" id=1]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
 [sub_resource type="StyleBoxEmpty" id=10]
 
 [sub_resource type="StyleBoxTexture" id=11]
@@ -44,11 +49,6 @@ texture = ExtResource( 3 )
 region_rect = Rect2( 213, 212, 6, 27 )
 margin_bottom = 1.0
 
-[sub_resource type="DynamicFont" id=1]
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 1 )
-
 [resource]
 default_font = SubResource( 1 )
 Button/colors/font_color = Color( 0, 0, 0, 1 )
@@ -60,6 +60,7 @@ CheckBox/icons/checked = SubResource( 2 )
 CheckBox/icons/radio_checked = SubResource( 2 )
 CheckBox/icons/radio_unchecked = SubResource( 3 )
 CheckBox/icons/unchecked = SubResource( 3 )
+TabContainer/fonts/font = SubResource( 1 )
 TabContainer/styles/panel = SubResource( 10 )
 TabContainer/styles/tab_bg = SubResource( 11 )
 TabContainer/styles/tab_fg = SubResource( 12 )
