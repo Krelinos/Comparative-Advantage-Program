@@ -31,7 +31,7 @@ public class Choice : MarginContainer
     public String LabelText
     {
         get { return _Label.Text; }
-        set { _Label.Text = GameService.Variables.Format( value ); }
+        set { _Label.Text = Main.Variables.Format( value ); }
     }
 
     protected int _Index;

@@ -10,7 +10,6 @@ public class DialogBasic : MarginContainer
 	{
 		get { return Label.BbcodeText; }
 		set {
-			GD.Print( value );
 			var dialog = Main.Variables.Format( value );
 			Label.BbcodeText = dialog;
 		}

@@ -1,3 +1,4 @@
+using ComparativeAdvantage.mobile;
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ public class Main : Control
     [Export] private NodePath _ScenarioSelectionButtons;
     [Export] private NodePath _ScenarioVisualsParent;
     [Export] private NodePath _ScenarioUIParent;
+    [Export] private NodePath _Terms;
 
     public static Scenarios Scenarios
     {
@@ -49,7 +51,7 @@ public class Main : Control
         base._EnterTree();
 
         Scenarios = new Scenarios( GetNode( _ScenarioSelectionButtons) );
-        Glossary = new Glossary();
+        Glossary = new Glossary( GetNode<Terms>(_Terms) );
         SaveInfo = new SaveInfo();
         Variables = new Variables();
 
@@ -123,6 +125,8 @@ public class Scenarios : Godot.Object
     public Godot.Collections.Array Dialog { get; private set; }
     public Godot.Collections.Dictionary Questions { get; private set; }
 
+    public String CurrentScenario { get; private set; }
+
     private int NextDialogIndex;
 
     public Scenarios( Node scenarioButtonsList )
@@ -145,6 +149,7 @@ public class Scenarios : Godot.Object
         Questions = scenarioData["questions"] as Godot.Collections.Dictionary;
 
         NextDialogIndex = 0;
+        CurrentScenario = scenarioFileName;
 
         EmitSignal( nameof(ScenarioLoaded), scenarioFileName );
     }
@@ -164,10 +169,23 @@ public class Glossary
 {
     public Godot.Collections.Dictionary TermDescriptions { get; protected set; }
 
-    public Glossary()
+    private Terms Terms;
+
+    public Glossary( Terms terms )
     {
         TermDescriptions = Main.ParseJSON("definitions.json", "res://Dialog/").Result
             as Godot.Collections.Dictionary;
+        
+        Terms = terms;
+    }
+
+    public void AppendTerm( String termId )
+    {
+        if ( !Main.SaveInfo.TermsLearned.Contains(termId) )
+        {
+            Terms.AddTerm( termId );
+            Main.SaveInfo.TermsLearned.Add( termId );
+        }
     }
 }
 
@@ -179,6 +197,14 @@ public class Glossary
 public class SaveInfo
 {
     public Godot.Collections.Dictionary Data { get; protected set; }
+    public Godot.Collections.Array QuestionsSolved
+    {
+        get { return Data["solved"] as Godot.Collections.Array; }
+    }
+    public Godot.Collections.Array TermsLearned
+    {
+        get { return Data["terms"] as Godot.Collections.Array; }
+    }
 
     protected const String SAVE_FILE_PATH = "userdata.json";
 
@@ -214,13 +240,15 @@ public class SaveInfo
         }
     }
 
+    public Godot.Collections.Dictionary GetSolvedQuestionsOfScenario( String scenarioId )
+    {
+        var dataSolved = Data["solved"] as Godot.Collections.Dictionary;
+        return dataSolved[ scenarioId ] as Godot.Collections.Dictionary;
+    }
+
     public void ResetScenarioProgress()
     {
-        Data["solved"] = new Godot.Collections.Dictionary
-        {
-            { "Scenario1aOutput", new Godot.Collections.Array() },
-            { "Scenario1bInput", new Godot.Collections.Array() }
-        };
+        Data["solved"] = new Godot.Collections.Array();
     }
 
     public void ResetGlossary()
@@ -252,10 +280,7 @@ public class Variables
         {
             // Some (if not most) variables can just be a constant value.
             if (jsonVars[key] is String constant)
-            {
                 VariablesDictionary.Add( key, Double.Parse(constant) );
-                GD.Print("Added " + key + " : " + constant);
-            }
 
             // Variables can also appear as a Godot Dictionary. Used for variables that depend on previous constants or variables.
             if (jsonVars[key] is Godot.Collections.Dictionary d)
@@ -276,8 +301,6 @@ public class Variables
                 var dt = new System.Data.DataTable();
                 double answer = (double)dt.Compute(expression, "");
                 this[key] = Math.Round(answer, 3); // AP test require rounding to the 3rd decimal, unless specified.
-                
-                GD.Print("Added " + key + " : " + answer);
             }
         }
     }
@@ -309,7 +332,6 @@ public class Variables
                     break;
                 case int i:
                 case String s:
-                    // GD.Print(varKey);
                     str = str.Insert( lBracket, this[ varKey ].ToString() );
                     break;
                 default:

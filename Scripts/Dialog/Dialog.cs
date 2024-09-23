@@ -66,25 +66,22 @@ public class Dialog : NinePatchRect
         }
 
         // text
-        try
+        if ( dialog.Contains("text") && dialog["text"] is String label )
         {
-            String label = dialog["text"] as String;
             DialogBasic dialogBasic = _DialogBasic.Instance() as DialogBasic;
             
             DialogContainer.AddChild( dialogBasic );
             // await ToSignal( dialogBasic, "ready" );
             dialogBasic.Text = label;
         }
-        catch( KeyNotFoundException ) { }
 
         // question
-        try
+        if( dialog.Contains("question") && dialog["question"] is String questionId )
         {
-            String questionId = dialog["question"] as String;
-            Godot.Collections.Dictionary question = GameService.Scenario.GetQuestion( questionId );
+            var question = Main.Scenarios.Questions[ questionId ] as Godot.Collections.Dictionary;
             question["id"] = questionId;
 
-            if ( GameService.Save.GetSolvedQuestionsOfScenario( GameService.Scenario.CurrentScenario ).Contains( questionId ) )
+            if ( Main.SaveInfo.QuestionsSolved.Contains( questionId ) )
                 question["previouslySolved"] = true;
             else
             {
@@ -99,23 +96,18 @@ public class Dialog : NinePatchRect
             if ( !(bool)question["previouslySolved"] )
                 mcQuestion.Connect("AnswerSubmitted", this, nameof(AnswerSubmitted), null, 0);    
         }
-        catch( KeyNotFoundException ) { }
 
         // visuals
-        try
+        if ( dialog.Contains("visuals") && dialog["visuals"] is String visualsId )
         {
-            String visualsId = dialog["visuals"] as String;
             EmitSignal(nameof(DialogVisualsEvent), visualsId);
         }
-        catch( KeyNotFoundException ) { }
 
-        // concept
-        try
+        // term
+        if ( dialog.Contains("term") && dialog["term"] is String termId )
         {
-            String conceptId = dialog["concept"] as String;
-            GameService.DefinitionsList.AppendDefinition( conceptId );
+            Main.Glossary.AppendTerm( termId );
         }
-        catch( KeyNotFoundException ) { }
 
         ScrollToBottom();
     }

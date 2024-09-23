@@ -41,6 +41,7 @@ script = ExtResource( 9 )
 _ScenarioSelectionButtons = NodePath("LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/TabContainer/Scenarios/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer")
 _ScenarioVisualsParent = NodePath("Scenario/VBoxContainer/ScenarioVisuals/CenterContainer/Center")
 _ScenarioUIParent = NodePath("Scenario/VBoxContainer/ScenarioVisuals/MarginContainer")
+_Terms = NodePath("RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary")
 
 [node name="Scenario" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -68,7 +69,7 @@ script = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Scenario/NinePatchRect/ScrollContainer"]
 margin_right = 360.0
-margin_bottom = 503.0
+margin_bottom = 543.0
 mouse_filter = 1
 size_flags_horizontal = 3
 custom_constants/margin_right = 8
@@ -80,7 +81,7 @@ custom_constants/margin_bottom = 8
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 352.0
-margin_bottom = 495.0
+margin_bottom = 535.0
 
 [node name="MCQuestion" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_right = 344.0

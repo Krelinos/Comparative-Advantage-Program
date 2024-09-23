@@ -34,9 +34,6 @@ public class Terms : NinePatchRect
         TermDetails = GetNode<TermDetails>( __TermDetails );
 
         _TermEntry = GD.Load("res://Scenes/Mobile/Definition.tscn") as PackedScene;
-    
-        AddTerm( "comparative_advantage" );
-        AddTerm( "opportunity_cost_(output)");
     }
 
     /// <summary>

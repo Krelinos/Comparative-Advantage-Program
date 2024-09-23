@@ -43,14 +43,14 @@
 			"text": "The dark soil can produce more tomatoes than the light soil, assuming both receive equal irrigation, sunlight, and maintenance. This is known as having the [color=#E49F5A]absolute advantage[/color].
 
 Try experimenting with the crop sliders by tapping or clicking anywhere on the sliders."
-			,"concept": "absolute_advantage"
+			,"term": "absolute_advantage"
 		}
 		,{
 			"question": "1a4"
 		}
 		,{
 			"text": "If the farmer were to plant only peppers in the light soil, the opportunity to plant tomatoes would be sacrificed. This is known as the [color=#E49F5A]opportunity cost[/color]."
-			,"concept": "opportunity_cost_output"
+			,"term": "opportunity_cost_output"
 		}
 		,{
 			"text": "As such, the farmer gives up the opportunity to grow {light_tomato} crates of tomatoes in exchange for {light_pepper} crates of peppers."
@@ -63,7 +63,7 @@ Try experimenting with the crop sliders by tapping or clicking anywhere on the s
 		}
 		,{
 			"text": "When comparing two entites, whichever has the lower opportunity cost to produce an item has the [color=#E49F5A]comparative advantage[/color] for that item."
-			,"concept": "comparative_advantage"
+			,"term": "comparative_advantage"
 		}
 		,{
 			"text": "To compare the opportunity costs of the farmlands, the costs must be normalized. The way to do this regarding output is by dividing the Sacrificed Item by the Gained Item."
