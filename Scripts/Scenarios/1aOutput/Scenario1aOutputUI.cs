@@ -2,7 +2,7 @@ using ComparativeAdvantage;
 using Godot;
 using System;
 
-public class Scenario1aOutputUI : VBoxContainer
+public class Scenario1aOutputUI : VBoxContainer, IScenarioVisualsOrUI
 {
     [Signal]
     public delegate void LightCropChanged(float oldVal, float newVal);
@@ -45,15 +45,15 @@ public class Scenario1aOutputUI : VBoxContainer
         DarkCropSlider.TweenValueTo(0.5f, true);
     }
 
-    private void _OnDialogVisualsEvent( String visualsName )
+    public void OnDialogVisualsEvent( String visualsId )
     {
-        switch ( visualsName )
+        switch ( visualsId )
         {
             case "plant_crops_light":
-                LightCropSlider.Initialize( (int)GameService.Variables["light_pepper"], (int)GameService.Variables["light_tomato"] );
+                LightCropSlider.Initialize( Main.Variables["light_pepper"], Main.Variables["light_tomato"] );
                 break;
             case "plant_crops_dark":
-                DarkCropSlider.Initialize( (int)GameService.Variables["dark_pepper"], (int)GameService.Variables["dark_tomato"] );
+                DarkCropSlider.Initialize( Main.Variables["dark_pepper"], Main.Variables["dark_tomato"] );
                 break;
             case "light_only_pepper":
                 LightCropSlider.TweenValueTo(1);

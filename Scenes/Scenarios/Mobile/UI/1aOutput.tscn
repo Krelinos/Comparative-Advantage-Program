@@ -62,9 +62,9 @@ size_flags_vertical = 6
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 visible = false
-margin_top = 168.0
-margin_right = 360.0
-margin_bottom = 640.0
+margin_top = 148.0
+margin_right = 130.0
+margin_bottom = 216.0
 size_flags_vertical = 3
 texture = ExtResource( 4 )
 region_rect = Rect2( 465, 65, 14, 14 )
@@ -84,15 +84,15 @@ custom_constants/margin_bottom = 6
 [node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer"]
 margin_left = 6.0
 margin_top = 6.0
-margin_right = 354.0
-margin_bottom = 466.0
+margin_right = 218.0
+margin_bottom = 140.0
 
 [node name="OpportunityCostTable" parent="NinePatchRect/MarginContainer/HBoxContainer" instance=ExtResource( 1 )]
 margin_right = 208.0
-margin_bottom = 460.0
+margin_bottom = 134.0
 
 [node name="MarginContainer2" type="MarginContainer" parent="NinePatchRect/MarginContainer/HBoxContainer"]
 margin_left = 212.0
-margin_right = 348.0
-margin_bottom = 460.0
+margin_right = 212.0
+margin_bottom = 134.0
 size_flags_horizontal = 3

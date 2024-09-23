@@ -154,7 +154,8 @@ public class Dialog : NinePatchRect
 
         if ( solved )
         {
-            GameService.Save.UserSolvedQuestionOfScenario( GameService.Scenario.CurrentScenario, question.QuestionID );
+            Main.SaveInfo.QuestionsSolved.Add( question.QuestionID );
+            Main.SaveInfo.Save();
             Resume();
             question.Disconnect("AnswerSubmitted", this, nameof(AnswerSubmitted));
         }
@@ -164,6 +165,9 @@ public class Dialog : NinePatchRect
     {
         Restart();
         ProceedToNextDialog();
+        var scenarioVisualsOrUI = Main.ScenarioVisuals as IScenarioVisualsOrUI;
+        Connect( nameof(DialogVisualsEvent), Main.ScenarioVisuals, nameof( scenarioVisualsOrUI.OnDialogVisualsEvent ) );
+        Connect( nameof(DialogVisualsEvent), Main.ScenarioUI, nameof( scenarioVisualsOrUI.OnDialogVisualsEvent ) );
     }
 
     public void _OnContinuePressed()

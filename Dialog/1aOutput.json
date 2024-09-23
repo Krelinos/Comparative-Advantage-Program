@@ -50,7 +50,7 @@ Try experimenting with the crop sliders by tapping or clicking anywhere on the s
 		}
 		,{
 			"text": "If the farmer were to plant only peppers in the light soil, the opportunity to plant tomatoes would be sacrificed. This is known as the [color=#E49F5A]opportunity cost[/color]."
-			,"term": "opportunity_cost_output"
+			,"term": "opportunity_cost_-_output"
 		}
 		,{
 			"text": "As such, the farmer gives up the opportunity to grow {light_tomato} crates of tomatoes in exchange for {light_pepper} crates of peppers."

@@ -14,8 +14,8 @@ public class CropSlider : MarginContainer
     public Slider Slider { get; protected set; }
 
     private float CurrentSliderValue;
-    private int PepperMax;
-    private int TomatoMax;
+    private double PepperMax;
+    private double TomatoMax;
 
     public override void _Ready()
     {
@@ -28,7 +28,7 @@ public class CropSlider : MarginContainer
         Modulate = new Color(1,1,1,0);
     }
 
-    public async void Initialize( int firstCrop, int secondCrop )
+    public async void Initialize( double firstCrop, double secondCrop )
     {
         PepperMax = firstCrop;
         TomatoMax = secondCrop;
@@ -37,7 +37,7 @@ public class CropSlider : MarginContainer
         Slider.Value = 0.5f;
 
         Tween tween = new Tween();
-        tween.InterpolateProperty(this, "rect_position:y", -30, 0, 1.5f, Tween.TransitionType.Quad, Tween.EaseType.Out );
+        tween.InterpolateProperty(this, "rect_position:y", RectPosition.y-30, RectPosition.y, 1.5f, Tween.TransitionType.Quad, Tween.EaseType.Out );
         AddChild(tween);
         tween.Start();
         
@@ -69,11 +69,11 @@ public class CropSlider : MarginContainer
     private void UpdateLabels()
     {
         var pepper = CurrentSliderValue * PepperMax;
-        pepper = (float)Math.Round( pepper, 2 );
+        pepper = Math.Round( pepper, 2 );
         PepperLabel.Text = pepper.ToString();
         
         var tomato = (1 - CurrentSliderValue) * TomatoMax;
-        tomato = (float)Math.Round( tomato, 2 );
+        tomato = Math.Round( tomato, 2 );
         TomatoLabel.Text = tomato.ToString();
     }
 

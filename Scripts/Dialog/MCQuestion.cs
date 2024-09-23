@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace ComparativeAdvantage
 {
 
-public class MCQuestion : MarginContainer, IHasDialogLabel
+public class MCQuestion : MarginContainer
 {
     [Signal]
     public delegate void AnswerSubmitted( MCQuestion question, bool solved );
@@ -67,11 +67,6 @@ public class MCQuestion : MarginContainer, IHasDialogLabel
         Solved = (bool)questionData["previouslySolved"];
         if ( Solved )
             Feedback.Visible = true;
-    }
-
-    public void SetLabel( String label )
-    {
-        Label.Text = Main.Variables.Format( label );
     }
 
     public void _OnChoiceSelected( int index )

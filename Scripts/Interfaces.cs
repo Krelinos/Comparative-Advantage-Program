@@ -6,4 +6,8 @@ namespace ComparativeAdvantage
     {
         void SetLabel( String label );
     }
+    interface IScenarioVisualsOrUI
+    {
+        void OnDialogVisualsEvent( String visualsId );
+    }
 }

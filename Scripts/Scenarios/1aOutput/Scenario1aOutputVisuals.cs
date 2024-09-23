@@ -4,7 +4,7 @@ using System;
 
 namespace ComparativeAdvantage {
 
-public class Scenario1aOutputVisuals : Node
+public class Scenario1aOutputVisuals : Node, IScenarioVisualsOrUI
 {
     private FarmCrops LightCrops;
     private FarmCrops DarkCrops;
@@ -32,7 +32,7 @@ public class Scenario1aOutputVisuals : Node
         DarkCrops.UpdateCrops(0.5f);
     }
 
-    private void _OnDialogVisualsEvent( String visualsName )
+    public void OnDialogVisualsEvent( String visualsName )
     {
         switch ( visualsName )
         {

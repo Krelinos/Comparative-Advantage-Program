@@ -50,10 +50,10 @@ public class Main : Control
     {
         base._EnterTree();
 
-        Scenarios = new Scenarios( GetNode( _ScenarioSelectionButtons) );
-        Glossary = new Glossary( GetNode<Terms>(_Terms) );
         SaveInfo = new SaveInfo();
         Variables = new Variables();
+        Scenarios = new Scenarios( GetNode( _ScenarioSelectionButtons) );
+        Glossary = new Glossary( GetNode<Terms>(_Terms) );
 
         ScenarioVisualsParent = GetNode( _ScenarioVisualsParent );
         ScenarioUIParent = GetNode( _ScenarioUIParent );
@@ -64,6 +64,7 @@ public class Main : Control
     public override void _Ready()
     {
         base._Ready();
+        Glossary.PopulateWithLearnedTerms();
         Scenarios.LoadScenario( "0Preface" );
     }
 
@@ -165,7 +166,7 @@ public class Scenarios : Godot.Object
 /// <summary>
 /// 
 /// </summary>
-public class Glossary
+public class Glossary : Godot.Object
 {
     public Godot.Collections.Dictionary TermDescriptions { get; protected set; }
 
@@ -179,12 +180,22 @@ public class Glossary
         Terms = terms;
     }
 
+    public void PopulateWithLearnedTerms()
+    {
+        foreach ( String termId in Main.SaveInfo.TermsLearned )
+            Terms.AddTerm( termId );
+    }
+
     public void AppendTerm( String termId )
     {
-        if ( !Main.SaveInfo.TermsLearned.Contains(termId) )
+        // Terms has an anti-duplicate mechanic already.
+        Terms.AddTerm( termId );
+
+        // SaveInfo doesn't, however
+        if ( !Main.SaveInfo.TermsLearned.Contains( termId ) )
         {
-            Terms.AddTerm( termId );
             Main.SaveInfo.TermsLearned.Add( termId );
+            Main.SaveInfo.Save();
         }
     }
 }
@@ -264,13 +275,13 @@ public class SaveInfo
 /// </summary>
 public class Variables
 {
-    public object this[ String key ]    // Whenever "Main.Variables[ key ]" is called, this is executed.
+    public double this[ String key ]    // Whenever "Main.Variables[ key ]" is called, this is executed.
     {
         get { return VariablesDictionary[ key ]; }
         private set { VariablesDictionary[ key ] = value; }
     }
 
-    private static readonly Dictionary<String, object> VariablesDictionary = new Dictionary<String, object>();
+    private static readonly Dictionary<String, Double> VariablesDictionary = new Dictionary<String, double>();
 
     public Variables()
     {
@@ -280,7 +291,7 @@ public class Variables
         {
             // Some (if not most) variables can just be a constant value.
             if (jsonVars[key] is String constant)
-                VariablesDictionary.Add( key, Double.Parse(constant) );
+                this[key] = Double.Parse(constant);
 
             // Variables can also appear as a Godot Dictionary. Used for variables that depend on previous constants or variables.
             if (jsonVars[key] is Godot.Collections.Dictionary d)
@@ -325,19 +336,21 @@ public class Variables
 			varKey = str.Substring( lBracket + 1, rBracket - lBracket - 1 );
 			str = str.Remove( lBracket, rBracket - lBracket + 1 );
 
-            switch ( this[ varKey ] )
-            {
-                case double d:
-                    str = str.Insert( lBracket, Math.Round( (double)this[ varKey ], 3 ).ToString() );
-                    break;
-                case int i:
-                case String s:
-                    str = str.Insert( lBracket, this[ varKey ].ToString() );
-                    break;
-                default:
-                    str = str.Insert( lBracket, "NULLVARTYPE" );
-                    break;
-            }
+            str = str.Insert( lBracket, Math.Round( this[ varKey ], 3 ).ToString() );
+
+            // switch ( this[ varKey ] )
+            // {
+            //     case double d:
+            //         str = str.Insert( lBracket, Math.Round( (double)this[ varKey ], 3 ).ToString() );
+            //         break;
+            //     case int i:
+            //     case String s:
+            //         str = str.Insert( lBracket, this[ varKey ].ToString() );
+            //         break;
+            //     default:
+            //         str = str.Insert( lBracket, "NULLVARTYPE" );
+            //         break;
+            // }
 			
 			lBracket = str.IndexOf('{');
 			rBracket = str.IndexOf('}');
