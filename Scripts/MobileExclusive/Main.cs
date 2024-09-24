@@ -137,8 +137,8 @@ public class Scenarios : Godot.Object
         // will complain about "Method not found" without stating this
         // reasoning.
         foreach( Node n in scenarioButtonsList.GetChildren() )
-            if ( n is MenuButton b )
-                b.Connect(nameof(MenuButton.ScenarioButtonPressed), this, nameof(LoadScenario) );
+            if ( n is ScenarioMenuButton b )
+                b.Connect(nameof(ScenarioMenuButton.ScenarioButtonPressed), this, nameof(LoadScenario) );
     }
 
     public void LoadScenario( String scenarioFileName )
