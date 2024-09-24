@@ -146,6 +146,7 @@ alignment = 1
 [node name="LeftSideMenuButton" type="MarginContainer" parent="Scenario/VBoxContainer/SideMenuButtons"]
 margin_right = 68.0
 margin_bottom = 43.0
+rect_min_size = Vector2( 0, 42 )
 size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_constants/margin_right = 0
@@ -174,7 +175,7 @@ custom_constants/margin_top = 6
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 6
 
-[node name="MenuButton" type="Button" parent="Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton/MarginContainer"]
+[node name="MenuLabel" type="Button" parent="Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton/MarginContainer"]
 modulate = Color( 0.941176, 0.941176, 0.941176, 1 )
 margin_left = 8.0
 margin_top = 6.0
@@ -187,10 +188,11 @@ custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+disabled = true
 text = "Menu"
 flat = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton/MarginContainer/MenuButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton/MarginContainer/MenuLabel"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -201,11 +203,18 @@ patch_margin_top = 6
 patch_margin_right = 7
 patch_margin_bottom = 7
 
+[node name="MenuButton" type="Button" parent="Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton"]
+margin_top = 6.0
+margin_right = 68.0
+margin_bottom = 43.0
+flat = true
+
 [node name="RightSideMenuButton" type="MarginContainer" parent="Scenario/VBoxContainer/SideMenuButtons"]
 margin_left = 269.0
 margin_right = 360.0
 margin_bottom = 43.0
 grow_horizontal = 0
+rect_min_size = Vector2( 0, 42 )
 size_flags_horizontal = 9
 size_flags_vertical = 0
 custom_constants/margin_right = 0
@@ -226,6 +235,7 @@ patch_margin_right = 7
 patch_margin_bottom = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton"]
+show_behind_parent = true
 margin_top = 6.0
 margin_right = 91.0
 margin_bottom = 43.0
@@ -234,12 +244,13 @@ custom_constants/margin_top = 6
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 6
 
-[node name="MenuButton" type="Button" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton/MarginContainer"]
+[node name="MenuLabel" type="Button" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton/MarginContainer"]
 modulate = Color( 0.941176, 0.941176, 0.941176, 1 )
 margin_left = 8.0
 margin_top = 6.0
 margin_right = 83.0
 margin_bottom = 31.0
+mouse_filter = 1
 size_flags_horizontal = 11
 theme = ExtResource( 7 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
@@ -247,10 +258,11 @@ custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+disabled = true
 text = "Glossary"
 flat = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton/MarginContainer/MenuButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton/MarginContainer/MenuLabel"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -260,6 +272,13 @@ patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 7
 patch_margin_bottom = 7
+
+[node name="MenuButton" type="Button" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton"]
+margin_top = 6.0
+margin_right = 91.0
+margin_bottom = 43.0
+theme = ExtResource( 7 )
+flat = true
 
 [node name="ScenarioVisuals" type="MarginContainer" parent="Scenario/VBoxContainer"]
 show_behind_parent = true
@@ -322,7 +341,7 @@ margin_right = 355.0
 offset = Vector2( -360, 0 )
 transform = Transform2D( 1, 0, 0, 1, -360, 0 )
 script = ExtResource( 11 )
-__MenuButton = NodePath("../Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton/MarginContainer/MenuButton")
+__MenuButton = NodePath("../Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton/MenuButton")
 __Backdrop = NodePath("Backdrop")
 __OffscreenWindow = NodePath("Offscreen")
 __OnscreenWindow = NodePath("../Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton")
@@ -648,7 +667,7 @@ text = "Close"
 offset = Vector2( 360, 0 )
 transform = Transform2D( 1, 0, 0, 1, 360, 0 )
 script = ExtResource( 11 )
-__MenuButton = NodePath("../Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton/MarginContainer/MenuButton")
+__MenuButton = NodePath("../Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton/MenuButton")
 __Backdrop = NodePath("Backdrop")
 __OffscreenWindow = NodePath("Offscreen")
 __OnscreenWindow = NodePath("../Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton")
