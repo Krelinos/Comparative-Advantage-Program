@@ -95,6 +95,16 @@ public class SideMenu : CanvasLayer
             Offset = GetViewport().Size * new Vector2( IsRightOriented?1:-1, 0 );
     }
 
+    public void OpenMenu()
+    {
+        if ( !IsMenuOpen ) ToggleMenu();
+    }
+
+    public void CloseMenu()
+    {
+        if ( IsMenuOpen ) ToggleMenu();
+    }
+
     protected void ToggleMenu()
     {
         IsMenuOpen = !IsMenuOpen;

@@ -198,6 +198,11 @@ public class Glossary : Godot.Object
             Main.SaveInfo.Save();
         }
     }
+
+    public void Reset()
+    {
+        Terms.ClearTerms();
+    }
 }
 
 //======================================= SAVEINFO
@@ -243,7 +248,7 @@ public class SaveInfo
         {
             Data = new Godot.Collections.Dictionary {};
             ResetScenarioProgress();
-            ResetGlossary();
+            ResetLearnedTerms();
 
             saveFile.Open("user://" + SAVE_FILE_PATH, File.ModeFlags.Write);
             saveFile.StoreString( JSON.Print(Data, "\t") );
@@ -260,11 +265,18 @@ public class SaveInfo
     public void ResetScenarioProgress()
     {
         Data["solved"] = new Godot.Collections.Array();
+        Save();
     }
 
-    public void ResetGlossary()
+    public void ResetLearnedTerms()
     {
         Data["terms"] = new Godot.Collections.Array();
+        Save();
+    }
+
+    public void ResetPracticeCount()
+    {
+
     }
 }
 

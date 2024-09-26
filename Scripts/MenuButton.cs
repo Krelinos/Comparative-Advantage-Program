@@ -33,12 +33,11 @@ public class MenuButton : Button
     }
     protected void OnMouseExited()
     {
-        if ( !Disabled && !Pressed )
+        if ( !Pressed )
             Modulate = new Color(0.9f, 0.9f, 0.9f);
     }
     protected virtual void OnButtonToggled( bool isPressed )
     {
-        GD.Print( Name + ": " + isPressed );
         if ( isPressed )
             Modulate = new Color( 1, 1, 1 );
         else

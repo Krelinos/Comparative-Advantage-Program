@@ -6,8 +6,9 @@
 
 [node name="MenuButton" type="Button"]
 modulate = Color( 0.941176, 0.941176, 0.941176, 1 )
-margin_right = 234.0
-margin_bottom = 25.0
+anchor_right = 0.208
+anchor_bottom = 0.066
+margin_right = 50.0
 rect_min_size = Vector2( 0, 42 )
 theme = ExtResource( 1 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
@@ -15,7 +16,7 @@ custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-text = "Scenario"
+text = "MenuButton"
 flat = true
 script = ExtResource( 3 )
 
