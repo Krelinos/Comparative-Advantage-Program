@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class RadioMenuButton : MenuButton
+public class TabMenuButton : MenuButton
 {
     [Export] private NodePath _TabContainer;
 

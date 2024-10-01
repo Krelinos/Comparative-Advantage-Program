@@ -35,7 +35,7 @@ public class Choice : MarginContainer
     }
 
     protected int _Index;
-    protected RichTextLabel _Label;
+    protected Label _Label;
     protected CheckBox _CheckBox;
     protected TextureRect _CheckBoxIcon;
 
@@ -52,9 +52,9 @@ public class Choice : MarginContainer
     public override void _Ready()
     {
         _Index = -1;
-        _Label = GetNode<RichTextLabel>("HBoxContainer/RichTextLabel");
-        _CheckBoxIcon = GetNode<TextureRect>("HBoxContainer/TextureRect");
-        _CheckBox = GetNode<CheckBox>("HBoxContainer/TextureRect/CheckBox");
+        _Label = GetNode<Label>("HBoxContainer/Control/HBoxContainer/Label");
+        _CheckBoxIcon = GetNode<TextureRect>("HBoxContainer/Control/HBoxContainer/TextureRect");
+        _CheckBox = GetNode<CheckBox>("HBoxContainer/Control/CheckBox");
 
         CheckBox.Connect( "toggled", this, nameof(OnCheckBoxToggled) );
     }

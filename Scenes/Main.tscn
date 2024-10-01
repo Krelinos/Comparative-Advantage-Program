@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Dialog/Basic.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/MobileExclusive/TouchSwipeScrollContainer.cs" type="Script" id=3]
 [ext_resource path="res://Scenes/Dialog/Choice.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Dialog/MCQuestion.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/UI/SrToasty/UI books & more.png" type="Texture" id=6]
@@ -16,8 +15,91 @@
 [ext_resource path="res://Assets/Font/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=14]
 [ext_resource path="res://Assets/Font/Roboto/Roboto-Bold.ttf" type="DynamicFontData" id=15]
 [ext_resource path="res://Scripts/MobileExclusive/TermDetails.cs" type="Script" id=16]
-[ext_resource path="res://Scripts/RadioMenuButton.cs" type="Script" id=17]
+[ext_resource path="res://Scripts/TabMenuButton.cs" type="Script" id=17]
 [ext_resource path="res://Scripts/Settings.cs" type="Script" id=18]
+
+[sub_resource type="CSharpScript" id=8]
+script/source = "using Godot;
+using System;
+
+namespace ComparativeAdvantage
+{
+
+/// <summary>
+/// A ScrollContainer that responds to touchscreen InputEvents. Swiping quickly
+/// will continue scrolling the scrollbar as is typical of mobile applications.
+/// </summary>
+public class TouchSwipeScrollContainer : ScrollContainer
+{
+	protected Vector2 TouchStartPos;
+	protected int VScrollInitial;
+	protected float Velocity;
+
+	protected Vector2 LastDragSpeed;
+	protected float TimeSinceLastDragEvent;
+	protected bool IsDragging;
+
+	public override void _Ready()
+	{
+		base._Ready();
+
+		// Since this is touchscreen, scrolling via scrollbar is not required.
+		GetVScrollbar().MouseFilter = MouseFilterEnum.Ignore;
+	}
+
+    public override void _Process(float delta)
+    {
+        base._Process(delta);
+		
+		if ( Math.Abs(400*delta) < Math.Abs(Velocity) )
+			Velocity -= 400*delta * Math.Sign(Velocity);
+		else
+			Velocity -= Velocity;
+
+		ScrollVertical -= (int)(Velocity*0.1f);
+		TimeSinceLastDragEvent += delta;
+    }
+
+    public override void _GuiInput(InputEvent @event)
+	{
+		//base._Input(@event);
+
+		if ( @event is InputEventScreenTouch touch )
+		{
+			if ( touch.Pressed )
+			{
+				TouchStartPos = touch.Position;
+				VScrollInitial = ScrollVertical;
+				Velocity = 0;
+			}
+			else
+			{
+				Velocity = TimeSinceLastDragEvent > 0.1f ? 0 : LastDragSpeed.y*0.25f;
+                IsDragging = false;
+            }
+		}
+
+		if ( @event is InputEventScreenDrag drag )
+			if ( IsDragging )
+			{
+				AcceptEvent();
+				TimeSinceLastDragEvent = 0;
+
+				ScrollVertical = VScrollInitial + (int)(TouchStartPos - drag.Position).y;
+				LastDragSpeed = drag.Speed;
+			}
+			else
+			{
+				if ( (TouchStartPos - drag.Position).Length() > 16 )
+				{
+					TouchStartPos = drag.Position;
+					IsDragging = true;
+				}
+			}
+	}
+}
+
+}	// namespace ComparativeAdvantage"
 
 [sub_resource type="ButtonGroup" id=7]
 
@@ -70,11 +152,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 follow_focus = true
 scroll_horizontal_enabled = false
-script = ExtResource( 3 )
+script = SubResource( 8 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Scenario/NinePatchRect/ScrollContainer"]
 margin_right = 360.0
-margin_bottom = 505.0
+margin_bottom = 437.0
 mouse_filter = 1
 size_flags_horizontal = 3
 custom_constants/margin_right = 8
@@ -86,7 +168,7 @@ custom_constants/margin_bottom = 8
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 352.0
-margin_bottom = 497.0
+margin_bottom = 429.0
 
 [node name="MCQuestion" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_right = 344.0
@@ -545,7 +627,6 @@ patch_margin_right = 1
 patch_margin_bottom = 2
 
 [node name="Scenarios" type="MarginContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer"]
-visible = false
 margin_right = 277.0
 margin_bottom = 578.0
 custom_constants/margin_right = 10
@@ -558,7 +639,6 @@ margin_left = 10.0
 margin_top = 20.0
 margin_right = 267.0
 margin_bottom = 568.0
-script = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer"]
 margin_right = 257.0
@@ -570,12 +650,16 @@ script = ExtResource( 13 )
 _SideMenu = NodePath("../../../../../../../../../..")
 
 [node name="0Preface" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 257.0
 margin_bottom = 42.0
 custom_styles/normal = SubResource( 2 )
 text = "0 - Preface"
 
 [node name="1aOutput" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 58.0
 margin_right = 257.0
 margin_bottom = 100.0
@@ -584,6 +668,8 @@ text = "1a - Output"
 
 [node name="1bInput" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
 modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 116.0
 margin_right = 257.0
 margin_bottom = 158.0
@@ -594,6 +680,8 @@ text = "1b - Input"
 
 [node name="2TermsOfTrade" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
 modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 174.0
 margin_right = 257.0
 margin_bottom = 216.0
@@ -604,6 +692,8 @@ text = "2 - Terms of Trade"
 
 [node name="3PracticeQuestions" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
 modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 232.0
 margin_right = 257.0
 margin_bottom = 274.0
@@ -613,6 +703,7 @@ disabled = true
 text = "3 - Practice Questions"
 
 [node name="Settings" type="MarginContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer"]
+visible = false
 margin_right = 277.0
 margin_bottom = 578.0
 script = ExtResource( 18 )
@@ -653,10 +744,9 @@ margin_right = 267.0
 margin_bottom = 517.0
 size_flags_vertical = 3
 theme = ExtResource( 7 )
-script = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer"]
-margin_right = 261.0
+margin_right = 267.0
 margin_bottom = 588.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -687,7 +777,7 @@ margin_right = 261.0
 margin_bottom = 215.0
 theme = ExtResource( 7 )
 custom_constants/line_spacing = 0
-text = "A keyword/phrase that is used to randomize variables and questions in the Practice Questions scenario. Leave blank to use your system's internal time.
+text = "A keyword/phrase that is used to randomize variables and questions in the Practice Questions scenario. Leave blank to use your system's internal time instead.
 
 ( Remember to press the Apply button! )"
 autowrap = true
@@ -708,6 +798,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 186.0
 margin_bottom = 42.0
+mouse_filter = 1
 size_flags_horizontal = 0
 text = "Reset Scenario Progress"
 
@@ -730,6 +821,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 118.0
 margin_bottom = 42.0
+mouse_filter = 1
 size_flags_horizontal = 0
 text = "Reset Glossary"
 
@@ -752,6 +844,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 168.0
 margin_bottom = 42.0
+mouse_filter = 1
 size_flags_horizontal = 0
 text = "Reset Answer Counter"
 

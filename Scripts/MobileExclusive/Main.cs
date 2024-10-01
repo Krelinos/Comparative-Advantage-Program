@@ -52,18 +52,20 @@ public class Main : Control
 
         SaveInfo = new SaveInfo();
         Variables = new Variables();
-        Scenarios = new Scenarios( GetNode( _ScenarioSelectionButtons) );
-        Glossary = new Glossary( GetNode<Terms>(_Terms) );
-
-        ScenarioVisualsParent = GetNode( _ScenarioVisualsParent );
-        ScenarioUIParent = GetNode( _ScenarioUIParent );
-
-        Scenarios.Connect( nameof(Scenarios.ScenarioLoaded), this, nameof(OnScenarioLoaded) );
     }
 
     public override void _Ready()
     {
         base._Ready();
+        
+        Glossary = new Glossary( GetNode<Terms>(_Terms) );
+        Scenarios = new Scenarios( GetNode( _ScenarioSelectionButtons) );
+
+        ScenarioVisualsParent = GetNode( _ScenarioVisualsParent );
+        ScenarioUIParent = GetNode( _ScenarioUIParent );
+
+        Scenarios.Connect( nameof(Scenarios.ScenarioLoaded), this, nameof(OnScenarioLoaded) );
+    
         Glossary.PopulateWithLearnedTerms();
         Scenarios.LoadScenario( "0Preface" );
     }
