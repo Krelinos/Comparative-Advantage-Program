@@ -1050,7 +1050,7 @@ size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
 margin_right = 281.0
-margin_bottom = 340.0
+margin_bottom = 360.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -1060,7 +1060,7 @@ custom_constants/margin_bottom = 10
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 271.0
-margin_bottom = 330.0
+margin_bottom = 350.0
 theme = ExtResource( 7 )
 bbcode_enabled = true
 bbcode_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
