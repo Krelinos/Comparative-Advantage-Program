@@ -1,9 +1,6 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Dialog/Basic.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Dialog/Choice.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Dialog/MCQuestion.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/UI/SrToasty/UI books & more.png" type="Texture" id=6]
 [ext_resource path="res://Assets/UI/MainTheme.tres" type="Theme" id=7]
 [ext_resource path="res://Scenes/Dialog/Dialog.tscn" type="PackedScene" id=8]
@@ -17,89 +14,6 @@
 [ext_resource path="res://Scripts/MobileExclusive/TermDetails.cs" type="Script" id=16]
 [ext_resource path="res://Scripts/TabMenuButton.cs" type="Script" id=17]
 [ext_resource path="res://Scripts/Settings.cs" type="Script" id=18]
-
-[sub_resource type="CSharpScript" id=8]
-script/source = "using Godot;
-using System;
-
-namespace ComparativeAdvantage
-{
-
-/// <summary>
-/// A ScrollContainer that responds to touchscreen InputEvents. Swiping quickly
-/// will continue scrolling the scrollbar as is typical of mobile applications.
-/// </summary>
-public class TouchSwipeScrollContainer : ScrollContainer
-{
-	protected Vector2 TouchStartPos;
-	protected int VScrollInitial;
-	protected float Velocity;
-
-	protected Vector2 LastDragSpeed;
-	protected float TimeSinceLastDragEvent;
-	protected bool IsDragging;
-
-	public override void _Ready()
-	{
-		base._Ready();
-
-		// Since this is touchscreen, scrolling via scrollbar is not required.
-		GetVScrollbar().MouseFilter = MouseFilterEnum.Ignore;
-	}
-
-    public override void _Process(float delta)
-    {
-        base._Process(delta);
-		
-		if ( Math.Abs(400*delta) < Math.Abs(Velocity) )
-			Velocity -= 400*delta * Math.Sign(Velocity);
-		else
-			Velocity -= Velocity;
-
-		ScrollVertical -= (int)(Velocity*0.1f);
-		TimeSinceLastDragEvent += delta;
-    }
-
-    public override void _GuiInput(InputEvent @event)
-	{
-		//base._Input(@event);
-
-		if ( @event is InputEventScreenTouch touch )
-		{
-			if ( touch.Pressed )
-			{
-				TouchStartPos = touch.Position;
-				VScrollInitial = ScrollVertical;
-				Velocity = 0;
-			}
-			else
-			{
-				Velocity = TimeSinceLastDragEvent > 0.1f ? 0 : LastDragSpeed.y*0.25f;
-                IsDragging = false;
-            }
-		}
-
-		if ( @event is InputEventScreenDrag drag )
-			if ( IsDragging )
-			{
-				AcceptEvent();
-				TimeSinceLastDragEvent = 0;
-
-				ScrollVertical = VScrollInitial + (int)(TouchStartPos - drag.Position).y;
-				LastDragSpeed = drag.Speed;
-			}
-			else
-			{
-				if ( (TouchStartPos - drag.Position).Length() > 16 )
-				{
-					TouchStartPos = drag.Position;
-					IsDragging = true;
-				}
-			}
-	}
-}
-
-}	// namespace ComparativeAdvantage"
 
 [sub_resource type="ButtonGroup" id=7]
 
@@ -133,89 +47,6 @@ _Terms = NodePath("RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary")
 [node name="Scenario" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Scenario"]
-visible = false
-margin_right = 360.0
-margin_bottom = 640.0
-size_flags_vertical = 3
-size_flags_stretch_ratio = 4.0
-texture = ExtResource( 1 )
-region_rect = Rect2( 417, 17, 46, 45 )
-patch_margin_left = 7
-patch_margin_top = 6
-patch_margin_right = 7
-patch_margin_bottom = 6
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Scenario/NinePatchRect"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-follow_focus = true
-scroll_horizontal_enabled = false
-script = SubResource( 8 )
-
-[node name="MarginContainer" type="MarginContainer" parent="Scenario/NinePatchRect/ScrollContainer"]
-margin_right = 360.0
-margin_bottom = 437.0
-mouse_filter = 1
-size_flags_horizontal = 3
-custom_constants/margin_right = 8
-custom_constants/margin_top = 8
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 352.0
-margin_bottom = 429.0
-
-[node name="MCQuestion" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_right = 344.0
-margin_bottom = 277.0
-
-[node name="NinePatchRect" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion" index="0"]
-margin_right = 344.0
-margin_bottom = 277.0
-
-[node name="MarginContainer" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion" index="1"]
-margin_right = 344.0
-margin_bottom = 277.0
-
-[node name="VBoxContainer" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer" index="0"]
-margin_right = 338.0
-margin_bottom = 273.0
-
-[node name="RichTextLabel" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer" index="0"]
-margin_right = 332.0
-margin_bottom = 60.0
-
-[node name="MarginContainer" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer" index="1"]
-margin_top = 64.0
-margin_right = 332.0
-margin_bottom = 240.0
-
-[node name="Answers" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer/MarginContainer" index="0"]
-margin_right = 332.0
-margin_bottom = 172.0
-
-[node name="Choice2" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer/MarginContainer/Answers" index="0" instance=ExtResource( 4 )]
-margin_right = 332.0
-margin_bottom = 80.0
-
-[node name="Choice" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer/MarginContainer/Answers" index="1" instance=ExtResource( 4 )]
-margin_top = 88.0
-margin_right = 332.0
-margin_bottom = 168.0
-
-[node name="Submit" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion/MarginContainer/VBoxContainer" index="2"]
-margin_top = 244.0
-margin_bottom = 269.0
-
-[node name="Basic2" parent="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 281.0
-margin_right = 344.0
-margin_bottom = 487.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Scenario"]
 margin_right = 360.0
@@ -1244,5 +1075,4 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 fit_content_height = true
 
-[editable path="Scenario/NinePatchRect/ScrollContainer/MarginContainer/VBoxContainer/MCQuestion"]
 [editable path="Scenario/VBoxContainer/DialogBox"]

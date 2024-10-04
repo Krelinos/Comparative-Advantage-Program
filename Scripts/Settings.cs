@@ -19,7 +19,7 @@ public class Settings : MarginContainer
 
     // Scenario is 0b001;
     // Glossary is 0b010;
-    // Practive is 0b100;
+    // Practice is 0b100;
     private byte ResetPendingFlags = 0b000;
 
     private const String CONFIRMATION_TEXT_MOBILE = "Tap the Apply button to confirm";

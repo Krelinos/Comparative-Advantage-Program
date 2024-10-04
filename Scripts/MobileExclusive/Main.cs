@@ -52,14 +52,13 @@ public class Main : Control
 
         SaveInfo = new SaveInfo();
         Variables = new Variables();
+        Scenarios = new Scenarios( GetNode( _ScenarioSelectionButtons) );
     }
 
     public override void _Ready()
     {
         base._Ready();
-        
         Glossary = new Glossary( GetNode<Terms>(_Terms) );
-        Scenarios = new Scenarios( GetNode( _ScenarioSelectionButtons) );
 
         ScenarioVisualsParent = GetNode( _ScenarioVisualsParent );
         ScenarioUIParent = GetNode( _ScenarioUIParent );
