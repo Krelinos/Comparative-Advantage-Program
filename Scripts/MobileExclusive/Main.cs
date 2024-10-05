@@ -2,8 +2,6 @@ using ComparativeAdvantage.mobile;
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Dynamic;
 
 namespace ComparativeAdvantage
 {
@@ -238,23 +236,38 @@ public class SaveInfo
         saveFile.Open("user://" + SAVE_FILE_PATH, File.ModeFlags.Write);
         saveFile.StoreString( saveJSON );
         saveFile.Close();
+        GD.Print("Saved");
     }
 
     public void Load()
     {
         Godot.File saveFile = new Godot.File();
         if ( saveFile.FileExists("user://" + SAVE_FILE_PATH) )
-            Data = GameService.ParseJSON( SAVE_FILE_PATH, "user://" ).Result as Godot.Collections.Dictionary;
-        else    // Nonexistant save file means this is a new user.
         {
-            Data = new Godot.Collections.Dictionary {};
-            ResetScenarioProgress();
-            ResetLearnedTerms();
-
-            saveFile.Open("user://" + SAVE_FILE_PATH, File.ModeFlags.Write);
-            saveFile.StoreString( JSON.Print(Data, "\t") );
-            saveFile.Close();
+            GD.Print("Loaded an existing save file.");
+            Data = GameService.ParseJSON( SAVE_FILE_PATH, "user://" ).Result as Godot.Collections.Dictionary;
+            
+            // Save files that still are in the old JSON format must be deleted and replaced.
+            if ( Data.Contains("concepts") )
+            {
+                GD.Print("Legacy file detected. Replacing.");
+                var dir = new Directory();
+                GD.Print( "Deleting save file result: " + dir.Remove( "user://" + SAVE_FILE_PATH ).ToString() );
+                GenerateNewSave();
+            }
         }
+        else    // Nonexistant save file means this is a new user.
+            GenerateNewSave();
+    }
+
+    public void GenerateNewSave()
+    {
+        GD.Print("Generated an empty save file.");
+        Data = new Godot.Collections.Dictionary {};
+        ResetScenarioProgress();
+        ResetLearnedTerms();
+
+        Save();
     }
 
     public Godot.Collections.Dictionary GetSolvedQuestionsOfScenario( String scenarioId )

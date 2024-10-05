@@ -32,7 +32,7 @@ pointing/emulate_touch_from_mouse=true
 
 [mono]
 
-project/assembly_name="Comparative Advantage V 2"
+project/assembly_name="Comparative Advantage"
 
 [physics]
 
