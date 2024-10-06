@@ -21,9 +21,6 @@ public class Scenario0Preface : Control
         Credits = GetNode<RichTextLabel>("VBoxContainer/Credits");
     
         Pages = Main.ParseJSON("credits.json", "res://Dialog/").Result as Godot.Collections.Array;
-        // JSON doesn't like BBcode tags using []s and newlines together, so I used <>s temporarily then decode that here.
-        for ( int i = 0; i < Pages.Count; i++ )
-            Pages[i] = (Pages[i] as String).Replace('<', '[').Replace('>', ']');
 
         Prev.Connect( "pressed", this, nameof(ButtonPressed), new Godot.Collections.Array { true } );
         Next.Connect( "pressed", this, nameof(ButtonPressed), new Godot.Collections.Array { false } );
@@ -34,9 +31,14 @@ public class Scenario0Preface : Control
     private void ButtonPressed( bool prev )
     {
         if ( prev )
-            CurrentPage = (CurrentPage - 1) % Pages.Count;
+            CurrentPage += 1;
         else
-            CurrentPage = (CurrentPage + 1) % Pages.Count;
+            CurrentPage -= 1;
+        
+        // 6 Oct 2024 - C# and C++ % operator is remainder and not modulo.
+        // Remainder allows for negative results, modulo only allows positive.
+        // https://stackoverflow.com/questions/1082917/mod-of-negative-number-is-melting-my-brain
+        CurrentPage = ( CurrentPage %= Pages.Count ) < 0 ? CurrentPage + Pages.Count : CurrentPage;
 
         UpdateCreditsAndPageIndicator();
     }
