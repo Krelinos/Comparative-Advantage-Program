@@ -65,6 +65,9 @@ public class Main : Control
     
         Glossary.PopulateWithLearnedTerms();
         Scenarios.LoadScenario( "0Preface" );
+
+        GetNode<SideMenu>("LeftSideMenu").OnScreenResized();
+        GetNode<SideMenuWithExtra>("RightSideMenu").OnScreenResized();
     }
 
     public static JSONParseResult ParseJSON( String fileName, String filePath )

@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/SideMenuWithExtra.cs" type="Script" id=2]
 [ext_resource path="res://Assets/UI/SrToasty/UI books & more.png" type="Texture" id=6]
 [ext_resource path="res://Assets/UI/MainTheme.tres" type="Theme" id=7]
 [ext_resource path="res://Scenes/Dialog/Dialog.tscn" type="PackedScene" id=8]
@@ -718,7 +719,7 @@ size_flags_horizontal = 3
 [node name="RightSideMenu" type="CanvasLayer" parent="."]
 offset = Vector2( 360, 0 )
 transform = Transform2D( 1, 0, 0, 1, 360, 0 )
-script = ExtResource( 11 )
+script = ExtResource( 2 )
 __MenuButton = NodePath("../Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton/MenuButton")
 __Backdrop = NodePath("Backdrop")
 __OffscreenWindow = NodePath("Offscreen")
