@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace ComparativeAdvantage
 {
 
-public class MCQuestion : MarginContainer, IHasDialogLabel
+public class MCQuestion : MarginContainer
 {
     [Signal]
     public delegate void AnswerSubmitted( MCQuestion question, bool solved );
@@ -42,7 +42,7 @@ public class MCQuestion : MarginContainer, IHasDialogLabel
 
     public void Initialize( Godot.Collections.Dictionary questionData )
     {
-        Label.BbcodeText = GameService.Variables.Format( questionData["text"] as String );
+        Label.BbcodeText = Main.Variables.Format( questionData["text"] as String );
         
         QuestionID = questionData["id"] as String;
         CorrectIndex = Convert.ToUInt16( questionData["correct"] );
@@ -54,24 +54,19 @@ public class MCQuestion : MarginContainer, IHasDialogLabel
             Choice choice = _Choice.Instance() as Choice;
             Answers.AddChild( choice );
 
-            choice.SetGroup( ButtonGroup );
-            choice.SetLabel( answer );
+            choice.ButtonGroup = ButtonGroup;
+            choice.LabelText = answer;
 
             Godot.Collections.Array args = new Godot.Collections.Array { i };
             choice.CheckBox.Connect("pressed", this, nameof(_OnChoiceSelected), args );
         }
 
         foreach( String feedback in questionData["feedback"] as Godot.Collections.Array )
-            FeedbackList.Add( GameService.Variables.Format( feedback ) );
+            FeedbackList.Add( Main.Variables.Format( feedback ) );
         
         Solved = (bool)questionData["previouslySolved"];
         if ( Solved )
             Feedback.Visible = true;
-    }
-
-    public void SetLabel( String label )
-    {
-        Label.Text = GameService.Variables.Format( label );
     }
 
     public void _OnChoiceSelected( int index )

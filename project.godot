@@ -10,26 +10,29 @@ config_version=4
 
 [application]
 
-config/name="Comparative Advantage V2"
-run/main_scene="res://Scenes/Game.tscn"
+config/name="Comparative Advantage"
+run/main_scene="res://Scenes/Main.tscn"
 boot_splash/use_filter=false
 config/icon="res://icon.png"
 
 [display]
 
-window/size/width=1366
-window/size/height=617
+window/size/width=360
+window/size/height=640
 window/energy_saving/keep_screen_on=false
-window/stretch/mode="viewport"
-window/stretch/aspect="keep"
+window/stretch/aspect="expand"
 
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [mono]
 
-project/assembly_name="Comparative Advantage V 2"
+project/assembly_name="Comparative Advantage"
 
 [physics]
 

@@ -1,30 +1,32 @@
-using ComparativeAdvantage;
 using Godot;
 using System;
 
-public class MenuDialog : PanelContainer
+namespace ComparativeAdvantage
+{
+
+public class MenuWindow : PanelContainer
 {
     private Button Menu;
     private LineEdit Seed;
     private Button ResetScenario;
     private Button ResetGlossary;
-    private Button ResetQuestions;
+    private Button ResetAnswersCounter;
     private Button ApplyClose;
     private Button Close;
 
     private bool ResetScenarioToggle;
     private bool ResetGlossaryToggle;
-    private bool ResetQuestionsToggle;
+    private bool ResetAnswersCounterToggle;
 
     public override void _Ready()
     {
-        Menu = GetNode<Button>("../HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer/Menu");
+        Menu = GetNode<Button>("../MarginContainer/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer/Menu");
         Node options = GetNode("MarginContainer/MarginContainer/VBoxContainer");
 
         Seed = options.GetNode<LineEdit>("RandomizingSeed/HBoxContainer/LineEdit");
-        ResetScenario = options.GetNode<Button>("ResetScenarioQuestions/Button");
-        ResetGlossary = options.GetNode<Button>("ResetGlossary/Button");
-        ResetQuestions = options.GetNode<Button>("ResetQuestionCounter/Button");
+        ResetScenario = options.GetNode<Button>("ResetScenarioQuestions/MenuButton");
+        ResetGlossary = options.GetNode<Button>("ResetGlossary/MenuButton");
+        ResetAnswersCounter = options.GetNode<Button>("ResetAnswersCounter/MenuButton");
 
         ApplyClose = options.GetNode<Button>("Exit/ApplyClose");
         Close = options.GetNode<Button>("Exit/Close");
@@ -49,9 +51,10 @@ public class MenuDialog : PanelContainer
         ResetGlossary.Text = "Press Apply to confirm";
     }
 
-    private void ResetQuestionsPressed()
+    private void ResetAnswersCounterPressed()
     {
-        ResetQuestionsToggle = true;
+        ResetAnswersCounterToggle = true;
+        ResetAnswersCounter.Text = "Press Apply to confirm";
     }
 
     private void Apply()
@@ -82,8 +85,12 @@ public class MenuDialog : PanelContainer
         Visible = false;
         ResetScenarioToggle = false;
         ResetGlossaryToggle = false;
+        ResetAnswersCounterToggle = false;
 
         ResetScenario.Text = "Reset Scenario Progress";
         ResetGlossary.Text = "Reset Glossary";
+        ResetAnswersCounter.Text = "Reset Answer Counter";
     }
+}
+
 }

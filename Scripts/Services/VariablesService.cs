@@ -37,6 +37,8 @@ public class VariablesService
                     String[] nums = s.Substring( lBracket + 1, rBracket - lBracket - 1 ).Split(",");
                     Variables[ key ] = GameService.RNG.RandiRange( Int32.Parse(nums[0]), Int32.Parse(nums[1]) );
                 }
+                else
+                    Variables[ key ] = Int32.Parse( s );
             }
             
             // Variables can also appear as a Godot Dictionary. Used for variables that depend on previous variables.

@@ -12,15 +12,19 @@ public class DefinitionsList : NinePatchRect
 
     private PackedScene _Definition;
 
+    [Export] private NodePath _DefinitionList;
+    [Export] private NodePath _DialogBox;
+    [Export] private NodePath _TextLabel;
+
     private Godot.Collections.Dictionary Definitions;
 
     private System.Collections.Generic.List<String> UnlockedDefinitions;
 
     public override void _Ready()
     {
-        DefinitionList = GetNode<Control>("MarginContainer/VBoxContainer");
-        DialogBox = GetNode<Control>("../../../../DefinitionDialogBox");
-        TextLabel = DialogBox.GetNode<RichTextLabel>("RichTextLabel");
+        DefinitionList = GetNode<Control>( _DefinitionList );
+        DialogBox = GetNode<Control>( _DialogBox );
+        TextLabel = DialogBox.GetNode<RichTextLabel>( _TextLabel );
 
         Definitions = GameService.ParseJSON("definitions.json", "res://Dialog/").Result as Godot.Collections.Dictionary;
 

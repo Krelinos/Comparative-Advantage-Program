@@ -2,34 +2,37 @@ using ComparativeAdvantage;
 using Godot;
 using System;
 
-public class Scenario1aOutputVisuals : Node
-{
-    private Scenario1aOutputUI UI;
+namespace ComparativeAdvantage {
 
+public class Scenario1aOutputVisuals : Node, IScenarioVisualsOrUI
+{
     private FarmCrops LightCrops;
     private FarmCrops DarkCrops;
+    private Scenario1aOutputUI UI;
 
     public override void _Ready()
     {
         LightCrops = GetNode<FarmCrops>("LightCrops");
         DarkCrops = GetNode<FarmCrops>("DarkCrops");
+        UI = Main.ScenarioUI as Scenario1aOutputUI;
+
+        Initialize();
     }
 
     public void Initialize()
     {
-        UI = GameService.Scenario.CurrentScenarioUI as Scenario1aOutputUI;
-        UI.Connect( "LightCropChanged", this, nameof(UpdateLightCrops) );
-        UI.Connect( "DarkCropChanged", this, nameof(UpdateDarkCrops) );
+        UI.Connect( nameof(Scenario1aOutputUI.LightCropChanged), this, nameof(UpdateLightCrops) );
+        UI.Connect( nameof(Scenario1aOutputUI.DarkCropChanged), this, nameof(UpdateDarkCrops) );
 
-        GameService.Dialog.Connect("DialogVisualsEvent", this, nameof(_OnDialogVisualsEvent));
+        // GameService.Dialog.Connect("DialogVisualsEvent", this, nameof(_OnDialogVisualsEvent));
     
-        LightCrops.Initialize( new Vector2( 20, 0 ), new Vector2( 10, 20 ), 4, 3, 2, 4 );
+        LightCrops.Initialize( 20, 20, 2, 4 );
         LightCrops.UpdateCrops(0.5f);
-        DarkCrops.Initialize( new Vector2( 12.5f, 0 ), new Vector2( 7.5f, 20 ), 6, 3, 8, 16 );
+        DarkCrops.Initialize( 15, 20, 8, 16 );
         DarkCrops.UpdateCrops(0.5f);
     }
 
-    private void _OnDialogVisualsEvent( String visualsName )
+    public void OnDialogVisualsEvent( String visualsName )
     {
         switch ( visualsName )
         {
@@ -53,3 +56,5 @@ public class Scenario1aOutputVisuals : Node
     }
     
 }
+
+} // namespace ComparativeAdvantage

@@ -2,23 +2,25 @@ using Godot;
 using System;
 using System.Globalization;
 
+namespace ComparativeAdvantage {
+
 public class CropSlider : MarginContainer
 {
     [Signal]
     public delegate void SliderValueChanged( float oldVal, float newVal );
 
-    private RichTextLabel PepperLabel;
-    private RichTextLabel TomatoLabel;
-    public Slider Slider { get; private set; }
+    private Label PepperLabel;
+    private Label TomatoLabel;
+    public Slider Slider { get; protected set; }
 
     private float CurrentSliderValue;
-    private int PepperMax;
-    private int TomatoMax;
+    private double PepperMax;
+    private double TomatoMax;
 
     public override void _Ready()
     {
-        PepperLabel = GetNode<RichTextLabel>("VBoxContainer/HBoxContainer2/PepperLabel");
-        TomatoLabel = GetNode<RichTextLabel>("VBoxContainer/HBoxContainer2/TomatoLabel");
+        PepperLabel = GetNode<Label>("VBoxContainer/HBoxContainer2/PepperLabel");
+        TomatoLabel = GetNode<Label>("VBoxContainer/HBoxContainer2/TomatoLabel");
         Slider = GetNode<Slider>("VBoxContainer/HBoxContainer/HSlider");
         PepperMax = 1;
         TomatoMax = 1;
@@ -26,7 +28,7 @@ public class CropSlider : MarginContainer
         Modulate = new Color(1,1,1,0);
     }
 
-    public async void Initialize( int firstCrop, int secondCrop )
+    public async void Initialize( double firstCrop, double secondCrop )
     {
         PepperMax = firstCrop;
         TomatoMax = secondCrop;
@@ -35,7 +37,7 @@ public class CropSlider : MarginContainer
         Slider.Value = 0.5f;
 
         Tween tween = new Tween();
-        tween.InterpolateProperty(this, "rect_position:y", -30, 0, 1.5f, Tween.TransitionType.Quad, Tween.EaseType.Out );
+        tween.InterpolateProperty(this, "rect_position:y", RectPosition.y-30, RectPosition.y, 1.5f, Tween.TransitionType.Quad, Tween.EaseType.Out );
         AddChild(tween);
         tween.Start();
         
@@ -50,7 +52,7 @@ public class CropSlider : MarginContainer
         tween2.QueueFree();
     }
 
-    public async void TweenValueTo( int newVal, bool instant = false )
+    public async void TweenValueTo( float newVal, bool instant = false )
 	{
 		// 26 Dec 2023 - Tween.TransitionType has the 'Trans' part removed.
 		// So instead of Tween.TransitionType.TransLinear, it would be
@@ -67,12 +69,12 @@ public class CropSlider : MarginContainer
     private void UpdateLabels()
     {
         var pepper = CurrentSliderValue * PepperMax;
-        pepper = (float)Math.Round( pepper, 2 );
-        PepperLabel.BbcodeText = $"[center]Peppers[/center]\n[center]{pepper}[/center]";
+        pepper = Math.Round( pepper, 2 );
+        PepperLabel.Text = pepper.ToString();
         
         var tomato = (1 - CurrentSliderValue) * TomatoMax;
-        tomato = (float)Math.Round( tomato, 2 );
-        TomatoLabel.BbcodeText = $"[center]Tomatoes[/center]\n[center]{tomato}[/center]";
+        tomato = Math.Round( tomato, 2 );
+        TomatoLabel.Text = tomato.ToString();
     }
 
     private void _OnSliderUpdate( float value )
@@ -85,3 +87,5 @@ public class CropSlider : MarginContainer
         }
     }
 }
+
+} // namespace ComparativeAdvantage

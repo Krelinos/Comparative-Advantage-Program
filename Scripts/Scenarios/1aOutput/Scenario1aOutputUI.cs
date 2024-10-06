@@ -2,12 +2,14 @@ using ComparativeAdvantage;
 using Godot;
 using System;
 
-public class Scenario1aOutputUI : VBoxContainer
+public class Scenario1aOutputUI : VBoxContainer, IScenarioVisualsOrUI
 {
     [Signal]
     public delegate void LightCropChanged(float oldVal, float newVal);
     [Signal]
     public delegate void DarkCropChanged(float oldVal, float newVal);
+
+    [Export] public NodePath _CropSliderContainer;
 
     private Control CropSliderContainer;
     private CropSlider LightCropSlider;
@@ -17,7 +19,7 @@ public class Scenario1aOutputUI : VBoxContainer
 
     public override void _Ready()
     {
-        CropSliderContainer = GetNode<Control>("HBoxContainer");
+        CropSliderContainer = GetNode<Control>( _CropSliderContainer );
         LightCropSlider = CropSliderContainer.GetNode<CropSlider>("CropSlider");
         DarkCropSlider = CropSliderContainer.GetNode<CropSlider>("CropSlider2");
 
@@ -33,22 +35,25 @@ public class Scenario1aOutputUI : VBoxContainer
         timer.Connect( "timeout", this, nameof(TimerTimeout) );
         // await ToSignal(timer, "timeout");
         // timer.QueueFree();
+        Initialize();
     }
 
     public void Initialize()
     {
-        GameService.Dialog.Connect("DialogVisualsEvent", this, nameof(_OnDialogVisualsEvent));
+        // GameService.Dialog.Connect("DialogVisualsEvent", this, nameof(_OnDialogVisualsEvent));
+        LightCropSlider.TweenValueTo(0.5f, true);
+        DarkCropSlider.TweenValueTo(0.5f, true);
     }
 
-    private void _OnDialogVisualsEvent( String visualsName )
+    public void OnDialogVisualsEvent( String visualsId )
     {
-        switch ( visualsName )
+        switch ( visualsId )
         {
             case "plant_crops_light":
-                LightCropSlider.Initialize( (int)GameService.Variables["light_pepper"], (int)GameService.Variables["light_tomato"] );
+                LightCropSlider.Initialize( Main.Variables["light_pepper"], Main.Variables["light_tomato"] );
                 break;
             case "plant_crops_dark":
-                DarkCropSlider.Initialize( (int)GameService.Variables["dark_pepper"], (int)GameService.Variables["dark_tomato"] );
+                DarkCropSlider.Initialize( Main.Variables["dark_pepper"], Main.Variables["dark_tomato"] );
                 break;
             case "light_only_pepper":
                 LightCropSlider.TweenValueTo(1);
@@ -77,7 +82,7 @@ public class Scenario1aOutputUI : VBoxContainer
 
     public void TimerTimeout()
     {
-        CropSliderContainer.RectSize = CropSliderContainerOriginalSize/2;
-        CropSliderContainer.RectScale = new Vector2(2, 2);
+    //     CropSliderContainer.RectSize = CropSliderContainerOriginalSize/2;
+    //     CropSliderContainer.RectScale = new Vector2(2, 2);
     }
 }

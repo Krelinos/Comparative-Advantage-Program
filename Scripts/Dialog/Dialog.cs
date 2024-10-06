@@ -8,26 +8,27 @@ public class Dialog : NinePatchRect
     [Signal]
     public delegate void DialogVisualsEvent( String visualsId );
 
-    private ScrollContainer DialogScroll;
-    private Control DialogContainer;
-    private Button ContinueButton;
-    private Timer ScrollTimer;
+    protected ScrollContainer DialogScroll;
+    protected Control DialogContainer;
+    protected Button ContinueButton;
+    protected Timer ScrollTimer;
 
-    private String NextDialogID;
-    private bool IsDialogPaused;
+    protected String NextDialogID;
+    protected bool IsDialogPaused;
 
-    private const String CONTINUE_CONTINUE = "Click here or press space to continue.";
-    private const String CONTINUE_PAUSE    = "Solve the above question to continue.";
-    private const String CONTINUE_END      = "- End of scenario -";
+    protected const String CONTINUE_CONTINUE = "Click here or press space to continue.";
+    protected const String CONTINUE_CONTINUE_MOBILE = "Tap here to continue.";
+    protected const String CONTINUE_PAUSE    = "Solve the above question to continue.";
+    protected const String CONTINUE_END      = "- End of scenario -";
 
-    private PackedScene _DialogBasic;
-    private PackedScene _DialogMCQuestion;
+    protected PackedScene _DialogBasic;
+    protected PackedScene _DialogMCQuestion;
 
     public override void _Ready()
     {
-        DialogScroll = GetNode<ScrollContainer>("MarginContainer/ScrollContainer");
-        DialogContainer = GetNode<Control>("MarginContainer/ScrollContainer/VBoxContainer");
-        ContinueButton = GetNode<Button>("MarginContainer2/Continue");
+        DialogScroll = GetNode<ScrollContainer>("VBoxContainer/MarginContainer/ScrollContainer");
+        DialogContainer = GetNode<Control>("VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer");
+        ContinueButton = GetNode<Button>("VBoxContainer/MarginContainer2/Continue");
         ScrollTimer = GetNode<Timer>("ScrollTimer");
         
         NextDialogID = "";
@@ -36,45 +37,51 @@ public class Dialog : NinePatchRect
         _DialogBasic = GD.Load<PackedScene>("res://Scenes/Dialog/Basic.tscn");
         _DialogMCQuestion = GD.Load<PackedScene>("res://Scenes/Dialog/MCQuestion.tscn");
 
-        // Restart();
+        Main.Scenarios.Connect( nameof(Scenarios.ScenarioLoaded), this, nameof(OnScenarioLoaded) );
+
+        Restart();
     }
 
     public void ProceedToNextDialog()
     {
-        Godot.Collections.Dictionary dialog = GameService.Scenario.GetDialog( NextDialogID );
+        Godot.Collections.Dictionary dialog = Main.Scenarios.PopDialog();
         
-        // next
-        try
+        // flags
+        // try
+        // {
+        //     NextDialogID = dialog["flags"] as String;
+        // }
+        // catch( KeyNotFoundException ) { }
+
+        if ( dialog.Contains("flags") && dialog["flags"] is String flags )
         {
-            NextDialogID = dialog["next"] as String;
-            GD.Print( NextDialogID );
-        }
-        catch( KeyNotFoundException )
-        {
-            NextDialogID = "END";
-            Pause();
+            var flagsList = flags.Split(' ');
+            foreach ( String flag in flagsList )
+                switch( flag )
+                {
+                    case "end":
+                        Pause( true );
+                        break;
+                }
         }
 
         // text
-        try
+        if ( dialog.Contains("text") && dialog["text"] is String label )
         {
-            String label = dialog["text"] as String;
             DialogBasic dialogBasic = _DialogBasic.Instance() as DialogBasic;
             
             DialogContainer.AddChild( dialogBasic );
             // await ToSignal( dialogBasic, "ready" );
-            dialogBasic.SetLabel( label );
+            dialogBasic.Text = label;
         }
-        catch( KeyNotFoundException ) { }
 
         // question
-        try
+        if( dialog.Contains("question") && dialog["question"] is String questionId )
         {
-            String questionId = dialog["question"] as String;
-            Godot.Collections.Dictionary question = GameService.Scenario.GetQuestion( questionId );
+            var question = Main.Scenarios.Questions[ questionId ] as Godot.Collections.Dictionary;
             question["id"] = questionId;
 
-            if ( GameService.Save.GetSolvedQuestionsOfScenario( GameService.Scenario.CurrentScenario ).Contains( questionId ) )
+            if ( Main.SaveInfo.QuestionsSolved.Contains( questionId ) )
                 question["previouslySolved"] = true;
             else
             {
@@ -89,33 +96,28 @@ public class Dialog : NinePatchRect
             if ( !(bool)question["previouslySolved"] )
                 mcQuestion.Connect("AnswerSubmitted", this, nameof(AnswerSubmitted), null, 0);    
         }
-        catch( KeyNotFoundException ) { }
 
         // visuals
-        try
+        if ( dialog.Contains("visuals") && dialog["visuals"] is String visualsId )
         {
-            String visualsId = dialog["visuals"] as String;
             EmitSignal(nameof(DialogVisualsEvent), visualsId);
         }
-        catch( KeyNotFoundException ) { }
 
-        // concept
-        try
+        // term
+        if ( dialog.Contains("term") && dialog["term"] is String termId )
         {
-            String conceptId = dialog["concept"] as String;
-            GameService.DefinitionsList.AppendDefinition( conceptId );
+            Main.Glossary.AppendTerm( termId );
         }
-        catch( KeyNotFoundException ) { }
 
         ScrollToBottom();
     }
 
-    public void Pause()
+    public void Pause( bool isEndOfScenario = false )
     {
         IsDialogPaused = true;
         ContinueButton.Disabled = true;
 
-        if ( NextDialogID == "END" )
+        if ( isEndOfScenario )
             ContinueButton.Text = CONTINUE_END;
         else
             ContinueButton.Text = CONTINUE_PAUSE;
@@ -125,7 +127,10 @@ public class Dialog : NinePatchRect
     {
         IsDialogPaused = false;
         ContinueButton.Disabled = false;
-        ContinueButton.Text = CONTINUE_CONTINUE;
+        if ( Main.IsClientOnDesktop )
+            ContinueButton.Text = CONTINUE_CONTINUE;
+        else
+            ContinueButton.Text = CONTINUE_CONTINUE_MOBILE;
     }
 
     public void Restart()
@@ -133,7 +138,6 @@ public class Dialog : NinePatchRect
         foreach( Node child in DialogContainer.GetChildren() )
             child.QueueFree();
         
-        NextDialogID = GameService.Scenario.GetStartID();
         Resume();
     }
 
@@ -150,10 +154,20 @@ public class Dialog : NinePatchRect
 
         if ( solved )
         {
-            GameService.Save.UserSolvedQuestionOfScenario( GameService.Scenario.CurrentScenario, question.QuestionID );
+            Main.SaveInfo.QuestionsSolved.Add( question.QuestionID );
+            Main.SaveInfo.Save();
             Resume();
             question.Disconnect("AnswerSubmitted", this, nameof(AnswerSubmitted));
         }
+    }
+
+    private void OnScenarioLoaded( String scenarioName )
+    {
+        Restart();
+        ProceedToNextDialog();
+        var scenarioVisualsOrUI = Main.ScenarioVisuals as IScenarioVisualsOrUI;
+        Connect( nameof(DialogVisualsEvent), Main.ScenarioVisuals, nameof( scenarioVisualsOrUI.OnDialogVisualsEvent ) );
+        Connect( nameof(DialogVisualsEvent), Main.ScenarioUI, nameof( scenarioVisualsOrUI.OnDialogVisualsEvent ) );
     }
 
     public void _OnContinuePressed()

@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
+[ext_resource path="res://Assets/Font/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scenes/Dialog/Basic.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Dialog/MCQuestion.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=4]
 [ext_resource path="res://Assets/UI/MainTheme.tres" type="Theme" id=5]
+[ext_resource path="res://Assets/UI/SrToasty/UI books & more.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/Dialog/Dialog.cs" type="Script" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -22,6 +24,9 @@ scancode = 32
 [sub_resource type="ShortCut" id=6]
 shortcut = SubResource( 5 )
 
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 1 )
+
 [node name="Dialog" type="NinePatchRect"]
 margin_right = 615.0
 margin_bottom = 612.0
@@ -36,70 +41,91 @@ patch_margin_right = 6
 patch_margin_bottom = 5
 script = ExtResource( 7 )
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="ScrollTimer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_right = 615.0
+margin_bottom = 568.0
+size_flags_vertical = 3
 custom_constants/margin_right = 6
 custom_constants/margin_top = 5
 custom_constants/margin_left = 6
-custom_constants/margin_bottom = 32
+custom_constants/margin_bottom = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer"]
 margin_left = 6.0
 margin_top = 5.0
 margin_right = 609.0
-margin_bottom = 580.0
+margin_bottom = 568.0
 theme = ExtResource( 5 )
 scroll_horizontal_enabled = false
+scroll_deadzone = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/ScrollContainer"]
 margin_right = 603.0
-margin_bottom = 235.0
+margin_bottom = 221.0
 size_flags_horizontal = 3
 custom_constants/separation = 4
 
-[node name="MCQuestion" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 3 )]
+[node name="MCQuestion" parent="VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 3 )]
 margin_right = 603.0
-margin_bottom = 85.0
+margin_bottom = 89.0
 
-[node name="Basic" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 89.0
+[node name="Basic" parent="VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 93.0
 margin_right = 603.0
-margin_bottom = 235.0
+margin_bottom = 221.0
 
-[node name="MarginContainer2" type="MarginContainer" parent="."]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -30.0
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 572.0
+margin_right = 615.0
+margin_bottom = 612.0
+rect_min_size = Vector2( 0, 36 )
 custom_constants/margin_right = 5
-custom_constants/margin_top = 0
 custom_constants/margin_left = 5
 custom_constants/margin_bottom = 4
 
-[node name="Continue" type="Button" parent="MarginContainer2"]
+[node name="Continue" type="Button" parent="VBoxContainer/MarginContainer2"]
 margin_left = 5.0
-margin_top = 2.0
 margin_right = 610.0
-margin_bottom = 26.0
-rect_min_size = Vector2( 0, 24 )
+margin_bottom = 36.0
+rect_min_size = Vector2( 0, 36 )
 size_flags_vertical = 8
 theme = ExtResource( 5 )
-custom_colors/font_color_disabled = Color( 0.643137, 0.643137, 0.643137, 1 )
-custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 4 )
 shortcut_in_tooltip = false
 shortcut = SubResource( 6 )
-text = "Click here or press space to continue."
+text = "Naomi~! :3c"
 
-[node name="ScrollTimer" type="Timer" parent="."]
-wait_time = 0.001
-one_shot = true
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/MarginContainer2/Continue"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+region_rect = Rect2( 352, 304, 32, 16 )
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
 
-[connection signal="pressed" from="MarginContainer2/Continue" to="." method="_OnContinuePressed"]
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer2/Continue/NinePatchRect"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "Tap here to continue"
+align = 1
+valign = 1
+
+[connection signal="pressed" from="VBoxContainer/MarginContainer2/Continue" to="." method="_OnContinuePressed"]

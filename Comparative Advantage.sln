@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comparative Advantage V 2", "Comparative Advantage V 2.csproj", "{065BD7BF-89DA-454B-ACFC-DAA2EA1FE68F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comparative Advantage", "Comparative Advantage.csproj", "{065BD7BF-89DA-454B-ACFC-DAA2EA1FE68F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

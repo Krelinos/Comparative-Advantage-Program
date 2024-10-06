@@ -6,6 +6,11 @@ namespace ComparativeAdvantage
 {
 public class GameService : Node
 {
+	[Export] protected NodePath ScenarioVisualsPath;
+	[Export] protected NodePath ScenarioUIPath;
+	[Export] protected NodePath DialogPath;
+	[Export] protected NodePath DefinitionsPath;
+
 	public static Godot.RandomNumberGenerator RNG { get; private set; }
 	public static SaveService Save { get; private set; }
 	public static ScenarioService Scenario { get; private set; }
@@ -15,13 +20,11 @@ public class GameService : Node
 	public static Dialog Dialog { get; private set; }
 	public static DefinitionsList DefinitionsList { get; private set; }
 
-	private static Node ScenariosList;
-
     public GameService()
 	{
 		RNG = new RandomNumberGenerator
 		{
-			Seed = (ulong)$"vivienne, until you call again".GetHashCode(),
+			Seed = (ulong)$"until you call again, vivienne".GetHashCode(),
 			State = 0
 		};
 
@@ -32,26 +35,17 @@ public class GameService : Node
 
 	public override void _Ready()
 	{
-		ScenarioVisualsContainer = GetNode("ScenarioVisuals");
-		ScenarioUIContainer = GetNode("UserInterface/HBoxContainer/ScenarioUI");
+		ScenarioVisualsContainer = GetNode( ScenarioVisualsPath );
+		ScenarioUIContainer = GetNode( ScenarioUIPath );
 		
 		Save.LoadSaveFile();
 
-		Dialog = GetNode<Dialog>("UserInterface/HBoxContainer/Dialog");
-		DefinitionsList = GetNode<DefinitionsList>("UserInterface/HBoxContainer/VBoxContainer/Definitions");
+		Dialog = GetNode<Dialog>( DialogPath );
+		DefinitionsList = GetNode<DefinitionsList>( DefinitionsPath );
 
 		DefinitionsList.Initialize();
 
         OnScenarioButtonPressed("0Preface");
-		
-        // ScenariosList = GetNode("UserInterface/HBoxContainer/VBoxContainer/ScenariosMenu/MarginContainer/VBoxContainer");
-		// foreach ( Button n in ScenariosList.GetChildren() )
-		// {
-		// 	var args = new Godot.Collections.Array(n.Name);
-		// 	n.Connect("pressed", this, nameof(OnScenarioButtonPressed), args);
-		// }
-
-		
 	}
 
 	public static JSONParseResult ParseJSON( String fileName, String filePath )
@@ -83,6 +77,7 @@ public class GameService : Node
 		var visuals = Scenario.CurrentScenarioVisuals as Scenario1aOutputVisuals;
 		if ( visuals != null )
 			visuals.Initialize();
+		
 		var ui = Scenario.CurrentScenarioUI as Scenario1aOutputUI;
 		if ( ui != null )
 			ui.Initialize();

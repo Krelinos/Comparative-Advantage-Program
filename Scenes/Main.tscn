@@ -1,0 +1,1078 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Assets/UI/SrToasty/UI.png" type="Texture" id=1]
+[ext_resource path="res://Assets/UI/SrToasty/UI books & more.png" type="Texture" id=6]
+[ext_resource path="res://Assets/UI/MainTheme.tres" type="Theme" id=7]
+[ext_resource path="res://Scenes/Dialog/Dialog.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/MobileExclusive/Main.cs" type="Script" id=9]
+[ext_resource path="res://Scenes/MenuButton.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scripts/SideMenu.cs" type="Script" id=11]
+[ext_resource path="res://Scripts/MobileExclusive/Terms.cs" type="Script" id=12]
+[ext_resource path="res://Scripts/ScenariosContainer.cs" type="Script" id=13]
+[ext_resource path="res://Assets/Font/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://Assets/Font/Roboto/Roboto-Bold.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://Scripts/MobileExclusive/TermDetails.cs" type="Script" id=16]
+[ext_resource path="res://Scripts/TabMenuButton.cs" type="Script" id=17]
+[ext_resource path="res://Scripts/Settings.cs" type="Script" id=18]
+
+[sub_resource type="ButtonGroup" id=7]
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 1 )
+region_rect = Rect2( 337, 129, 14, 14 )
+margin_left = 7.0
+margin_right = 7.0
+margin_top = 6.0
+margin_bottom = 7.0
+
+[sub_resource type="StyleBoxLine" id=3]
+thickness = 2
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 18
+font_data = ExtResource( 15 )
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+_ScenarioSelectionButtons = NodePath("LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer/VBoxContainer")
+_ScenarioVisualsParent = NodePath("Scenario/VBoxContainer/ScenarioVisuals/CenterContainer/Center")
+_ScenarioUIParent = NodePath("Scenario/VBoxContainer/ScenarioVisuals/MarginContainer")
+_Terms = NodePath("RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary")
+
+[node name="Scenario" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scenario"]
+margin_right = 360.0
+margin_bottom = 640.0
+custom_constants/separation = 0
+
+[node name="SideMenuButtons" type="HBoxContainer" parent="Scenario/VBoxContainer"]
+margin_right = 360.0
+margin_bottom = 43.0
+size_flags_horizontal = 9
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.35
+alignment = 1
+
+[node name="LeftSideMenuButton" type="MarginContainer" parent="Scenario/VBoxContainer/SideMenuButtons"]
+margin_right = 68.0
+margin_bottom = 43.0
+rect_min_size = Vector2( 0, 42 )
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 6
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton"]
+show_behind_parent = true
+margin_top = 6.0
+margin_right = 68.0
+margin_bottom = 43.0
+texture = ExtResource( 6 )
+region_rect = Rect2( 358, 336, 25, 16 )
+patch_margin_left = 11
+patch_margin_top = 5
+patch_margin_right = 7
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton"]
+margin_top = 6.0
+margin_right = 68.0
+margin_bottom = 43.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 6
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 6
+
+[node name="MenuLabel" type="Button" parent="Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton/MarginContainer"]
+modulate = Color( 0.941176, 0.941176, 0.941176, 1 )
+margin_left = 8.0
+margin_top = 6.0
+margin_right = 60.0
+margin_bottom = 31.0
+size_flags_horizontal = 3
+theme = ExtResource( 7 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+disabled = true
+text = "Menu"
+flat = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton/MarginContainer/MenuLabel"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+region_rect = Rect2( 337, 129, 14, 14 )
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 7
+patch_margin_bottom = 7
+
+[node name="MenuButton" type="Button" parent="Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton"]
+margin_top = 6.0
+margin_right = 68.0
+margin_bottom = 43.0
+flat = true
+
+[node name="RightSideMenuButton" type="MarginContainer" parent="Scenario/VBoxContainer/SideMenuButtons"]
+margin_left = 269.0
+margin_right = 360.0
+margin_bottom = 43.0
+grow_horizontal = 0
+rect_min_size = Vector2( 0, 42 )
+size_flags_horizontal = 9
+size_flags_vertical = 0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 6
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton"]
+show_behind_parent = true
+margin_top = 6.0
+margin_right = 91.0
+margin_bottom = 43.0
+texture = ExtResource( 6 )
+region_rect = Rect2( 353, 336, 25, 16 )
+patch_margin_left = 11
+patch_margin_top = 5
+patch_margin_right = 7
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton"]
+show_behind_parent = true
+margin_top = 6.0
+margin_right = 91.0
+margin_bottom = 43.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 6
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 6
+
+[node name="MenuLabel" type="Button" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton/MarginContainer"]
+modulate = Color( 0.941176, 0.941176, 0.941176, 1 )
+margin_left = 8.0
+margin_top = 6.0
+margin_right = 83.0
+margin_bottom = 31.0
+mouse_filter = 1
+size_flags_horizontal = 11
+theme = ExtResource( 7 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+disabled = true
+text = "Glossary"
+flat = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton/MarginContainer/MenuLabel"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+region_rect = Rect2( 337, 129, 14, 14 )
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 7
+patch_margin_bottom = 7
+
+[node name="MenuButton" type="Button" parent="Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton"]
+margin_top = 6.0
+margin_right = 91.0
+margin_bottom = 43.0
+theme = ExtResource( 7 )
+flat = true
+
+[node name="ScenarioVisuals" type="MarginContainer" parent="Scenario/VBoxContainer"]
+show_behind_parent = true
+margin_top = 43.0
+margin_right = 360.0
+margin_bottom = 318.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Scenario/VBoxContainer/ScenarioVisuals"]
+margin_right = 360.0
+margin_bottom = 275.0
+
+[node name="Center" type="Control" parent="Scenario/VBoxContainer/ScenarioVisuals/CenterContainer"]
+margin_left = 180.0
+margin_top = 137.0
+margin_right = 180.0
+margin_bottom = 137.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Scenario/VBoxContainer/ScenarioVisuals"]
+margin_right = 360.0
+margin_bottom = 275.0
+
+[node name="DialogBox" parent="Scenario/VBoxContainer" instance=ExtResource( 8 )]
+margin_top = 318.0
+margin_right = 360.0
+margin_bottom = 640.0
+size_flags_stretch_ratio = 3.5
+
+[node name="MarginContainer" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer" index="0"]
+margin_right = 360.0
+margin_bottom = 278.0
+
+[node name="ScrollContainer" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer/MarginContainer" index="0"]
+margin_right = 354.0
+margin_bottom = 278.0
+
+[node name="VBoxContainer" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer/MarginContainer/ScrollContainer" index="0"]
+margin_right = 342.0
+margin_bottom = 321.0
+
+[node name="MCQuestion" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer" index="0"]
+margin_right = 342.0
+margin_bottom = 109.0
+
+[node name="Basic" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer" index="1"]
+margin_top = 113.0
+margin_right = 342.0
+margin_bottom = 321.0
+
+[node name="MarginContainer2" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer" index="1"]
+margin_top = 282.0
+margin_right = 360.0
+margin_bottom = 322.0
+
+[node name="Continue" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer/MarginContainer2" index="0"]
+margin_right = 355.0
+
+[node name="LeftSideMenu" type="CanvasLayer" parent="."]
+offset = Vector2( -360, 0 )
+transform = Transform2D( 1, 0, 0, 1, -360, 0 )
+script = ExtResource( 11 )
+__MenuButton = NodePath("../Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton/MenuButton")
+__Backdrop = NodePath("Backdrop")
+__OffscreenWindow = NodePath("Offscreen")
+__OnscreenWindow = NodePath("../Scenario/VBoxContainer/SideMenuButtons/LeftSideMenuButton")
+__Menu = NodePath("Offscreen/Menu")
+__BackButton = NodePath("Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Back")
+OtherSideMenu = NodePath("../RightSideMenu")
+
+[node name="Backdrop" type="Button" parent="LeftSideMenu"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 2.0
+anchor_bottom = 1.0
+mouse_filter = 2
+flat = true
+
+[node name="Panel" type="Panel" parent="LeftSideMenu/Backdrop"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Offscreen" type="HBoxContainer" parent="LeftSideMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Padding" type="MarginContainer" parent="LeftSideMenu/Offscreen"]
+margin_right = 65.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+
+[node name="Menu" type="MarginContainer" parent="LeftSideMenu/Offscreen"]
+margin_left = 69.0
+margin_right = 360.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.45
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LeftSideMenu/Offscreen/Menu"]
+margin_right = 291.0
+margin_bottom = 640.0
+rect_min_size = Vector2( 0, 35 )
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.35
+texture = ExtResource( 1 )
+region_rect = Rect2( 423, 17, 40, 46 )
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 2
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 8
+
+[node name="TabContainer" type="TabContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer"]
+visible = false
+margin_left = 6.0
+margin_top = 2.0
+margin_right = 283.0
+margin_bottom = 632.0
+size_flags_horizontal = 3
+theme = ExtResource( 7 )
+tab_align = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer"]
+margin_left = 6.0
+margin_top = 2.0
+margin_right = 283.0
+margin_bottom = 632.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer"]
+margin_right = 277.0
+margin_bottom = 48.0
+
+[node name="Scenarios" type="Button" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+modulate = Color( 0.882353, 0.882353, 0.882353, 1 )
+margin_right = 96.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+theme = ExtResource( 7 )
+toggle_mode = true
+pressed = true
+group = SubResource( 7 )
+text = "Scenarios"
+flat = true
+script = ExtResource( 17 )
+_TabContainer = NodePath("../../NinePatchRect/MarginContainer/Scenarios")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Scenarios"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 4.0
+margin_bottom = -4.0
+texture = ExtResource( 6 )
+region_rect = Rect2( 352, 272, 32, 16 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Settings" type="Button" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+modulate = Color( 0.882353, 0.882353, 0.882353, 1 )
+margin_left = 100.0
+margin_right = 196.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+theme = ExtResource( 7 )
+toggle_mode = true
+group = SubResource( 7 )
+text = "Settings"
+flat = true
+script = ExtResource( 17 )
+_TabContainer = NodePath("../../NinePatchRect/MarginContainer/Settings")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Settings"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 4.0
+margin_bottom = -4.0
+texture = ExtResource( 6 )
+region_rect = Rect2( 352, 272, 32, 16 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Back" type="Button" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 213.0
+margin_right = 277.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 64, 48 )
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.8
+theme = ExtResource( 7 )
+flat = true
+align = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Back"]
+show_behind_parent = true
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -20.0
+margin_right = 65.0
+margin_bottom = 21.0
+texture = ExtResource( 6 )
+region_rect = Rect2( 352, 304, 32, 16 )
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+
+[node name="Label" type="Label" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Back/NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.5
+margin_top = -20.5
+margin_right = 32.5
+margin_bottom = 20.5
+theme = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Back"
+align = 1
+valign = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 277.0
+margin_bottom = 630.0
+size_flags_vertical = 3
+texture = ExtResource( 1 )
+region_rect = Rect2( 778, 265, 12, 14 )
+patch_margin_left = 1
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer"]
+margin_right = 277.0
+margin_bottom = 578.0
+texture = ExtResource( 1 )
+region_rect = Rect2( 778, 265, 12, 14 )
+patch_margin_left = 1
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="Scenarios" type="MarginContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer"]
+margin_right = 277.0
+margin_bottom = 578.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 20
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios"]
+margin_left = 10.0
+margin_top = 20.0
+margin_right = 267.0
+margin_bottom = 568.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer"]
+margin_right = 257.0
+margin_bottom = 548.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 16
+script = ExtResource( 13 )
+_SideMenu = NodePath("../../../../../../../../../..")
+
+[node name="0Preface" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 257.0
+margin_bottom = 42.0
+custom_styles/normal = SubResource( 2 )
+text = "0 - Preface"
+
+[node name="1aOutput" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 58.0
+margin_right = 257.0
+margin_bottom = 100.0
+custom_styles/normal = SubResource( 2 )
+text = "1a - Output"
+
+[node name="1bInput" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
+modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 116.0
+margin_right = 257.0
+margin_bottom = 158.0
+focus_mode = 0
+custom_styles/normal = SubResource( 2 )
+disabled = true
+text = "1b - Input"
+
+[node name="2TermsOfTrade" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
+modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 174.0
+margin_right = 257.0
+margin_bottom = 216.0
+focus_mode = 0
+custom_styles/normal = SubResource( 2 )
+disabled = true
+text = "2 - Terms of Trade"
+
+[node name="3PracticeQuestions" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
+modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 232.0
+margin_right = 257.0
+margin_bottom = 274.0
+focus_mode = 0
+custom_styles/normal = SubResource( 2 )
+disabled = true
+text = "3 - Practice Questions"
+
+[node name="Settings" type="MarginContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer"]
+visible = false
+margin_right = 277.0
+margin_bottom = 578.0
+script = ExtResource( 18 )
+_Seed = NodePath("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/RandomizingSeed/LineEdit")
+_ResetScenario = NodePath("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Reset_Scenario_Progress/MenuButton")
+_ResetGlossary = NodePath("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Reset_Glossary/MenuButton")
+_ResetPractice = NodePath("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Reset_Answer_Counter/MenuButton")
+_Apply = NodePath("MarginContainer/VBoxContainer/Confirmation/ApplyClose")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings"]
+margin_right = 277.0
+margin_bottom = 578.0
+texture = ExtResource( 1 )
+region_rect = Rect2( 778, 265, 12, 14 )
+patch_margin_left = 1
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings"]
+margin_right = 277.0
+margin_bottom = 578.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 5
+custom_constants/margin_top = 10
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer"]
+margin_left = 5.0
+margin_top = 10.0
+margin_right = 272.0
+margin_bottom = 573.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer"]
+margin_right = 267.0
+margin_bottom = 517.0
+size_flags_vertical = 3
+theme = ExtResource( 7 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer"]
+margin_right = 267.0
+margin_bottom = 588.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 16
+
+[node name="RandomizingSeed" type="VBoxContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_right = 261.0
+margin_bottom = 215.0
+
+[node name="Label" type="Label" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/RandomizingSeed"]
+margin_right = 261.0
+margin_bottom = 19.0
+theme = ExtResource( 7 )
+text = "Randomizing Seed"
+
+[node name="LineEdit" type="LineEdit" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/RandomizingSeed"]
+margin_top = 23.0
+margin_right = 261.0
+margin_bottom = 59.0
+rect_min_size = Vector2( 0, 36 )
+theme = ExtResource( 7 )
+align = 1
+placeholder_text = "Enter keyword/phrase here"
+
+[node name="Label2" type="Label" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/RandomizingSeed"]
+margin_top = 63.0
+margin_right = 261.0
+margin_bottom = 215.0
+theme = ExtResource( 7 )
+custom_constants/line_spacing = 0
+text = "A keyword/phrase that is used to randomize variables and questions in the Practice Questions scenario. Leave blank to use your system's internal time instead.
+
+( Remember to press the Apply button! )"
+autowrap = true
+
+[node name="Panel" type="Panel" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 231.0
+margin_right = 261.0
+margin_bottom = 231.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Reset_Scenario_Progress" type="VBoxContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 247.0
+margin_right = 261.0
+margin_bottom = 350.0
+
+[node name="MenuButton" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Reset_Scenario_Progress" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 186.0
+margin_bottom = 42.0
+mouse_filter = 1
+size_flags_horizontal = 0
+text = "Reset Scenario Progress"
+
+[node name="Label" type="Label" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Reset_Scenario_Progress"]
+margin_top = 46.0
+margin_right = 261.0
+margin_bottom = 103.0
+theme = ExtResource( 7 )
+custom_constants/line_spacing = 0
+text = "Previously solved scenario questions will require solving again to progress past them."
+autowrap = true
+
+[node name="Reset_Glossary" type="VBoxContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 366.0
+margin_right = 261.0
+margin_bottom = 469.0
+
+[node name="MenuButton" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Reset_Glossary" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 118.0
+margin_bottom = 42.0
+mouse_filter = 1
+size_flags_horizontal = 0
+text = "Reset Glossary"
+
+[node name="Label" type="Label" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Reset_Glossary"]
+margin_top = 46.0
+margin_right = 261.0
+margin_bottom = 103.0
+theme = ExtResource( 7 )
+custom_constants/line_spacing = 0
+text = "Previously learned glossary concepts must be rediscovered in the scenarios."
+autowrap = true
+
+[node name="Reset_Answer_Counter" type="VBoxContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 485.0
+margin_right = 261.0
+margin_bottom = 588.0
+
+[node name="MenuButton" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Reset_Answer_Counter" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 168.0
+margin_bottom = 42.0
+mouse_filter = 1
+size_flags_horizontal = 0
+text = "Reset Answer Counter"
+
+[node name="Label" type="Label" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Reset_Answer_Counter"]
+margin_top = 46.0
+margin_right = 261.0
+margin_bottom = 103.0
+theme = ExtResource( 7 )
+custom_constants/line_spacing = 0
+text = "Correct & incorrect counters for Practice Questions will be reset to zero."
+autowrap = true
+
+[node name="Confirmation" type="HBoxContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer"]
+margin_top = 521.0
+margin_right = 267.0
+margin_bottom = 563.0
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/Confirmation"]
+margin_right = 64.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+
+[node name="ApplyClose" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/Confirmation" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 68.0
+margin_right = 198.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "Apply"
+
+[node name="MarginContainer2" type="MarginContainer" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Settings/MarginContainer/VBoxContainer/Confirmation"]
+margin_left = 202.0
+margin_right = 267.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+
+[node name="RightSideMenu" type="CanvasLayer" parent="."]
+offset = Vector2( 360, 0 )
+transform = Transform2D( 1, 0, 0, 1, 360, 0 )
+script = ExtResource( 11 )
+__MenuButton = NodePath("../Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton/MenuButton")
+__Backdrop = NodePath("Backdrop")
+__OffscreenWindow = NodePath("Offscreen")
+__OnscreenWindow = NodePath("../Scenario/VBoxContainer/SideMenuButtons/RightSideMenuButton")
+__Menu = NodePath("Offscreen/Menu")
+__BackButton = NodePath("Offscreen/Menu/VBoxContainer/Glossary/MarginContainer/VBoxContainer/HBoxContainer/Back")
+OtherSideMenu = NodePath("../LeftSideMenu")
+IsRightOriented = true
+
+[node name="Backdrop" type="Button" parent="RightSideMenu"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = -1.0
+anchor_top = -0.002
+anchor_bottom = 1.0
+margin_top = 1.28
+mouse_filter = 2
+flat = true
+
+[node name="Panel" type="Panel" parent="RightSideMenu/Backdrop"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Offscreen" type="HBoxContainer" parent="RightSideMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Menu" type="MarginContainer" parent="RightSideMenu/Offscreen"]
+margin_right = 293.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.45
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightSideMenu/Offscreen/Menu"]
+margin_right = 293.0
+margin_bottom = 640.0
+
+[node name="Glossary" type="NinePatchRect" parent="RightSideMenu/Offscreen/Menu/VBoxContainer"]
+margin_right = 293.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 1 )
+region_rect = Rect2( 465, 65, 14, 14 )
+patch_margin_left = 6
+patch_margin_top = 5
+patch_margin_right = 6
+patch_margin_bottom = 5
+script = ExtResource( 12 )
+__TermsList = NodePath("MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer")
+__TermDetails = NodePath("../../../../TermDetails")
+
+[node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 6
+custom_constants/margin_top = 2
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary/MarginContainer"]
+margin_left = 6.0
+margin_top = 2.0
+margin_right = 287.0
+margin_bottom = 634.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary/MarginContainer/VBoxContainer"]
+margin_right = 281.0
+margin_bottom = 48.0
+
+[node name="Back" type="Button" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 64, 48 )
+theme = ExtResource( 7 )
+flat = true
+align = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary/MarginContainer/VBoxContainer/HBoxContainer/Back"]
+show_behind_parent = true
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -20.0
+margin_right = 65.0
+margin_bottom = 21.0
+texture = ExtResource( 6 )
+region_rect = Rect2( 352, 304, 32, 16 )
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+
+[node name="Label" type="Label" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary/MarginContainer/VBoxContainer/HBoxContainer/Back/NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.5
+margin_top = -20.5
+margin_right = 32.5
+margin_bottom = 20.5
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "Back"
+align = 1
+valign = 1
+
+[node name="Label" type="Label" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 68.0
+margin_top = 13.0
+margin_right = 281.0
+margin_bottom = 35.0
+size_flags_horizontal = 7
+custom_fonts/font = SubResource( 6 )
+text = "Glossary"
+align = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary/MarginContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 281.0
+margin_bottom = 632.0
+size_flags_vertical = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary/MarginContainer/VBoxContainer/MarginContainer"]
+margin_right = 281.0
+margin_bottom = 580.0
+texture = ExtResource( 1 )
+region_rect = Rect2( 778, 265, 12, 14 )
+patch_margin_left = 1
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary/MarginContainer/VBoxContainer/MarginContainer"]
+margin_right = 281.0
+margin_bottom = 580.0
+rect_pivot_offset = Vector2( -354, -73 )
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/Glossary/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer"]
+margin_right = 281.0
+margin_bottom = 580.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DefinitionDialogBox" type="MarginContainer" parent="RightSideMenu/Offscreen/Menu/VBoxContainer"]
+visible = false
+margin_top = 222.0
+margin_right = 293.0
+margin_bottom = 640.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.91
+custom_constants/margin_right = 6
+custom_constants/margin_top = 4
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/DefinitionDialogBox"]
+margin_left = 10.0
+margin_top = 4.0
+margin_right = 287.0
+margin_bottom = 412.0
+rect_clip_content = false
+theme = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "The tradeoff in which an entity sacrifices the potential to produce a good in order to produce a more desirable good.
+
+For example, an entity can produce 4 units of Item A or 10 units of Item B. If the entity focused entirely on Item B, the opportunity cost would be the 4 units of Item A that the entity could have made instead.
+
+( As an aside, the entity could put any ratio into A or B, 75% to A and 25% to B for example, but then the opportunity cost would be 1 unit of A and 7.5 units of B. )"
+text = "The tradeoff in which an entity sacrifices the potential to produce a good in order to produce a more desirable good.
+
+For example, an entity can produce 4 units of Item A or 10 units of Item B. If the entity focused entirely on Item B, the opportunity cost would be the 4 units of Item A that the entity could have made instead.
+
+( As an aside, the entity could put any ratio into A or B, 75% to A and 25% to B for example, but then the opportunity cost would be 1 unit of A and 7.5 units of B. )"
+fit_content_height = true
+
+[node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/DefinitionDialogBox/RichTextLabel"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = -6
+custom_constants/margin_top = -4
+custom_constants/margin_left = -10
+custom_constants/margin_bottom = -6
+
+[node name="PanelContainer" type="NinePatchRect" parent="RightSideMenu/Offscreen/Menu/VBoxContainer/DefinitionDialogBox/RichTextLabel/MarginContainer"]
+margin_left = -10.0
+margin_top = -4.0
+margin_right = 283.0
+margin_bottom = 414.0
+texture = ExtResource( 1 )
+region_rect = Rect2( 465, 65, 14, 14 )
+patch_margin_left = 6
+patch_margin_top = 5
+patch_margin_right = 6
+patch_margin_bottom = 5
+
+[node name="Padding" type="MarginContainer" parent="RightSideMenu/Offscreen"]
+margin_left = 293.0
+margin_right = 360.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+
+[node name="TermDetails" type="NinePatchRect" parent="RightSideMenu"]
+anchor_right = 0.814
+anchor_bottom = 1.0
+margin_left = 293.0
+margin_right = 292.96
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.45
+texture = ExtResource( 1 )
+region_rect = Rect2( 417, 17, 46, 46 )
+patch_margin_left = 6
+patch_margin_top = 5
+patch_margin_right = 6
+patch_margin_bottom = 5
+script = ExtResource( 16 )
+__BackButton = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Back")
+__Backdrop = NodePath("Backdrop")
+__TermName = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Label")
+__TermDescription = NodePath("MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/RichTextLabel")
+
+[node name="Backdrop" type="Button" parent="RightSideMenu/TermDetails"]
+modulate = Color( 1, 1, 1, 0 )
+show_behind_parent = true
+anchor_left = -1.0
+anchor_right = 0.024
+anchor_bottom = 1.0
+margin_right = -0.0320001
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/TermDetails"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 6
+custom_constants/margin_top = 2
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightSideMenu/TermDetails/MarginContainer"]
+margin_left = 6.0
+margin_top = 2.0
+margin_right = 287.0
+margin_bottom = 634.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer"]
+margin_right = 281.0
+margin_bottom = 48.0
+
+[node name="Back" type="Button" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 64, 48 )
+size_flags_horizontal = 0
+theme = ExtResource( 7 )
+flat = true
+align = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/HBoxContainer/Back"]
+show_behind_parent = true
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -20.0
+margin_right = 65.0
+margin_bottom = 21.0
+texture = ExtResource( 6 )
+region_rect = Rect2( 352, 304, 32, 16 )
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+
+[node name="Label" type="Label" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/HBoxContainer/Back/NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.5
+margin_top = -20.5
+margin_right = 32.5
+margin_bottom = 20.5
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "Back"
+align = 1
+valign = 1
+
+[node name="Label" type="Label" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 68.0
+margin_top = 13.0
+margin_right = 281.0
+margin_bottom = 35.0
+size_flags_horizontal = 7
+custom_fonts/font = SubResource( 6 )
+text = "Lorem ispum dolor"
+align = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 281.0
+margin_bottom = 632.0
+size_flags_vertical = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/MarginContainer"]
+margin_right = 281.0
+margin_bottom = 580.0
+texture = ExtResource( 1 )
+region_rect = Rect2( 778, 265, 12, 14 )
+patch_margin_left = 1
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/MarginContainer"]
+margin_right = 281.0
+margin_bottom = 580.0
+rect_pivot_offset = Vector2( -354, -73 )
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer"]
+margin_right = 281.0
+margin_bottom = 580.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+margin_right = 281.0
+margin_bottom = 360.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RightSideMenu/TermDetails/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 271.0
+margin_bottom = 350.0
+theme = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+fit_content_height = true
+
+[editable path="Scenario/VBoxContainer/DialogBox"]
