@@ -1,0 +1,20 @@
+{
+	"dialog": [
+		{
+			"text": "Something about a baker."
+		}
+		,{
+			"text": "Something about the child of the baker."
+		}
+		,{
+			"text": "Something about pumpkin pie and cheesecake."
+		}
+		,{
+			"text": "Yum."
+			,"flags": "end"
+		}
+	]
+	,"questions": {
+		
+	}
+}
