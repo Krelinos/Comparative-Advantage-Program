@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PiePumpkin.png-456ffa7f31a7b1303b020c57e5932a3d.stex"
+path="res://.import/apprentice_handsup.png-40d5ab47224e05dc56e85bfad17daa4c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Entity/PiePumpkin.png"
-dest_files=[ "res://.import/PiePumpkin.png-456ffa7f31a7b1303b020c57e5932a3d.stex" ]
+source_file="res://Assets/Entity/apprentice_handsup.png"
+dest_files=[ "res://.import/apprentice_handsup.png-40d5ab47224e05dc56e85bfad17daa4c.stex" ]
 
 [params]
 

@@ -1,20 +1,121 @@
 {
 	"dialog": [
 		{
-			"text": "Something about a baker."
+			"text": "A baker and his apprentice are preparing to start the day."
 		}
 		,{
-			"text": "Something about the child of the baker."
+			"text": "While they are equipped to make a large variety of dishes, we will consider only two: pumpkin pie and cheesecake."
+			,"visuals": "show_food"
 		}
 		,{
-			"text": "Something about pumpkin pie and cheesecake."
+			"text": "The baker is capable of either preparing a pumpkin pie in {baker_pumpkin} minutes, or a cheesecake in {baker_cheese} minutes."
+			,"visuals": "show_minutes_table"
 		}
 		,{
-			"text": "Yum."
+			"text": "The apprentice can prepare a pumpkin pie in {apprentice_pumpkin} minutes, or a cheesecake in {apprentice_cheese} minutes."
+			,"visuals": "show_minutes_table_apprentice"
+		}
+		,{
+			"text": "The baker—being more experienced—is faster in preparing both dishes compared to the apprentice. He uses less resources and thus has the [color=#E49F5A]absolute advantage[/color]."
+			,"visuals": "move_actors_to_counters"
+		}
+		,{
+			"text": "Of course, he cannot work on both at the same time. If he spent {baker_pumpkin} minutes to produce a pumpkin pie, that time could have instead been on the {baker_cheese} minutes for a cheesecake."
+			,"visuals": "baker_create_pumpkin"
+		}
+		,{
+			"text": "Since he spent {baker_pumpkin} minutes preparing a pumpkin pie, he misses out on the opportunity to make {baker_pumpkin_opcost} cheesecakes (as {baker_pumpkin} minutes divided by {baker_cheese} is {baker_pumpkin_opcost}.)"
+			,"visuals": "show_opcost_table"
+		}
+		,{
+			"question": "1b1"
+		}
+		,{
+			"question": "1b2"
+			,"visuals": "reveal_opcost_of_baker_cheese"
+		}
+		,{
+			"question": "1b3"
+			,"visuals": "reveal_opcost_of_apprentice"
+		}
+		,{
+			"question": "1b4"
+		}
+		,{
+			"text": "You have completed 1b - Input!"
 			,"flags": "end"
 		}
 	]
 	,"questions": {
-		
+		"1b1": {
+			"type": "multiple_choice"
+			,"text": "If the baker instead spent that time on a cheesecake, how many pumpkin pies could he have made instead?
+
+The opportunity cost for the baker to prepare a cheesecake is ___ pumpkin pies."
+			,"correct": 2
+			,"content": [
+				"{incorrect_baker_appren_compare_1}"
+				,"{incorrect_baker_appren_compare_2}"
+				,"{baker_cheese_opcost}"
+				,"{baker_pumpkin_opcost}"
+			]
+			,"feedback": [
+				"You are comparing the capabilities of two entities. Opportunity cost considers the capabilities of only one entity."
+				,"You are comparing the capabilities of two entities. Opportunity cost considers the capabilities of only one entity."
+				,"Correct!"
+				,"You have incorrectly applied the equation regarding output. The equation is [Gained Good] / [Sacrificed Good] or in this case, {baker_cheese} / {baker_pumpkin}"
+			]
+		}
+		,"1b2": {
+			"type": "multiple_choice"
+			,"text": "Now, apply this to the apprentice. What are the opportunity costs for them?
+
+When the apprentice prepares a pumpkin pie, they miss out on ___ cheesecakes.
+
+When the apprentice prepares a cheesecake, they miss out on ___ pumpkin pies."
+			,"correct": 0
+			,"content": [
+				"{apprentice_pumpkin_opcost}, {apprentice_cheese_opcost}"
+				,"{apprentice_cheese_opcost}, {apprentice_pumpkin_opcost}"
+			]
+			,"feedback": [
+				"Correct!"
+				,"You have incorrectly applied the equation regarding output. The equation is [Gained Good] / [Sacrificed Good]."
+			]
+		}
+		,"1b3": {
+			"type": "multiple_choice"
+			,"text": "Which one of these statements about the tables above is false?"
+			,"correct": 3
+			,"content": [
+				"The apprentice has the comparative advantage in cheesecakes as they sacrifice less pumpkin pies to make a cheesecake compared to the baker."
+				,"Both baker and apprentice can make more pumpkin pies than cheesecakes given a fixed time limit."
+				,"If the baker makes 5 cheesecakes, the cost is {baker_cheese_opcost_multplied_by_five} pumpkin pies."
+				,"The baker has the absolute and comparative advantage in both dishes."
+			]
+			,"feedback": [
+				"On the opportunity table, the apprentice loses out on {apprentice_cheese_opcost} pies, which is less than the {baker_cheese_opcost} pies the baker loses out on."
+				,"Both tables show that pumpkin pies are quicker to make for both characters as pies costs less time/opportunity compared to cheesecakes."
+				,"1 cheesecake costs {baker_cheese_opcost} pies. Multiply both by 5 to show that 5 cheesecakes costs {baker_cheese_opcost_multplied_by_five} pies."
+				,"Correct!"
+			]
+		}
+		,"1b4": {
+			"type": "multiple_choice"
+			,"text": "At its very core, what is the purpose of comparing the opportunity costs and comparative advantages of two entities?"
+			,"correct": 0
+			,"content": [
+				"To determine how to maximize the productive capabilities of both entities."
+				,"To make sure the involved entities have a product to trade."
+				,"To increase the consumption of goods for a population."
+				,"I'm craving some pumpkin pie/cheesecake now."
+			]
+			,"feedback": [
+				"Correct!"
+				,"Specialization [i]does[/i] facilitate trade (explored in 2 - Terms of Trade), but that is not the core purpose of comparing productivity."
+				,"The increase of goods produced [i]does[/i] lead to an increased consumption, but that is not the core purpose of comparing productivity."
+				,"Yeah me too. The cheesecake is not even a cheesecake, by the way. The image is called \"PieLemon.png\", but I thought it was a cheesecake at first so I kept it as that."
+			]
+		}
 	}
 }

@@ -86,7 +86,7 @@ public class MCQuestion : MarginContainer
             Feedback.Modulate = new Color( 1f, 0.9f, 0.9f, 1f );
 
         Feedback.Visible = true;
-        Feedback.Text = FeedbackList[ SelectedIndex ];
+        Feedback.BbcodeText = FeedbackList[ SelectedIndex ];
         EmitSignal("AnswerSubmitted", this, Solved);
     }
 }
