@@ -229,11 +229,11 @@ size_flags_stretch_ratio = 3.5
 
 [node name="MarginContainer" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer" index="0"]
 margin_right = 360.0
-margin_bottom = 278.0
+margin_bottom = 272.0
 
 [node name="ScrollContainer" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer/MarginContainer" index="0"]
 margin_right = 354.0
-margin_bottom = 278.0
+margin_bottom = 272.0
 
 [node name="VBoxContainer" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer/MarginContainer/ScrollContainer" index="0"]
 margin_right = 342.0
@@ -249,12 +249,14 @@ margin_right = 342.0
 margin_bottom = 321.0
 
 [node name="MarginContainer2" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer" index="1"]
-margin_top = 282.0
+margin_top = 276.0
 margin_right = 360.0
 margin_bottom = 322.0
 
 [node name="Continue" parent="Scenario/VBoxContainer/DialogBox/VBoxContainer/MarginContainer2" index="0"]
 margin_right = 355.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 0, 42 )
 
 [node name="LeftSideMenu" type="CanvasLayer" parent="."]
 offset = Vector2( -360, 0 )
@@ -499,7 +501,6 @@ custom_styles/normal = SubResource( 2 )
 text = "1a - Output"
 
 [node name="1bInput" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
-modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 116.0
@@ -507,7 +508,6 @@ margin_right = 257.0
 margin_bottom = 158.0
 focus_mode = 0
 custom_styles/normal = SubResource( 2 )
-disabled = true
 text = "1b - Input"
 
 [node name="2TermsOfTrade" parent="LeftSideMenu/Offscreen/Menu/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Scenarios/ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]

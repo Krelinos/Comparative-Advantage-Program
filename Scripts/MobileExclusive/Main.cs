@@ -2,6 +2,7 @@ using ComparativeAdvantage.mobile;
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace ComparativeAdvantage
 {
@@ -339,8 +340,11 @@ public class Variables
 
                 // Solve and put into the VariablesDictionary.
                 var dt = new System.Data.DataTable();
-                double answer = (double)dt.Compute(expression, "");
-                this[key] = Math.Round(answer, 3); // AP test require rounding to the 3rd decimal, unless specified.
+                var answer = dt.Compute(expression, "");
+                if ( answer is Int32 )
+                    answer = Convert.ToDouble( answer );
+                
+                this[key] = Math.Round((double)answer, 3); // AP test require rounding to the 3rd decimal, unless specified.
             }
         }
     }

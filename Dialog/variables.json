@@ -31,4 +31,58 @@
 			,"dark_pepper"
 		]
 	}
+	
+	
+	,"baker_pumpkin": "25"
+	,"baker_cheese": "50"
+	,"apprentice_pumpkin": "40"
+	,"apprentice_cheese": "60"
+	,"baker_pumpkin_opcost": {
+		"formula": "{0} / {1}"
+		,"variables": [
+			"baker_pumpkin"
+			,"baker_cheese"
+		]
+	}
+	,"baker_cheese_opcost": {
+		"formula": "{0} / {1}"
+		,"variables": [
+			"baker_cheese"
+			,"baker_pumpkin"
+		]
+	}
+	,"apprentice_pumpkin_opcost": {
+		"formula": "{0} / {1}"
+		,"variables": [
+			"apprentice_pumpkin"
+			,"apprentice_cheese"
+		]
+	}
+	,"apprentice_cheese_opcost": {
+		"formula": "{0} / {1}"
+		,"variables": [
+			"apprentice_cheese"
+			,"apprentice_pumpkin"
+		]
+	}
+	,"incorrect_baker_appren_compare_1": {
+		"formula": "{0} / {1}"
+		,"variables": [
+			"baker_pumpkin"
+			,"apprentice_pumpkin"
+		]
+	}
+	,"incorrect_baker_appren_compare_2": {
+		"formula": "{0} / {1}"
+		,"variables": [
+			"apprentice_pumpkin"
+			,"baker_pumpkin"
+		]
+	}
+	,"baker_cheese_opcost_multplied_by_five": {
+		"formula": "{0} * 5"
+		,"variables": [
+			"baker_cheese_opcost"
+		]
+	}
 }
